@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/03/28 15:56:45 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/03/28 17:25:12 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <mlx.h>
 
 #endif

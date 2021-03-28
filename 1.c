@@ -3,11 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   1.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldermign <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/03/28 15:39:17 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/03/28 17:26:11 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
 
+int main(int ac, char **av)
+{
+	(void)ac;
+	(void)av;
+	void *mlx;
+
+	mlx = mlx_init();
+}
