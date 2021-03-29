@@ -6,15 +6,14 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 15:24:48 by ldermign          #+#    #+#             */
-/*   Updated: 2021/03/27 18:30:33 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/03/29 11:24:35 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <stdlib.h>
-# include <unistd.h>
+#include "libft.h"
 # define BUFFER_SIZE 42
 
 int		get_next_line(int fd, char **line);
