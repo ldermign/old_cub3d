@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 11:22:50 by ldermign          #+#    #+#             */
-/*   Updated: 2021/03/27 18:20:09 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/03/30 09:36:37 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,7 @@ int		ft_free_reader(char *reader)
 	return (1);
 }
 
-size_t	ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	char	*dst;
 	int		i;
@@ -41,7 +31,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (0);
 	i = -1;
 	j = -1;
-	size_tot = ft_strlen(s1) + ft_strlen(s2) + 1;
+	size_tot = ft_strlen((const char *)s1) + ft_strlen((const char *)s2) + 1;
 	if ((dst = (char*)malloc(sizeof(char) * size_tot)) == NULL)
 		return (NULL);
 	while (s1[++i])

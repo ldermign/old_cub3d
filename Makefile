@@ -6,48 +6,37 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/28 17:09:11 by ldermign          #+#    #+#              #
-#    Updated: 2021/03/29 11:32:41 by ldermign         ###   ########.fr        #
+#    Updated: 2021/03/30 13:54:20 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	cub3d.a
+NAME	=	cub3d
 
-INCS	=	cub3d.h
+INCS	=	./incs
 
-SRCS	=	./*.c ./libft/get_next_line.c
+SRCS	=	cub3d.c
+
+LIBFT	=	./libft
 
 OBJS	=	${SRCS:.c=.o}
 
 CC		=	clang
 
-CFLAGS	=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror
 
 MLX		=	libmlx.dylib
 
-LIBC	=	ar rc
-
-LIBR	=	ranlib
-
 RM		=	rm -rf
 
-#.c.o:
-#			${MAKE} -C libft
-#			${MAKE} -C MLX
-#			cp mlx/${MLX} .
-#			${CC} ${CFLAGS} -Imlx -c $< -o $@
-
-#${NAME}:	${OBJS} ./cub3d.h
-#			${CC} ${CFLAGS} -Lmlx -lmlx -Ilibft -framework OpenGL -framework AppKit ${OBJS} -I ${INCS} -o ${NAME}
-#			${LIBC} ${NAME} ${OBJS}
-#			${LIBR}	${NAME}
 .c.o:
-			$(MAKE) -C libft
-			$(MAKE) -C mlx
-			cp mlx/$(MLX) .
-			$(CC) ${CFLAGS} -c $< -o $@ -Imlx
+			${MAKE} -C MLX
+			cp mlx/${MLX} .
+			${CC} ${CFLAGS} -Imlx -c $< -o $@ -I ${INCS}
 
 ${NAME}:	${OBJS}
-			$(CC) ${CFLAGS} -Imlx -Ilibft -Llibft -lft -Lmlx -lmlx -lm -framework OpenGL -framework AppKit $(OBJS) -I $(INCS) -o $(NAME)
+			${MAKE} -C libft
+			${CC} ${CFLAGS} -I ${INCS} -o ${NAME} ${OBJS} -Lmlx -lft -lmlx -I ${LIBFT} -L ${LIBFT} -framework OpenGL -framework AppKit
+#			${CC} ${CFLAGS} -Imlx -lft -lm -framework OpenGL -framework AppKit ${OBJS} -I ${INCS} -o ${NAME}
 
 all:		${NAME}
 

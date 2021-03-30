@@ -6,11 +6,13 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 19:45:34 by ldermign          #+#    #+#              #
-#    Updated: 2021/03/27 18:31:53 by ldermign         ###   ########.fr        #
+#    Updated: 2021/03/30 13:06:36 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libft.a
+
+INCS	=	./incs/
 
 SRCS	=	ft_strrchr.c ft_isalnum.c ft_memchr.c ft_strlcat.c ft_tolower.c \
 			ft_isalpha.c ft_isdigit.c ft_memmove.c ft_memccpy.c ft_strchr.c \
@@ -39,9 +41,9 @@ LIBR	=	ranlib
 RM		=	rm -f
 
 .c.o:
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
 
-$(NAME):	${OBJS} ./libft.h ./get_next_line.h ./ft_printf.h
+${NAME}:	${OBJS} ${INCS}
 			${LIBC} ${NAME} ${OBJS}
 			${LIBR}	${NAME}
 
