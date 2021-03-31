@@ -6,15 +6,15 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/28 17:09:11 by ldermign          #+#    #+#              #
-#    Updated: 2021/03/30 13:54:20 by ldermign         ###   ########.fr        #
+#    Updated: 2021/03/31 13:45:43 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cub3d
 
-INCS	=	./incs
+IDIR	=	./incs/
 
-SRCS	=	cub3d.c
+SRCS	=	./main.c
 
 LIBFT	=	./libft
 
@@ -22,21 +22,20 @@ OBJS	=	${SRCS:.c=.o}
 
 CC		=	clang
 
-CFLAGS	=	-Wall -Wextra -Werror
-
 MLX		=	libmlx.dylib
+
+CFLAGS	=	-Wall -Wextra -Werror -I ${IDIR} -I ${MLX}
 
 RM		=	rm -rf
 
 .c.o:
 			${MAKE} -C MLX
 			cp mlx/${MLX} .
-			${CC} ${CFLAGS} -Imlx -c $< -o $@ -I ${INCS}
+			${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}
 			${MAKE} -C libft
-			${CC} ${CFLAGS} -I ${INCS} -o ${NAME} ${OBJS} -Lmlx -lft -lmlx -I ${LIBFT} -L ${LIBFT} -framework OpenGL -framework AppKit
-#			${CC} ${CFLAGS} -Imlx -lft -lm -framework OpenGL -framework AppKit ${OBJS} -I ${INCS} -o ${NAME}
+			${CC} ${CFLAGS} -o ${NAME} ${OBJS} -Lmlx -lft -lmlx -I ${LIBFT} -L ${LIBFT} -framework OpenGL -framework AppKit
 
 all:		${NAME}
 

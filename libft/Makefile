@@ -6,33 +6,69 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 19:45:34 by ldermign          #+#    #+#              #
-#    Updated: 2021/03/30 13:06:36 by ldermign         ###   ########.fr        #
+#    Updated: 2021/03/31 13:30:30 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libft.a
 
-INCS	=	./incs/
+SRCS	=	./srcs/ft_strrchr.c \
+			./srcs/ft_isalnum.c \
+			./srcs/ft_memchr.c \
+			./srcs/ft_strlcat.c \
+			./srcs/ft_tolower.c \
+			./srcs/ft_isalpha.c \
+			./srcs/ft_isdigit.c \
+			./srcs/ft_memmove.c \
+			./srcs/ft_memccpy.c \
+			./srcs/ft_strchr.c \
+			./srcs/ft_strlcpy.c \
+			./srcs/ft_memcmp.c \
+			./srcs/ft_toupper.c \
+			./srcs/ft_memcpy.c \
+			./srcs/ft_isascii.c \
+			./srcs/ft_strlen.c \
+			./srcs/ft_isprint.c \
+			./srcs/ft_memset.c \
+			./srcs/ft_strnstr.c \
+			./srcs/ft_bzero.c \
+			./srcs/ft_strncmp.c \
+			./srcs/ft_atoi.c \
+			./srcs/ft_calloc.c \
+			./srcs/ft_itoa.c \
+			./srcs/ft_putchar_fd.c \
+			./srcs/ft_putendl_fd.c \
+			./srcs/ft_putnbr_fd.c \
+			./srcs/ft_putstr_fd.c \
+			./srcs/ft_split.c \
+			./srcs/ft_strdup.c \
+			./srcs/ft_strjoin.c \
+			./srcs/ft_strmapi.c \
+			./srcs/ft_strtrim.c \
+			./srcs/ft_substr.c \
+			./srcs/get_next_line_utils.c \
+			./srcs/get_next_line.c \
+			./srcs/check.c \
+			./srcs/conversion_p_d_i_u_x.c \
+			./srcs/conversion_s_c_per.c \
+			./srcs/ft_printf.c \
+			./srcs/start_fusion.c \
+			./srcs/fusion_strflag_conv_cps.c \
+			./srcs/utils_size.c \
+			./srcs/fusion_strflag_conv_dius.c \
+			./srcs/fusion_strflag_conv_s_utils.c \
+			./srcs/init_flags.c \
+			./srcs/join_width_preci.c \
+			./srcs/utils.c \
+			./srcs/utils_itoa.c 		
 
-SRCS	=	ft_strrchr.c ft_isalnum.c ft_memchr.c ft_strlcat.c ft_tolower.c \
-			ft_isalpha.c ft_isdigit.c ft_memmove.c ft_memccpy.c ft_strchr.c \
-			ft_strlcpy.c ft_memcmp.c ft_toupper.c ft_memcpy.c ft_isascii.c \
-			ft_strlen.c ft_isprint.c ft_memset.c ft_strnstr.c ft_bzero.c \
-			ft_strncmp.c ft_atoi.c ft_calloc.c ft_itoa.c ft_putchar_fd.c \
-			ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c \
-			ft_strdup.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_substr.c \
-			get_next_line_utils.c get_next_line.c \
-			check.c conversion_p_d_i_u_x.c conversion_s_c_per.c ft_printf.c \
-			start_fusion.c fusion_strflag_conv_cps.c utils_size.c \
-			fusion_strflag_conv_dius.c fusion_strflag_conv_s_utils.c \
-			init_flags.c join_width_preci.c utils.c utils_itoa.c 
-			
+IDIR	=	./include/
 
 OBJS	=	${SRCS:.c=.o}
 
 CC		=	clang
 
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -I ${IDIR}
 
 LIBC	=	ar rc
 
@@ -40,14 +76,14 @@ LIBR	=	ranlib
 
 RM		=	rm -f
 
-.c.o:
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
+all:		${NAME}
 
-${NAME}:	${OBJS} ${INCS}
+${NAME}:	${OBJS}
 			${LIBC} ${NAME} ${OBJS}
 			${LIBR}	${NAME}
 
-all:		${NAME}
+.c.o:
+			${CC} ${CFLAGS} -c $< -o $@
 
 clean:
 			${RM} ${OBJS}
