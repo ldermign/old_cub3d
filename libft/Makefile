@@ -6,7 +6,7 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 19:45:34 by ldermign          #+#    #+#              #
-#    Updated: 2021/03/31 13:30:30 by ldermign         ###   ########.fr        #
+#    Updated: 2021/04/01 08:06:47 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ SRCS	=	./srcs/ft_strrchr.c \
 			./srcs/utils.c \
 			./srcs/utils_itoa.c 		
 
-IDIR	=	./include/
+IDIR	=	./includes/
 
 OBJS	=	${SRCS:.c=.o}
 

@@ -6,13 +6,13 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/28 17:09:11 by ldermign          #+#    #+#              #
-#    Updated: 2021/03/31 13:45:43 by ldermign         ###   ########.fr        #
+#    Updated: 2021/04/01 09:44:15 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cub3d
 
-IDIR	=	./incs/
+IDIR	=	./includes
 
 SRCS	=	./main.c
 
@@ -28,6 +28,8 @@ CFLAGS	=	-Wall -Wextra -Werror -I ${IDIR} -I ${MLX}
 
 RM		=	rm -rf
 
+all:		${NAME}
+
 .c.o:
 			${MAKE} -C MLX
 			cp mlx/${MLX} .
@@ -36,8 +38,6 @@ RM		=	rm -rf
 ${NAME}:	${OBJS}
 			${MAKE} -C libft
 			${CC} ${CFLAGS} -o ${NAME} ${OBJS} -Lmlx -lft -lmlx -I ${LIBFT} -L ${LIBFT} -framework OpenGL -framework AppKit
-
-all:		${NAME}
 
 clean:
 			${MAKE} -C libft clean
