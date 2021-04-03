@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/02 14:47:02 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:57:58 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ typedef struct  s_input {
     int arr_d;
     int arr_l;
     int arr_r;
-}               t_input;
+    int mouse_l;
+    int mouse_r;
+    int touche;
+}               t_ipt;
 
 typedef struct  s_xy {
     int x;
@@ -58,3 +61,36 @@ typedef struct  s_xy {
 # include <libc.h>
 
 #endif
+
+
+/*
+RGB colors can be initialized as above, a few examples would be:
+
+Red: 0x00FF0000;
+Green: 0x0000FF00;
+Blue: 0x000000FF;
+
+
+Keycode
+
+w = 0x0D
+space = 49
+arrow up = 126
+arrow down = 125
+arrow left = 123
+arrow right = 124
+s = 1
+a = 0
+d = 2
+f = 3
+m = 46
+l = 37
+enter = 36
+delete = 51
+left mouse = 1
+right mouse = 2
+molette haut = 5
+molette bas = 4
+esc = 53
+
+*/

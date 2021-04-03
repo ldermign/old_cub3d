@@ -6,35 +6,22 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/02 14:48:46 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:57:18 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+int		key_hook(int keycode, t_mlx *mlx);
+int		mouse_hook(int keycode, t_mlx *temp);
+int		ft_close(int keycode, t_mlx *temp);
 
-int		get_t(int trgb)
+void	ft_init_img(t_data *img)
 {
-	return (trgb & (0xFF << 24));
-}
-
-int		get_r(int trgb)
-{
-	return (trgb & (0xFF << 16));
-}
-
-int		get_g(int trgb)
-{
-	return (trgb & (0xFF << 8));
-}
-
-int		get_b(int trgb)
-{
-	return (trgb & 0xFF);
-}
-
-int		create_trgb(int t, int r, int g, int b)
-{
-	return(t << 24 | r << 16 | g << 8 | b);
+	img->img = NULL;
+	img->addr = NULL;
+	img->bpp = 0;
+	img->line_len = 0;
+	img->endian = 0;
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -61,96 +48,69 @@ void ft_circle(t_data img)
 	}
 }
 
-void ft_rainbow(t_data img)
+int		key_hook(int keycode, t_mlx *temp)
 {
-	int place = 0;
-	
-	while (place < 800)
-	{
-		my_mlx_pixel_put(&img, place, place, 0x00FF0000);
-		place += 5;
-	}
-	while (place > 0)
-	{
-		my_mlx_pixel_put(&img, place, 800 - place, 0x000000FF);
-		place -= 5;
-	}
-	ft_circle(img);
-}
-
-int		key_hook(int keycode, t_mlx *mlx)
-{
-	(void)mlx;
-	printf("key is [%d] in int.\n", keycode);
+	(void)temp;
+	printf("key is [%d].\n", keycode);
 	return (1);
 }
 
 int		mouse_hook(int keycode, t_mlx *temp)
 {
 	(void)temp;
-	printf("key is [%d] in int.\n", keycode);
+	printf("key is [%d].\n", keycode);
 	return (1);
 }
 
-int		ft_close(int keycode, t_mlx *temp)
+void		ft_close(int touche)
 {
-	(void)temp;
+	printf("Goodbye !\n");
+	exit(0);
+}
+
+int		render_next_frame(t_data img, void *myStruct)
+{
+	(void)myStruct;
+	(void)img;
+	// printf("test\n");
+	return (1);
+}
+
+void	ft_events_loop(t_mlx a, t_data img)
+{
+	(void)img;
 	if (keycode == 53)
-		mlx_destroy_window(temp->mlx, temp->win);
-	return (1);
+		mlx_hook(a.win, 2, 1L<<0, ft_close, &a);
+
+	
+	// mlx_hook(a.win, 2, 1L<<5, ft_close, &a);
+	// mlx_hook(a.win, 2, 1L<<0, ft_close, &a);
+	// mlx_hook(a.win, 2, 1L<<0, ft_close, &a);
+	// mlx_hook(a.win, 2, 1L<<0, ft_close, &a);
+	// mlx_hook(a.win, 2, 1L<<0, ft_close, &a);
 }
 
-int		main(int ac, char **ag)
+void	create_image(t_mlx a, t_data img)
 {
-	// void *mlx;
-	// void *win;
-	t_data img;
-	(void)ac;
-	(void)ag;
-	// t_mlx	hook;
-	t_mlx	temp;
-
-	temp.mlx = mlx_init();
-	temp.win = mlx_new_window(temp.mlx, 800, 800, "Cub3D");
-	mlx_key_hook(temp.win, key_hook, &temp);
-	mlx_mouse_hook(temp.win, mouse_hook, &temp);
-	img.img = mlx_new_image(temp.mlx, 800, 800);
+	mlx_key_hook(a.win, key_hook, &a);
+	mlx_mouse_hook(a.win, mouse_hook, &a);
+	img.img = mlx_new_image(a.mlx, 800, 800);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
-	mlx_put_image_to_window(temp.mlx, temp.win, img.img, 0, 0);
-	ft_rainbow(img);
-	mlx_hook(temp.win, 2, 1L<<0, ft_close, &temp);
-	mlx_loop(temp.mlx);
-	return (0);
+	ft_circle(img);
+	mlx_put_image_to_window(a.mlx, a.win, img.img, 0, 0);
+	ft_events_loop(a, img);
 }
 
-/*
-RGB colors can be initialized as above, a few examples would be:
+int		main()
+{
+	void *myStruct = NULL;
+	t_data img;
+	t_mlx a;
 
-Red: 0x00FF0000;
-Green: 0x0000FF00;
-Blue: 0x000000FF;
-
-
-Keycode
-
-w = 0x0D
-space = 49
-arrow up = 126
-arrow down = 125
-arrow left = 123
-arrow right = 124
-s = 1
-a = 0
-d = 2
-f = 3
-m = 46
-l = 37
-enter = 36
-delete = 51
-left mouse = 1
-right mouse = 2
-molette haut = 5
-molette bas = 4
-esc = 53
-
-*/
+	a.mlx = mlx_init();
+	a.win = mlx_new_window(a.mlx, 800, 800, "Cub3D");
+	ft_init_img(&img);
+	create_image(a, img);
+	mlx_loop_hook(a.mlx, render_next_frame, myStruct);
+	mlx_loop(a.mlx);
+}
