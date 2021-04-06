@@ -6,20 +6,21 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/03 17:57:58 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:35:21 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libft.h"
-# include "get_next_line.h"
 # include <mlx.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include "libft.h"
+# include "ft_printf.h"
+# include "get_next_line.h"
 
 typedef struct  s_data {
     void        *img;
@@ -27,6 +28,8 @@ typedef struct  s_data {
     int         bpp;
     int         line_len;
     int         endian;
+	int			width;
+	int			height;
 }               t_data;
 
 typedef struct  s_mlx {
@@ -65,14 +68,10 @@ typedef struct  s_xy {
 
 /*
 RGB colors can be initialized as above, a few examples would be:
-
 Red: 0x00FF0000;
 Green: 0x0000FF00;
 Blue: 0x000000FF;
-
-
 Keycode
-
 w = 0x0D
 space = 49
 arrow up = 126
@@ -92,5 +91,4 @@ right mouse = 2
 molette haut = 5
 molette bas = 4
 esc = 53
-
 */

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 16:05:29 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:18:54 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include "libft.h"
 
 /*
 **	Structures cspdiuxX%
@@ -63,7 +64,7 @@ size_t			ft_strlen(const char *str);
 char			*ft_itoa(int nb);
 char			*ft_strjoin(char const *s1, char const *s2);
 int				ft_atoi_printf(char *str);
-void			*ft_memmove(char *dst, char *src, size_t n);
+// void			*ft_memmove(char *dst, char *src, size_t n);
 void			*fill_from_end(char *dst, char *src, size_t n);
 int				ft_atoi(char *str);
 void			ft_fill_with_c(char *str, char c, int size);

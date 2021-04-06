@@ -6,13 +6,13 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:57:56 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 13:02:21 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:48:18 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_len_nbr(size_t nbr, size_t size_base)
+size_t		ft_len_nbr(size_t nbr, size_t size_base)
 {
 	size_t	size_nbr;
 
@@ -32,7 +32,7 @@ size_t	ft_len_nbr(size_t nbr, size_t size_base)
 	return (size_nbr);
 }
 
-char	*ft_itoa_base(size_t nbr, char *base)
+char		*ft_itoa_base(size_t nbr, char *base)
 {
 	size_t	size_base;
 	size_t	size_nbr;
@@ -61,7 +61,7 @@ char	*ft_itoa_base(size_t nbr, char *base)
 	return (dst);
 }
 
-int		ft_len_int(long n)
+static int	ft_len_int(long n)
 {
 	int len_int;
 
@@ -76,28 +76,7 @@ int		ft_len_int(long n)
 	return (len_int + 1);
 }
 
-char	*ft_itoa(int n)
-{
-	char	*dst;
-	long	nb;
-	int		len;
-
-	nb = n;
-	len = ft_len_int(nb) + (nb < 0);
-	if ((dst = (char*)malloc(sizeof(char) * len + 1 + (n < 0))) == NULL)
-		return (NULL);
-	if (nb < 0 && (nb = -nb))
-		*dst = '-';
-	dst[len--] = '\0';
-	while (len >= (n < 0))
-	{
-		dst[len--] = (nb % 10) + '0';
-		nb /= 10;
-	}
-	return (dst);
-}
-
-char	*ft_itoa_unsd(unsigned int n)
+char		*ft_itoa_unsd(unsigned int n)
 {
 	char			*dst;
 	int				len;

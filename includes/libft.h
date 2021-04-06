@@ -6,12 +6,12 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 19:44:50 by ldermign          #+#    #+#             */
-/*   Updated: 2021/03/29 11:24:06 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/03/31 10:11:48 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LIBFT_H
-# define FT_LIBFT_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
 # include <stdlib.h>
 # include <unistd.h>

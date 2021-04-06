@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldermign <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 21:51:48 by ldermign          #+#    #+#             */
-/*   Updated: 2020/12/06 22:41:19 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/06 10:57:33 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		j;
 	int		size_tot;
 
-	if (!s1 || !s2)
+	if (s1 == NULL)
+		s1 = ft_strdup("");
+	if (s2 == NULL)
 		return (NULL);
 	i = -1;
 	j = -1;

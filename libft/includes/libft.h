@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 19:44:50 by ldermign          #+#    #+#             */
-/*   Updated: 2021/03/31 10:11:48 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:33:54 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char				*ft_strdup(char *s1);
 char				*ft_strjoin(char const *s1, char const *s2);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
-int					ft_strlen(const char *str);
+size_t				ft_strlen(const char *str);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strnstr(const char *s1, const char *s2, size_t size);

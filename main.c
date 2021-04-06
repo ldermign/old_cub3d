@@ -6,14 +6,15 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/03 17:57:18 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:24:18 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-int		key_hook(int keycode, t_mlx *mlx);
+int		key_hook(int keycode, void *param);
 int		mouse_hook(int keycode, t_mlx *temp);
 int		ft_close(int keycode, t_mlx *temp);
+
 
 void	ft_init_img(t_data *img)
 {
@@ -22,6 +23,8 @@ void	ft_init_img(t_data *img)
 	img->bpp = 0;
 	img->line_len = 0;
 	img->endian = 0;
+	img->width = 0;
+	img->height = 0;
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -32,15 +35,15 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void ft_circle(t_data img)
+void ft_circle_pixel(t_data img, int x, int y, int place)
 {
-	int x = -800, y = -800, place = 400;
-	while (x < 800)
+	// int x = -400, y = -400, place = 200;
+	while (x < 400)
 	{
-		y = -800;
-		while (y < 800)
+		y = -400;
+		while (y < 400)
 		{
-			if (((x - place) * (x - place) + (y - place) * (y - place)) < 800)
+			if (((x - place) * (x - place) + (y - place) * (y - place)) < 400)
 				my_mlx_pixel_put(&img, x, y, 0x0000FF00);
 			y += 2;
 		}
@@ -48,69 +51,111 @@ void ft_circle(t_data img)
 	}
 }
 
-int		key_hook(int keycode, t_mlx *temp)
+int		key_hook(int keycode, void *param)
 {
-	(void)temp;
-	printf("key is [%d].\n", keycode);
-	return (1);
+	(void)param;
+	(void)keycode;
+	// printf("keycode is [%d].\n", keycode);
+	return (0);
 }
 
 int		mouse_hook(int keycode, t_mlx *temp)
 {
 	(void)temp;
-	printf("key is [%d].\n", keycode);
-	return (1);
+	(void)keycode;
+	return (0);
 }
 
-void		ft_close(int touche)
+int		ft_close(int keycode, t_mlx *temp)
 {
-	printf("Goodbye !\n");
-	exit(0);
-}
-
-int		render_next_frame(t_data img, void *myStruct)
-{
-	(void)myStruct;
-	(void)img;
-	// printf("test\n");
-	return (1);
-}
-
-void	ft_events_loop(t_mlx a, t_data img)
-{
-	(void)img;
+	(void)temp;
+	(void)keycode;
 	if (keycode == 53)
-		mlx_hook(a.win, 2, 1L<<0, ft_close, &a);
-
-	
-	// mlx_hook(a.win, 2, 1L<<5, ft_close, &a);
-	// mlx_hook(a.win, 2, 1L<<0, ft_close, &a);
-	// mlx_hook(a.win, 2, 1L<<0, ft_close, &a);
-	// mlx_hook(a.win, 2, 1L<<0, ft_close, &a);
-	// mlx_hook(a.win, 2, 1L<<0, ft_close, &a);
+	{
+		ft_printf("Goodbye !\n");
+		exit(0);
+	}
+	return (0);
 }
 
-void	create_image(t_mlx a, t_data img)
+int		ft_pressing(int keycode, t_mlx *temp)
 {
-	mlx_key_hook(a.win, key_hook, &a);
-	mlx_mouse_hook(a.win, mouse_hook, &a);
-	img.img = mlx_new_image(a.mlx, 800, 800);
-	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
-	ft_circle(img);
-	mlx_put_image_to_window(a.mlx, a.win, img.img, 0, 0);
-	ft_events_loop(a, img);
+	(void)temp;
+	(void)keycode;
+	if (keycode != 53)
+		printf("You are pressing the button [%d].\nEvents = 2, mask = 1L<<1\n", keycode);
+	return (0);
 }
 
-int		main()
+int		ft_mouse_in_win(int keycode, t_mlx *temp)
 {
-	void *myStruct = NULL;
-	t_data img;
-	t_mlx a;
+	(void)temp;
+	(void)keycode;
+	printf("The cursor is in the window.\nEvents = 4, mask = 1L<<4\n");
+	return (0);
+}
 
-	a.mlx = mlx_init();
-	a.win = mlx_new_window(a.mlx, 800, 800, "Cub3D");
-	ft_init_img(&img);
-	create_image(a, img);
-	mlx_loop_hook(a.mlx, render_next_frame, myStruct);
-	mlx_loop(a.mlx);
+int		render_next_frame(int keycode, t_mlx a, t_data img)
+{
+	(void)a;
+	(void)keycode;
+	int x = -400, y = -400, place = 200;
+	// if (keycode == 13)
+		ft_circle_pixel(img, x, y, place);
+		
+	// mlx_put_image_to_window(a.mlx, a.win, img.img, 0, 0);
+	return (0);
+}
+
+char	*circle(char *src)
+{
+	int i = -10, j = -10, x = 10;
+	char *circle;
+
+	circle = "";
+	while (i < x)
+	{
+		while (j < x)
+		{
+			if ((i * i + j * j) < x * x)
+				circle = ft_strjoin(circle, src);
+			else
+				circle = ft_strjoin(circle, " ");
+			j++;
+		}
+		circle = ft_strjoin(circle, "\n");
+		i++;
+		j = -10;
+	}
+	return (circle);
+}
+
+int		main(int ac, char **ag)
+{
+	// t_data img;
+	// t_mlx a;
+	// void *myStruct = NULL;
+	(void)ag;
+	if (ac != 2)
+	{
+		ft_printf("Erreur : il faut entrer 2 arguments.\n");
+		return (0);
+	}
+
+
+	// ft_init_img(&img);
+	// img.width = 500;
+	// img.height = 500;
+	// a.mlx = mlx_init();
+	// a.win = mlx_new_window(a.mlx, img.width, img.height, "Cub3D");
+	// mlx_hook(a.win, 2, 1L<<0, ft_close, &a);
+	// mlx_key_hook(a.win, key_hook, (void *)0);
+	// mlx_mouse_hook(a.win, mouse_hook, &a);
+	// img.img = mlx_new_image(a.mlx, img.width, img.height);
+	// img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
+	// // ft_circle_pixel(img);
+	// mlx_put_image_to_window(a.mlx, a.win, img.img, 0, 0);
+	// mlx_loop_hook(a.mlx, render_next_frame, myStruct);
+	// mlx_loop(a.mlx);
+	return (0);
 }
