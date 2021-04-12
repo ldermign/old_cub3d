@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 16:55:05 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/10 14:07:27 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int		particular_case(int arg_unsdint, int size, char *tmp, t_flag_len *flag)
 	if (flag->width == 1 && flag->precision == 1
 	&& (arg_unsdint == 0 && flag->nbr_width <= 1 && flag->nbr_precision == 0))
 	{
-		ft_putchar(' ', flag);
+		ft_putchar_ptf(' ', flag);
 		free(tmp);
 		return (1);
 	}
 	else if (size >= flag->nbr_precision && size >= flag->nbr_width)
 	{
-		ft_putstr(tmp, flag);
+		ft_putstr_ptf(tmp, flag);
 		free(tmp);
 		return (1);
 	}
@@ -52,11 +52,11 @@ void	conv_p(va_list ap, t_flag_len *flag)
 	else
 		temp = ft_strjoin("0x", str_adresse);
 	if (ft_no_flag(flag) || flag->nbr_width < (int)ft_strlen(temp))
-		ft_putstr(temp, flag);
+		ft_putstr_ptf(temp, flag);
 	else
 	{
 		fusion_conv_strflag(temp, ft_strlen(temp), flag);
-		ft_putstr(flag->final_str_flag, flag);
+		ft_putstr_ptf(flag->final_str_flag, flag);
 	}
 	free(temp);
 	free(str_adresse);
@@ -82,11 +82,11 @@ void	conv_d_i(va_list ap, t_flag_len *flag)
 		return ;
 	}
 	if (size_temp > flag->nbr_precision && size_temp > flag->nbr_width)
-		ft_putstr(temp, flag);
+		ft_putstr_ptf(temp, flag);
 	else
 	{
 		fusion_conv_strflag(temp, arg_int, flag);
-		ft_putstr(flag->final_str_flag, flag);
+		ft_putstr_ptf(flag->final_str_flag, flag);
 	}
 	free(temp);
 }
@@ -105,7 +105,7 @@ void	conv_u(va_list ap, t_flag_len *flag)
 	else
 	{
 		fusion_conv_strflag(temp, arg_unsdint, flag);
-		ft_putstr(flag->final_str_flag, flag);
+		ft_putstr_ptf(flag->final_str_flag, flag);
 	}
 	free(temp);
 }
@@ -129,7 +129,7 @@ void	conv_x(char c, va_list ap, t_flag_len *flag)
 	else
 	{
 		fusion_conv_strflag(temp, arg_unsdint, flag);
-		ft_putstr(flag->final_str_flag, flag);
+		ft_putstr_ptf(flag->final_str_flag, flag);
 	}
 	free(temp);
 }

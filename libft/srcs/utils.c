@@ -6,19 +6,19 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/06 16:34:37 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/10 14:07:12 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(char c, t_flag_len *len)
+void	ft_putchar_ptf(char c, t_flag_len *len)
 {
 	write(1, &c, 1);
 	len->final_len++;
 }
 
-void	ft_putstr(char *str, t_flag_len *len)
+void	ft_putstr_ptf(char *str, t_flag_len *len)
 {
 	size_t size;
 

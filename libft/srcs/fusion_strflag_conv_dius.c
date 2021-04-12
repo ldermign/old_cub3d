@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:53:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 16:04:52 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/10 14:09:52 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		ft_nbr_inf_zero(int space, int zero, int size, t_flag_len *flag)
 {
 	if (flag->nbr_width <= flag->nbr_precision)
 	{
-		ft_putchar('-', flag);
+		ft_putchar_ptf('-', flag);
 		return (1);
 	}
 	else if (flag->padded_zero == 1 && flag->precision == -1)

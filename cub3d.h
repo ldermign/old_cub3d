@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/06 16:35:21 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/12 12:10:36 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,18 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
+
+typedef	struct	s_map {
+	int			res_x;
+	int			res_y;
+	int 		flr_r;
+	int		 	flr_g;
+	int 		flr_b;
+	int 		ciel_r;
+	int			ciel_g;
+	int 		ciel_b;
+	char		**map;
+}				t_agmap;
 
 typedef struct  s_data {
     void        *img;
@@ -60,6 +72,56 @@ typedef struct  s_xy {
     int x;
     int y;
 }               t_xy;
+
+/*
+**	INIT
+*/
+
+void	ft_init_agmap(t_agmap *tmp);
+
+
+/*
+**	CHECK
+*/
+
+int		ft__save(char *arg);
+int		ft_check_name_map(char *arg);
+void	ft_check_arg(int ac, char **ag);
+
+
+/*
+**	SAVE INFOS
+*/
+
+void	gnl_mapcub(t_agmap *data, char *arg, int fd_map, int call);
+void	save_mapcub_in_char(t_agmap *data, char *arg);
+void	get_resolution(t_agmap *data, char *str);
+void	get_floor(t_agmap *data, char *str);
+void	get_sky(t_agmap *data, char *str);
+
+
+
+/*
+**	UTILS
+*/
+
+int		space_or_element(int c);
+int		ft_int_strstr(char *str, char *needle);
+int		ft_int_strchr(const char *str, int c);
+int		space_or_comma(int c);
+int		element(int c);
+
+
+//autres
+
+void	printf_struct_arg(t_agmap data);
+
+
+
+
+
+
+
 
 # include <libc.h>
 

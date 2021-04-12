@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 12:23:12 by ldermign          #+#    #+#             */
-/*   Updated: 2021/03/30 09:36:21 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/10 19:15:16 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		get_next_line(int fd, char **line)
 		dst = ft_strjoin_gnl(dst, reader);
 	}
 	free(reader);
-	*line = ft_strdup(dst);
+	*line = ft_strdup_gnl(dst);
 	dst = ft_last_call(dst);
 	if (place_in_fd == 0 && dst == NULL)
 		return (0);

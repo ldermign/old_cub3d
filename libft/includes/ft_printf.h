@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/06 16:31:31 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/10 14:04:38 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int				ft_is_alpha(char c);
 **	Utils
 */
 
-void			ft_putchar(char c, t_flag_len *len);
-void			ft_putstr(char *str, t_flag_len *len);
+void			ft_putchar_ptf(char c, t_flag_len *len);
+void			ft_putstr_ptf(char *str, t_flag_len *len);
 char			*ft_itoa(int nb);
 char			*ft_strjoin(char const *s1, char const *s2);
 int				ft_atoi_printf(char *str);

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 14:37:39 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 12:53:45 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/10 14:08:15 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	conv_s(va_list ap, t_flag_len *flag)
 	else if (ft_no_flag(flag) || flag->padded_zero == 1
 	|| (flag->nbr_precision < 0 && flag->width == -1)
 	|| (flag->nbr_precision < 0 && temp != 0 && size_arg > flag->nbr_width))
-		ft_putstr(arg_char, flag);
+		ft_putstr_ptf(arg_char, flag);
 	else
 	{
 		fusion_conv_strflag(arg_char, 0, flag);
-		ft_putstr(flag->final_str_flag, flag);
+		ft_putstr_ptf(flag->final_str_flag, flag);
 	}
 }
 
@@ -43,12 +43,12 @@ void	conv_c(va_list ap, t_flag_len *flag)
 
 	cara = va_arg(ap, int);
 	if (flag->nbr_width <= 1)
-		ft_putchar(cara, flag);
+		ft_putchar_ptf(cara, flag);
 	else
 	{
 		fusion_conv_strflag(NULL, cara, flag);
 		if (cara > 31)
-			ft_putstr(flag->final_str_flag, flag);
+			ft_putstr_ptf(flag->final_str_flag, flag);
 	}
 }
 
@@ -57,10 +57,10 @@ void	conv_per(t_flag_len *flag)
 	const int	charac = '%';
 
 	if ((1 >= flag->nbr_precision) && (1 >= flag->nbr_width))
-		ft_putstr("%", flag);
+		ft_putstr_ptf("%", flag);
 	else
 	{
 		fusion_conv_strflag(NULL, charac, flag);
-		ft_putstr(flag->final_str_flag, flag);
+		ft_putstr_ptf(flag->final_str_flag, flag);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 19:44:50 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/06 16:33:54 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/08 12:33:08 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ char				*ft_strtrim(char const *s1, char const *set);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
+int					ft_strcmp(char *s1, char *s2);
 
 #endif

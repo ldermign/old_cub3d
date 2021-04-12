@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 12:44:44 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/10 14:08:56 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		ft_printf_inside_job(const char *str, va_list ap)
 		}
 		else if (str[i] != '%')
 		{
-			ft_putchar(str[i], &flag);
+			ft_putchar_ptf(str[i], &flag);
 			i++;
 		}
 	}

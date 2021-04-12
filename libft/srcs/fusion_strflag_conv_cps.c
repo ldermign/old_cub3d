@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fusion_strflag_conv_c_p.c                          :+:      :+:    :+:   */
+/*   fusion_strflag_conv_cps.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 16:01:48 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/10 14:09:28 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	ft_cara_non_imp(int nbr, t_flag_len *flag)
 {
 	if (flag->minus == 1)
 	{
-		ft_putchar(nbr, flag);
+		ft_putchar_ptf(nbr, flag);
 		while (flag->nbr_width > 1 && flag->nbr_width--)
-			ft_putchar(' ', flag);
+			ft_putchar_ptf(' ', flag);
 	}
 	else
 	{
 		while (flag->nbr_width > 1 && flag->nbr_width--)
-			ft_putchar(' ', flag);
-		ft_putchar(nbr, flag);
+			ft_putchar_ptf(' ', flag);
+		ft_putchar_ptf(nbr, flag);
 	}
 }
 

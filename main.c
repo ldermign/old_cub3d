@@ -6,128 +6,79 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/06 16:24:18 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/12 12:27:07 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-int		key_hook(int keycode, void *param);
-int		mouse_hook(int keycode, t_mlx *temp);
-int		ft_close(int keycode, t_mlx *temp);
 
-
-void	ft_init_img(t_data *img)
+void		get_reso_floor_sky(t_agmap *data)
 {
-	img->img = NULL;
-	img->addr = NULL;
-	img->bpp = 0;
-	img->line_len = 0;
-	img->endian = 0;
-	img->width = 0;
-	img->height = 0;
-}
+	int i;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char *dst;
-
-	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
-}
-
-void ft_circle_pixel(t_data img, int x, int y, int place)
-{
-	// int x = -400, y = -400, place = 200;
-	while (x < 400)
-	{
-		y = -400;
-		while (y < 400)
-		{
-			if (((x - place) * (x - place) + (y - place) * (y - place)) < 400)
-				my_mlx_pixel_put(&img, x, y, 0x0000FF00);
-			y += 2;
-		}
-		x += 2;
-	}
-}
-
-int		key_hook(int keycode, void *param)
-{
-	(void)param;
-	(void)keycode;
-	// printf("keycode is [%d].\n", keycode);
-	return (0);
-}
-
-int		mouse_hook(int keycode, t_mlx *temp)
-{
-	(void)temp;
-	(void)keycode;
-	return (0);
-}
-
-int		ft_close(int keycode, t_mlx *temp)
-{
-	(void)temp;
-	(void)keycode;
-	if (keycode == 53)
-	{
-		ft_printf("Goodbye !\n");
-		exit(0);
-	}
-	return (0);
-}
-
-int		ft_pressing(int keycode, t_mlx *temp)
-{
-	(void)temp;
-	(void)keycode;
-	if (keycode != 53)
-		printf("You are pressing the button [%d].\nEvents = 2, mask = 1L<<1\n", keycode);
-	return (0);
-}
-
-int		ft_mouse_in_win(int keycode, t_mlx *temp)
-{
-	(void)temp;
-	(void)keycode;
-	printf("The cursor is in the window.\nEvents = 4, mask = 1L<<4\n");
-	return (0);
-}
-
-int		render_next_frame(int keycode, t_mlx a, t_data img)
-{
-	(void)a;
-	(void)keycode;
-	int x = -400, y = -400, place = 200;
-	// if (keycode == 13)
-		ft_circle_pixel(img, x, y, place);
-		
-	// mlx_put_image_to_window(a.mlx, a.win, img.img, 0, 0);
-	return (0);
-}
-
-char	*circle(char *src)
-{
-	int i = -10, j = -10, x = 10;
-	char *circle;
-
-	circle = "";
-	while (i < x)
-	{
-		while (j < x)
-		{
-			if ((i * i + j * j) < x * x)
-				circle = ft_strjoin(circle, src);
-			else
-				circle = ft_strjoin(circle, " ");
-			j++;
-		}
-		circle = ft_strjoin(circle, "\n");
+	i = 0;
+	while (data->map[i])
+	{ //faire check si 2 fois r ou no ou s...
+		if (ft_int_strchr(data->map[i], 'R') == 1)
+			get_resolution(data, ft_strchr(data->map[i], 'R'));
+		if (ft_int_strchr(data->map[i], 'F') == 1)
+			get_floor(data, ft_strchr(data->map[i], 'F'));
+		if (ft_int_strchr(data->map[i], 'C') == 1)
+			get_sky(data, ft_strchr(data->map[i], 'C'));
 		i++;
-		j = -10;
 	}
-	return (circle);
+}
+
+int		check_info_for_window(t_agmap *data)
+{
+	int i;
+	int j;
+	int ret;
+
+	i = 0;
+	j = 0;
+	ret = 0;
+	while (data->map[i][j])
+	{
+		j = 0;
+		while (data->map[i][j] == ' ')
+			j++;
+		if (element(data->map[i][0]))
+			ret++;
+		if (ft_int_strstr(data->map[i], "NO")
+		|| ft_int_strstr(data->map[i], "SO")
+		|| ft_int_strstr(data->map[i], "WE")
+		|| ft_int_strstr(data->map[i], "EA")
+		|| ft_int_strstr(data->map[i], "S "))
+			ret++;
+		i++;
+		printf("data->map[i][j] = [%c]\n", data->map[i][j]);
+	}
+	printf("ret = %d\n", ret);
+	if (ret != 8)
+		return (1);
+	get_reso_floor_sky(data);
+	return (0);
+}
+
+void	ft_check_save_map(char *arg)
+{
+	t_agmap	data;
+
+	ft_init_agmap(&data);
+	save_mapcub_in_char(&data, arg);
+	// if (check_info_for_window(&data) == 1)
+	// {
+	// 	ft_printf("Error\nCheck informations in map's file.\n");
+	// 	exit (0);
+	// }
+	printf_struct_arg(data);
+}
+
+void check(int ac, char **ag)
+{
+	ft_check_arg(ac, ag);
+	ft_check_save_map(ag[1]);
 }
 
 int		main(int ac, char **ag)
@@ -136,11 +87,8 @@ int		main(int ac, char **ag)
 	// t_mlx a;
 	// void *myStruct = NULL;
 	(void)ag;
-	if (ac != 2)
-	{
-		ft_printf("Erreur : il faut entrer 2 arguments.\n");
-		return (0);
-	}
+	ft_printf("\n\t///\\\\\\BEGINNING///\\\\\\\n\n");
+	check(ac, ag);
 
 
 	// ft_init_img(&img);

@@ -6,7 +6,7 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 19:45:34 by ldermign          #+#    #+#              #
-#    Updated: 2021/04/01 08:06:47 by ldermign         ###   ########.fr        #
+#    Updated: 2021/04/09 17:37:44 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,14 @@ SRCS	=	./srcs/ft_strrchr.c \
 			./srcs/ft_strmapi.c \
 			./srcs/ft_strtrim.c \
 			./srcs/ft_substr.c \
+			./srcs/ft_strcmp.c \
+			./srcs/ft_putchar.c \
+			./srcs/ft_strncpy.c \
+			./srcs/ft_swap.c \
+			./srcs/ft_putstr.c \
+			./srcs/ft_strcpy.c \
+			./srcs/ft_strcat.c \
+			./srcs/ft_strncat.c \
 			./srcs/get_next_line_utils.c \
 			./srcs/get_next_line.c \
 			./srcs/check.c \
@@ -60,7 +68,7 @@ SRCS	=	./srcs/ft_strrchr.c \
 			./srcs/init_flags.c \
 			./srcs/join_width_preci.c \
 			./srcs/utils.c \
-			./srcs/utils_itoa.c 		
+			./srcs/utils_itoa.c
 
 IDIR	=	./includes/
 

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 19:44:50 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/06 16:32:38 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/08 12:33:08 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
-# include "ft_printf.h"
-# include "get_next_line.h"
 
 int					ft_atoi(const char *str);
 void				ft_bzero(void *str, size_t n);
@@ -53,5 +51,6 @@ char				*ft_strtrim(char const *s1, char const *set);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
+int					ft_strcmp(char *s1, char *s2);
 
 #endif
