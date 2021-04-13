@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:25:08 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/12 12:15:45 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/13 15:27:33 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,38 @@ int		space_or_comma(int c)
 int		element(int c)
 {
 	return (c == 'R' || c == 'F' || c == 'C');	
+}
+
+int		position_player(int c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
+int		strstr_double(char **str, char *needle)
+{
+	int i;
+	int j;
+	int k;
+
+	i = 0;
+	k = 0;
+	while (*str[k] != (char)NULL)
+	{
+		i = 0;
+		while (str[k][i])
+		{
+			j = 0;
+				printf("str[k][i] = %c\n", str[k][i]);
+			while (needle[j] && str[k][i + j] && needle[j] == str[k][i + j])
+			{
+				if (needle[j + 1] == '\0')
+					return (1);
+				j++;
+			}
+			i++;
+		}
+		k++;
+		printf("str[k] = %s\n", str[k]);
+	}
+	return (0);
 }

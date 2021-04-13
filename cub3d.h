@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/12 12:10:36 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/13 17:45:13 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ typedef	struct	s_map {
 	int 		ciel_r;
 	int			ciel_g;
 	int 		ciel_b;
+	int			ret;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	char		*sprite;
 	char		**map;
 }				t_agmap;
 
@@ -110,6 +116,8 @@ int		ft_int_strstr(char *str, char *needle);
 int		ft_int_strchr(const char *str, int c);
 int		space_or_comma(int c);
 int		element(int c);
+
+int		strstr_double(char **str, char *needle);
 
 
 //autres
