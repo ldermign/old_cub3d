@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/13 17:45:13 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/14 16:55:50 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef	struct	s_map {
 	int 		ciel_r;
 	int			ciel_g;
 	int 		ciel_b;
-	int			ret;
+	int			tmp;
 	char		*north;
 	char		*south;
 	char		*west;
@@ -93,17 +93,17 @@ void	ft_init_agmap(t_agmap *tmp);
 int		ft__save(char *arg);
 int		ft_check_name_map(char *arg);
 void	ft_check_arg(int ac, char **ag);
+void	check_map(t_agmap *data);
+
 
 
 /*
 **	SAVE INFOS
 */
 
-void	gnl_mapcub(t_agmap *data, char *arg, int fd_map, int call);
 void	save_mapcub_in_char(t_agmap *data, char *arg);
-void	get_resolution(t_agmap *data, char *str);
-void	get_floor(t_agmap *data, char *str);
-void	get_sky(t_agmap *data, char *str);
+void	get_reso_floor_sky(t_agmap *data, char *line);
+
 
 
 
@@ -116,14 +116,15 @@ int		ft_int_strstr(char *str, char *needle);
 int		ft_int_strchr(const char *str, int c);
 int		space_or_comma(int c);
 int		element(int c);
+int		full_of(char *str, char c);
+int		size_tab_char(char **tab);
 
-int		strstr_double(char **str, char *needle);
 
 
 //autres
 
 void	printf_struct_arg(t_agmap data);
-
+// void	ft_free(t_agmap *data);
 
 
 

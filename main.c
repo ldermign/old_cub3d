@@ -6,108 +6,11 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/13 17:50:05 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/14 16:55:20 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void		get_reso_floor_sky_text(t_agmap *data)
-{
-	int i;
-
-	i = 0;
-	while (data->map[i])
-	{
-		if (ft_int_strchr(data->map[i], 'R') == 1)
-			get_resolution(data, ft_strchr(data->map[i], 'R'));
-		if (ft_int_strchr(data->map[i], 'F') == 1)
-			get_floor(data, ft_strchr(data->map[i], 'F'));
-		if (ft_int_strchr(data->map[i], 'C') == 1)
-			get_sky(data, ft_strchr(data->map[i], 'C'));
-		// if (ft_int_strstr(data->map[i], "NO"))
-		// {
-		// 	while (ft_isdigit(data->map[i][j]))
-		// 		j++;
-		// || ft_int_strstr(data->map[i], "SO")
-		// || ft_int_strstr(data->map[i], "WE")
-		// || ft_int_strstr(data->map[i], "EA")
-		// || ft_int_strstr(data->map[i], "S "))
-		i++;
-	}
-}
-
-// void	ft_check_save_map(char *arg)
-// {
-// 	save_mapcub_in_char(&data, arg);
-// 	if (check_info_for_window(&data) == 1)
-// 	{
-// 		// ft_printf("Error\nCheck informations in map's file.\n");
-// 		exit (0);
-// 	}
-// 	printf_struct_arg(data);
-// }
-
-void	final_map(t_agmap *data, int len_map)
-{
-	(void)len_map;
-	char **tmp;
-	
-	tmp = data->map;
-	printf("len_map = %d\n", len_map);
-}
-
-void	check_infos_mapcub(t_agmap *data)
-{
-	int i;
-	int j;
-	int ret;
-	// int len_map;
-
-	i = 0;
-	j = 0;
-	ret = 0;
-	// len_map = 0;
-	while (data->map[i])
-	{
-		j = 0;
-		while (data->map[i][j] == ' ')
-			j++;
-		if (element(data->map[i][j]))
-			ret++;
-		if (ft_int_strstr(data->map[i], "NO")
-		|| ft_int_strstr(data->map[i], "SO")
-		|| ft_int_strstr(data->map[i], "WE")
-		|| ft_int_strstr(data->map[i], "EA")
-		|| ft_int_strstr(data->map[i], "S "))
-			ret++;
-		i++;
-		if (ret == 8)
-			break ;
-	}
-	if (ret != 8)
-	{
-		if (ret > 8)
-			ft_printf("Error\nToo much info in map's file.\n");
-		if (ret < 8)
-			ft_printf("Error\nIt's missing some info in map's file.\n");
-		exit (0);
-	}
-	// i = 0;
-	// while (data->map[i][0] != '1' && i++)
-	// 	len_map++;
-
-	// while (data->map)
-	// {
-	// 	if (!strstr_double(data->map, "NO "))
-	// 	{
-	// 		printf("pouet\n");
-	// 		exit(0);
-	// 	}
-	// }
-	printf("i avant = %d\n", i);
-	final_map(data, i);
-}
 
 void 	check(int ac, char **ag)
 {
@@ -116,7 +19,7 @@ void 	check(int ac, char **ag)
 	ft_init_agmap(&data);
 	ft_check_arg(ac, ag);
 	save_mapcub_in_char(&data, ag[1]);
-	// check_infos_mapcub(&data);
+	check_map(&data);
 	// get_reso_floor_sky_text(&data);
 	// check_final_map();
 	// if (check_info_for_window(&data) == 1)
@@ -125,6 +28,7 @@ void 	check(int ac, char **ag)
 	// 	exit (0);
 	// }
 	printf_struct_arg(data);
+	// ft_free(&data);
 }
 
 int		main(int ac, char **ag)
