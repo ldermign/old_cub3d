@@ -6,13 +6,13 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:15:51 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/14 17:22:46 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/15 16:35:07 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	get_resolution(t_agmap *data, char *str)
+static void	get_resolution(t_arg *data, char *str)
 {
 	int i;
 
@@ -32,7 +32,7 @@ static void	get_resolution(t_agmap *data, char *str)
 	}
 }
 
-static void	get_floor(t_agmap *data, char *str)
+static void	get_floor(t_arg *data, char *str)
 {
 	int i;
 
@@ -52,7 +52,7 @@ static void	get_floor(t_agmap *data, char *str)
 	data->flr_b = ft_atoi((const char *)str + i);
 }
 
-static void	get_sky(t_agmap *data, char *str)
+static void	get_sky(t_arg *data, char *str)
 {
 	int i;
 
@@ -72,50 +72,78 @@ static void	get_sky(t_agmap *data, char *str)
 	data->ciel_b = ft_atoi((const char *)str + i);
 }
 
-void		get_reso_floor_sky(t_agmap *data, char *line)
+void		recup_data(t_arg *data, char *str)
 {
 	int	i;
+	int j;
 
 	i = 0;
-	if (element(line[i]) || ft_int_strstr(&line[i], "NO ")
-	|| ft_int_strstr(&line[i], "SO ") || ft_int_strstr(&line[i], "WE ")
-	|| ft_int_strstr(&line[i], "EA ") || ft_int_strstr(&line[i], "S "))
+	j = 0;
+	if (ft_int_strstr(str, "R ") || ft_int_strstr(str, "F ")
+	|| ft_int_strstr(str, "C ") || ft_int_strstr(str, "NO ")
+	|| ft_int_strstr(str, "SO ") || ft_int_strstr(str, "WE ")
+	|| ft_int_strstr(str, "EA ") || ft_int_strstr(str, "S "))
 	{
-		if (line[i] == 'R')
-			get_resolution(data, &line[i]);
-		else if (line[i] == 'F')
-			get_floor(data, &line[i]);
-		else if (line[i] == 'C')
-			get_sky(data, &line[i]);
-		else if (ft_int_strstr(&line[i], "NO "))
+		if (ft_int_strstr(str, "R "))
+			get_resolution(data, str);
+		else if (ft_int_strstr(str, "F "))
+			get_floor(data, str);
+		else if (ft_int_strstr(str, "C "))
+			get_sky(data, str);
+		else if (ft_int_strstr(str, "NO "))
 		{
-			while (line[i] == 'N' || line[i] == 'O' || line[i] == ' ')
+			if (data->north != NULL)
+			{
+				ft_printf("Error\nSome info are duplicated.\n");
+				exit (0);
+			}
+			while (str[i] == 'N' || str[i] == 'O' || str[i] == ' ')
 				i++;
-			data->north = ft_strdup(&line[i]);
+			data->north = ft_strdup(&str[i]);
 		}
-		else if (ft_int_strstr(&line[i], "SO "))
+		else if (ft_int_strstr(str, "SO "))
 		{
-			while (line[i] == 'S' || line[i] == 'O' || line[i] == ' ')
+			if (data->south != NULL)
+			{
+				ft_printf("Error\nSome info are duplicated.\n");
+				exit (0);
+			}
+			while (str[i] == 'S' || str[i] == 'O' || str[i] == ' ')
 				i++;
-			data->south = ft_strdup(&line[i]);
+			data->south = ft_strdup(&str[i]);
 		}
-		else if (ft_int_strstr(&line[i], "WE "))
+		else if (ft_int_strstr(str, "WE "))
 		{
-			while (line[i] == 'W' || line[i] == 'E' || line[i] == ' ')
+			if (data->west != NULL)
+			{
+				ft_printf("Error\nSome info are duplicated.\n");
+				exit (0);
+			}
+			while (str[i] == 'W' || str[i] == 'E' || str[i] == ' ')
 				i++;
-			data->west = ft_strdup(&line[i]);
+			data->west = ft_strdup(&str[i]);
 		}
-		else if (ft_int_strstr(&line[i], "EA "))
+		else if (ft_int_strstr(str, "EA "))
 		{
-			while (line[i] == 'E' || line[i] == 'A' || line[i] == ' ')
+			if (data->east != NULL)
+			{
+				ft_printf("Error\nSome info are duplicated.\n");
+				exit (0);
+			}
+			while (str[i] == 'E' || str[i] == 'A' || str[i] == ' ')
 				i++;
-			data->east = ft_strdup(&line[i]);
+			data->east = ft_strdup(&str[i]);
 		}
-		else if (ft_int_strstr(&line[i], "S "))
+		else if (ft_int_strstr(str, "S "))
 		{
-			while (line[i] == 'S' || line[i] == ' ')
+			if (data->sprite != NULL)
+			{
+				ft_printf("Error\nSome info are duplicated.\n");
+				exit (0);
+			}
+			while (str[i] == 'S' || str[i] == ' ')
 				i++;
-			data->sprite = ft_strdup(&line[i]);
+			data->sprite = ft_strdup(&str[i]);
 		}
 		data->tmp += 1;
 	}

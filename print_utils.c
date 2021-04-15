@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:39:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/14 17:52:03 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:19:56 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 #define KMAG  "\x1B[0;35m" // MAGENTA
 #define KCYN  "\x1B[0;36m" // CYAN
 #define KWHT  "\x1B[0;37m" // BLANC
-#define KGRE  "\x1b[1;30m" // VERT
+#define KGRE  "\x1b[1;30m" // GRIS
 #define CLR_COLOR "\x1b[0m" // CLEAR COLOR
 
-void	printf_struct_arg(t_agmap data)
+void	printf_struct_arg(t_arg data)
 {
 	(void)data;
 	ft_printf("\t///\\\\\\ map.cub ///\\\\\\\n");
@@ -42,12 +42,19 @@ void	printf_struct_arg(t_agmap data)
 	int i = 0;
 	while (data.map[i])
 	{
-		printf("data->map ligne {%d}\t\t==>\t\t%s\n", i + 1, data.map[i]);
+		printf("\x1b[0mdata->map ligne {%d}\t\t==>\t\t\x1B[1;30m%s\n", i + 1, data.map[i]);
+		i++;
+	}
+	i = 0;
+	printf("\n");
+	while (data.map_final[i])
+	{
+		printf("\x1b[0mFinal map ligne {%d}\t\t==>\t\t\x1B[1;30m%s\n", i + 1, data.map[i]);
 		i++;
 	}
 }
 
-// void	ft_free(t_agmap *data)
+// void	ft_free(t_arg *data)
 // {
 // 	free(data->res_x);
 // 	free(data->res_y);

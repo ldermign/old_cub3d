@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/14 16:55:50 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:08:50 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 
-typedef	struct	s_map {
+typedef	struct	s_argmts {
+	int			tmp;
+    int         last;
+    int         len_fd;
 	int			res_x;
 	int			res_y;
 	int 		flr_r;
@@ -31,14 +34,14 @@ typedef	struct	s_map {
 	int 		ciel_r;
 	int			ciel_g;
 	int 		ciel_b;
-	int			tmp;
 	char		*north;
 	char		*south;
 	char		*west;
 	char		*east;
 	char		*sprite;
 	char		**map;
-}				t_agmap;
+    char        **map_final;
+}				t_arg;
 
 typedef struct  s_data {
     void        *img;
@@ -49,6 +52,14 @@ typedef struct  s_data {
 	int			width;
 	int			height;
 }               t_data;
+
+typedef struct  s_map
+{
+    int         player;
+    
+    
+}               t_spacemap;
+
 
 typedef struct  s_mlx {
     void        *mlx;
@@ -83,7 +94,7 @@ typedef struct  s_xy {
 **	INIT
 */
 
-void	ft_init_agmap(t_agmap *tmp);
+void	ft_init_arg(t_arg *tmp);
 
 
 /*
@@ -93,17 +104,17 @@ void	ft_init_agmap(t_agmap *tmp);
 int		ft__save(char *arg);
 int		ft_check_name_map(char *arg);
 void	ft_check_arg(int ac, char **ag);
-void	check_map(t_agmap *data);
-
+void	check_map(t_arg *data);
+void	check_wrong_data(t_arg *data);
 
 
 /*
 **	SAVE INFOS
 */
 
-void	save_mapcub_in_char(t_agmap *data, char *arg);
-void	get_reso_floor_sky(t_agmap *data, char *line);
-
+void	save_mapcub_in_char(t_arg *data, char *arg);
+void	recup_data(t_arg *data, char *str);
+void	recup_map(t_arg *data);
 
 
 
@@ -119,12 +130,25 @@ int		element(int c);
 int		full_of(char *str, char c);
 int		size_tab_char(char **tab);
 
+/*
+**  UTILS MAP
+*/
+
+int		pos_player(int c);
+int		ft_is_map(char c);
+void	map_valid(char **tab);
+int		cara_in_map(int c);
+int		ft_is_noting(char *str);
+int		ft_is_either(char *str);
+
+
+
 
 
 //autres
 
-void	printf_struct_arg(t_agmap data);
-// void	ft_free(t_agmap *data);
+void	printf_struct_arg(t_arg data);
+// void	ft_free(t_arg *data);
 
 
 

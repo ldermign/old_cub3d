@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/10 14:12:17 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/15 08:28:06 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 
-typedef	struct	s_map {
+typedef	struct	s_argmts {
 	int			res_x;
 	int			res_y;
 	int 		flr_r;
@@ -31,7 +31,7 @@ typedef	struct	s_map {
 	int 		ciel_r;
 	int			ciel_g;
 	int 		ciel_b;
-}				t_agmap;
+}				t_arg;
 
 typedef struct  s_data {
     void        *img;

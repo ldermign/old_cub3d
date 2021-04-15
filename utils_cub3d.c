@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:25:08 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/14 14:59:22 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/15 16:53:54 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		element(int c)
 	return (c == 'R' || c == 'F' || c == 'C');	
 }
 
-int		position_player(int c)
+int		pos_player(int c)
 {
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
@@ -96,4 +96,54 @@ int		size_tab_char(char **tab)
 	while (tab[i])
 		i++;
 	return (i);
+}
+
+int		ft_is_map(char c)
+{
+	return (c == ' ' || c == '1');
+}
+
+int		cara_in_map(int c)
+{
+	return (c == '0' || c == '1' || c == '2' || c == 'N' || c == 'S'
+	|| c == 'E' || c == 'W');
+}
+
+void		map_valid(char **tab)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (tab[i] != NULL)
+	{
+		j = 0;
+		while (tab[i][j])
+		{
+			if (!cara_in_map(tab[i][j]) || tab[i][j] != ' ')
+			{
+				ft_printf("Error\nThe element [ %c ] line [ %d ] is not valid.\n", tab[i][j], i);
+				exit (0);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int		ft_is_noting(char *str)
+{
+	return (!ft_int_strstr(str, "R ") && !ft_int_strstr(str, "F ")
+	&& !ft_int_strstr(str, "C ") && !ft_int_strstr(str, "NO ")
+	&& !ft_int_strstr(str, "SO ") && !ft_int_strstr(str, "WE ")
+	&& !ft_int_strstr(str, "EA ") && !ft_int_strstr(str, "S "));
+}
+
+int		ft_is_either(char *str)
+{
+	return (ft_int_strstr(str, "R ") || ft_int_strstr(str, "F ")
+	|| ft_int_strstr(str, "C ") || ft_int_strstr(str, "NO ")
+	|| ft_int_strstr(str, "SO ") || ft_int_strstr(str, "WE ")
+	|| ft_int_strstr(str, "EA ") || ft_int_strstr(str, "S "));
 }

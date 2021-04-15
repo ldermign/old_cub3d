@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/14 16:55:20 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/15 16:34:27 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void 	check(int ac, char **ag)
 {
-	t_agmap	data;
+	t_arg	data;
 
-	ft_init_agmap(&data);
 	ft_check_arg(ac, ag);
+	ft_init_arg(&data);
 	save_mapcub_in_char(&data, ag[1]);
-	check_map(&data);
-	// get_reso_floor_sky_text(&data);
+	check_wrong_data(&data);
+	recup_map(&data);
+	// check_map(&data);
 	// check_final_map();
 	// if (check_info_for_window(&data) == 1)
 	// {
