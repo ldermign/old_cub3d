@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/15 17:08:50 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/16 13:42:24 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef	struct	s_argmts {
 	char		*west;
 	char		*east;
 	char		*sprite;
-	char		**map;
+	char		**fd;
     char        **map_final;
 }				t_arg;
 
@@ -134,16 +134,19 @@ int		size_tab_char(char **tab);
 **  UTILS MAP
 */
 
-int		pos_player(int c);
+int		player(int c);
 int		ft_is_map(char c);
 void	map_valid(char **tab);
 int		cara_in_map(int c);
 int		ft_is_noting(char *str);
 int		ft_is_either(char *str);
+int		get_position(char **tab, int c);
 
 
 
 
+
+void	ft_print_line(t_arg *data);
 
 //autres
 
@@ -154,6 +157,20 @@ void	printf_struct_arg(t_arg data);
 
 
 
+/*
+**  A TEJ
+*/
+
+
+#define KRED  "\x1B[0;31m" // ROUGE
+#define KGRN  "\x1B[0;32m" // VERT
+#define KYEL  "\x1B[0;33m" // JAUNE
+#define KBLU  "\x1B[0;34m" // BLEU
+#define KMAG  "\x1B[0;35m" // MAGENTA
+#define KCYN  "\x1B[0;36m" // CYAN
+#define KWHT  "\x1B[0;37m" // BLANC
+#define KGRE  "\x1b[1;30m" // GRIS
+#define CLR_COLOR "\x1b[0m" // CLEAR COLOR
 
 
 # include <libc.h>

@@ -6,26 +6,16 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:39:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/15 17:19:56 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/16 13:45:01 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-#define KRED  "\x1B[0;31m" // ROUGE
-#define KGRN  "\x1B[0;32m" // VERT
-#define KYEL  "\x1B[0;33m" // JAUNE
-#define KBLU  "\x1B[0;34m" // BLEU
-#define KMAG  "\x1B[0;35m" // MAGENTA
-#define KCYN  "\x1B[0;36m" // CYAN
-#define KWHT  "\x1B[0;37m" // BLANC
-#define KGRE  "\x1b[1;30m" // GRIS
-#define CLR_COLOR "\x1b[0m" // CLEAR COLOR
-
 void	printf_struct_arg(t_arg data)
 {
 	(void)data;
-	ft_printf("\t///\\\\\\ map.cub ///\\\\\\\n");
+	ft_printf(KGRN"\n\n\t///\\\\\\DATA MAP.CUB///\\\\\\\n\n\n"CLR_COLOR);
 	ft_printf("res_x = \t%d\n", data.res_x);
 	ft_printf("res_y = \t%d\n", data.res_y);
 	ft_printf("flr_r = \t%d\n", data.flr_r);
@@ -40,16 +30,16 @@ void	printf_struct_arg(t_arg data)
 	ft_printf("east = \t\t[%s]\n", data.east);
 	ft_printf("sprite = \t[%s]\n", data.sprite);
 	int i = 0;
-	while (data.map[i])
+	while (data.fd[i])
 	{
-		printf("\x1b[0mdata->map ligne {%d}\t\t==>\t\t\x1B[1;30m%s\n", i + 1, data.map[i]);
+		printf("\x1b[0mFile descriptor ligne [ %d ]\t\t==>\t\t\x1B[1;30m%s\n", i + 1, data.fd[i]);
 		i++;
 	}
+	printf(KGRN"\n\n\t///\\\\\\FINAL MAP TO USE///\\\\\\\n\n\n");
 	i = 0;
-	printf("\n");
 	while (data.map_final[i])
 	{
-		printf("\x1b[0mFinal map ligne {%d}\t\t==>\t\t\x1B[1;30m%s\n", i + 1, data.map[i]);
+		printf("\x1b[0mFinal map ligne [ %d ]\t\t==>\t\t\x1B[1;30m%s\n", i + 1, data.map_final[i]);
 		i++;
 	}
 }

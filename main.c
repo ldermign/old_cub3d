@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/15 16:34:27 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/16 10:07:37 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void 	check(int ac, char **ag)
 	save_mapcub_in_char(&data, ag[1]);
 	check_wrong_data(&data);
 	recup_map(&data);
-	// check_map(&data);
+	check_map(&data);
 	// check_final_map();
 	// if (check_info_for_window(&data) == 1)
 	// {
@@ -38,7 +38,7 @@ int		main(int ac, char **ag)
 	// t_mlx a;
 	// void *myStruct = NULL;
 	(void)ag;
-	ft_printf("\n\t///\\\\\\BEGINNING///\\\\\\\n\n");
+	ft_printf(KRED"\n\n\t///\\\\\\BEGINNING///\\\\\\\n\n\n"CLR_COLOR);
 	check(ac, ag);
 
 

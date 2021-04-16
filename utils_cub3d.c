@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:25:08 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/15 16:53:54 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/16 11:47:25 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		element(int c)
 	return (c == 'R' || c == 'F' || c == 'C');	
 }
 
-int		pos_player(int c)
+int		player(int c)
 {
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
@@ -93,7 +93,7 @@ int		size_tab_char(char **tab)
 	i = 0;
 	if (tab == NULL)
 		return (0);
-	while (tab[i])
+	while (tab[i] != NULL)
 		i++;
 	return (i);
 }
@@ -109,7 +109,7 @@ int		cara_in_map(int c)
 	|| c == 'E' || c == 'W');
 }
 
-void		map_valid(char **tab)
+int		get_position(char **tab, int c)
 {
 	int i;
 	int j;
@@ -121,15 +121,13 @@ void		map_valid(char **tab)
 		j = 0;
 		while (tab[i][j])
 		{
-			if (!cara_in_map(tab[i][j]) || tab[i][j] != ' ')
-			{
-				ft_printf("Error\nThe element [ %c ] line [ %d ] is not valid.\n", tab[i][j], i);
-				exit (0);
-			}
+			if (tab[i][j] == (char)c)
+				return (1);
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }
 
 int		ft_is_noting(char *str)
@@ -146,4 +144,16 @@ int		ft_is_either(char *str)
 	|| ft_int_strstr(str, "C ") || ft_int_strstr(str, "NO ")
 	|| ft_int_strstr(str, "SO ") || ft_int_strstr(str, "WE ")
 	|| ft_int_strstr(str, "EA ") || ft_int_strstr(str, "S "));
+}
+
+void	ft_print_line(t_arg *data)
+{
+	int i;
+	
+	i = 0;
+	while (data->map_final[i])
+	{
+		ft_printf("\x1b[0mLine [ %d ]\t==>\t\x1B[1;30m%s\n", i + 1, data->map_final[i]);
+		i++;
+	}
 }

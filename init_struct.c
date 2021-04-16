@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:38:48 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/15 17:15:58 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/16 08:46:04 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	ft_init_arg(t_arg *info)
 	info->west = NULL;
 	info->east = NULL;
 	info->sprite = NULL;
-	info->map = NULL;
+	info->fd = NULL;
 	info->map_final = NULL;
 }
