@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:15:51 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/15 16:35:07 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/17 13:55:34 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ static void	get_resolution(t_arg *data, char *str)
 	int i;
 
 	i = 0;
+	if (data->res_x != 0 && data->res_y != 0)
+	{
+		ft_printf("Error\nToo much info for resolution.\n");
+		exit (0);
+	}
 	while (str[i] && space_or_element(str[i]))
 		i++;
 	data->res_x = ft_atoi((const char *)str + i);
@@ -37,6 +42,11 @@ static void	get_floor(t_arg *data, char *str)
 	int i;
 
 	i = 0;
+	if (data->flr_r != 0 || data->flr_g != 0 || data->flr_b != 0)
+	{
+		ft_printf("Error\nYou've duplicated info about the floor.\n");
+		exit (0);
+	}
 	while (str[i] && space_or_element(str[i]))
 		i++;
 	data->flr_r = ft_atoi((const char *)str + i);
@@ -57,6 +67,11 @@ static void	get_sky(t_arg *data, char *str)
 	int i;
 
 	i = 0;
+	if (data->ciel_r != 0 || data->ciel_g != 0 || data->ciel_b != 0)
+	{
+		ft_printf("Error\nYou've duplicated info about the sky.\n");
+		exit (0);
+	}
 	while (str[i] && space_or_element(str[i]))
 		i++;
 	data->ciel_r = ft_atoi((const char *)str + i);
@@ -72,13 +87,26 @@ static void	get_sky(t_arg *data, char *str)
 	data->ciel_b = ft_atoi((const char *)str + i);
 }
 
-void		recup_data(t_arg *data, char *str)
+char		*get_texture(char *str, char *data)
 {
-	int	i;
-	int j;
+	int i;
+	char *texture;
 
 	i = 0;
-	j = 0;
+	texture = NULL;
+	if (data != NULL)
+	{
+		ft_printf("Error\nSome info are duplicated.\n");
+		exit (0);
+	}
+	while (ft_is_alpha((int)str[i]) || str[i] == ' ')
+		i++;
+	texture = ft_strdup(&str[i]);
+	return (texture);
+}
+
+void		recup_data(t_arg *data, char *str)
+{
 	if (ft_int_strstr(str, "R ") || ft_int_strstr(str, "F ")
 	|| ft_int_strstr(str, "C ") || ft_int_strstr(str, "NO ")
 	|| ft_int_strstr(str, "SO ") || ft_int_strstr(str, "WE ")
@@ -91,60 +119,15 @@ void		recup_data(t_arg *data, char *str)
 		else if (ft_int_strstr(str, "C "))
 			get_sky(data, str);
 		else if (ft_int_strstr(str, "NO "))
-		{
-			if (data->north != NULL)
-			{
-				ft_printf("Error\nSome info are duplicated.\n");
-				exit (0);
-			}
-			while (str[i] == 'N' || str[i] == 'O' || str[i] == ' ')
-				i++;
-			data->north = ft_strdup(&str[i]);
-		}
+			data->north = get_texture(str, data->north);
 		else if (ft_int_strstr(str, "SO "))
-		{
-			if (data->south != NULL)
-			{
-				ft_printf("Error\nSome info are duplicated.\n");
-				exit (0);
-			}
-			while (str[i] == 'S' || str[i] == 'O' || str[i] == ' ')
-				i++;
-			data->south = ft_strdup(&str[i]);
-		}
+			data->south = get_texture(str, data->south);
 		else if (ft_int_strstr(str, "WE "))
-		{
-			if (data->west != NULL)
-			{
-				ft_printf("Error\nSome info are duplicated.\n");
-				exit (0);
-			}
-			while (str[i] == 'W' || str[i] == 'E' || str[i] == ' ')
-				i++;
-			data->west = ft_strdup(&str[i]);
-		}
+			data->west = get_texture(str, data->west);
 		else if (ft_int_strstr(str, "EA "))
-		{
-			if (data->east != NULL)
-			{
-				ft_printf("Error\nSome info are duplicated.\n");
-				exit (0);
-			}
-			while (str[i] == 'E' || str[i] == 'A' || str[i] == ' ')
-				i++;
-			data->east = ft_strdup(&str[i]);
-		}
+			data->east = get_texture(str, data->east);
 		else if (ft_int_strstr(str, "S "))
-		{
-			if (data->sprite != NULL)
-			{
-				ft_printf("Error\nSome info are duplicated.\n");
-				exit (0);
-			}
-			while (str[i] == 'S' || str[i] == ' ')
-				i++;
-			data->sprite = ft_strdup(&str[i]);
-		}
+			data->sprite = get_texture(str, data->sprite);
 		data->tmp += 1;
 	}
 }

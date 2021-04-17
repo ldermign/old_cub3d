@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 09:46:18 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/16 16:20:31 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/17 13:46:11 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,25 +94,23 @@ void	check_wrong_data(t_arg *data)
 	
 	i = 0;
 	j = 0;
-	// while (data->fd[i] != NULL)
-	// {
-	// 	if (ft_is_noting(data->fd[i])// && !ft_int_strstr(data->fd[i], " 1")
-	// 	&& !ft_int_strchr(data->fd[i], '1') && data->fd[i][0] != '\0')
-	// 	{
-	// 		ft_printf("Error\nSomething's wrong on line %d.\n", i + 1);
-	// 		exit (0);
-	// 	}
-	// 	i++;
-	// }
 	i = 0;
 	while (data->fd[i] != NULL)
 	{
 		recup_data(data, data->fd[i]);
 		i++;
 	}
+	if (data->flr_r < 0 || data->flr_g < 0 || data->flr_b < 0
+	|| data->ciel_r < 0 || data->ciel_g < 0 || data->ciel_b < 0
+	|| data->flr_r > 255 || data->flr_g > 255 || data->flr_b > 255
+	|| data->ciel_r > 255 || data->ciel_g > 255 || data->ciel_b > 255)
+	{
+		ft_printf("Error\nCheck floor or sky's color.\n");
+		exit (0);
+	}
 }
 
-void	gnl_mapcub(t_arg *data, char *arg) //, int skip)
+void	save_mapcub_in_char(t_arg *data, char *arg) //, int skip)
 {
 	int		i;
 	int		ret;
@@ -127,17 +125,8 @@ void	gnl_mapcub(t_arg *data, char *arg) //, int skip)
 		return ;
 	while ((ret = get_next_line(fd_map, &line)) > 0)
 	{
-		if (ft_is_noting(line) || !ft_int_strstr(line, " 1")
-		|| !ft_int_strchr(line, '1') || line[0] != '\0')
-		{
-			data->fd[i] = ft_strdup(line);
-			i++;
-		}
-		else
-		{
-			ft_printf("Error\nSomething's wrong on line %d.\n", i + 1);
-			exit (0);
-		}
+		data->fd[i] = ft_strdup(line);
+		i++;
 	}
 	data->fd[i] = ft_strdup(line);
 	data->fd[++i] = NULL;
@@ -145,7 +134,7 @@ void	gnl_mapcub(t_arg *data, char *arg) //, int skip)
 	close(fd_map);
 }
 
-void	save_mapcub_in_char(t_arg *data, char *arg)
+void	gnl_mapcub(t_arg *data, char *arg)
 {
 	int		ret;
 	int		fd_map;
@@ -160,9 +149,16 @@ void	save_mapcub_in_char(t_arg *data, char *arg)
 		exit (0);
 	}
 	while ((ret = get_next_line(fd_map, &line)) > 0)
+	{
+		if (ft_is_noting(line) && !ft_int_strchr(line, '1') && line[0] != '\0')
+		{
+			ft_printf("Error\nWrong info in map's file.\n", arg);
+			exit (0);
+		}
 		data->len_fd++;
+	}
 	data->len_fd++;
 	free(line);
 	close(fd_map);
-	gnl_mapcub(data, arg);
+	save_mapcub_in_char(data, arg);
 }

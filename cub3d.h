@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/16 13:42:24 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/17 11:34:42 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	check_wrong_data(t_arg *data);
 **	SAVE INFOS
 */
 
-void	save_mapcub_in_char(t_arg *data, char *arg);
+void	gnl_mapcub(t_arg *data, char *arg);
 void	recup_data(t_arg *data, char *str);
 void	recup_map(t_arg *data);
 
