@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/17 11:34:42 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/18 15:59:17 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct  s_data {
 typedef struct  s_map
 {
     int         player;
-    
     
 }               t_spacemap;
 
@@ -129,6 +128,7 @@ int		space_or_comma(int c);
 int		element(int c);
 int		full_of(char *str, char c);
 int		size_tab_char(char **tab);
+int		pos_last(char *str, char c);
 
 /*
 **  UTILS MAP

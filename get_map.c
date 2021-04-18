@@ -6,11 +6,37 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 09:46:18 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/17 13:46:11 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/18 16:04:04 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	check_structure_map(t_arg *data, char **map)
+{
+	(void)data;
+	int		i;
+	int		j;
+	char	*first;
+	char	*second;
+
+	i = 0;
+	j = 0;
+	first = NULL;
+	second = NULL;
+	while (map[i] && map[i + 1])
+	{
+		first = map[i];
+		second = map[i + 1];
+		printf ("fisrt = \t[%s]\n", first);
+		printf ("second = \t[%s]\n", second);
+		if (!ft_int_strchr(first, ' '))
+			data->tmp = pos_last(first, '1');
+		printf("last position 1 \t= %d\n", data->tmp);
+		printf("size ligne first \t= %zu\n", ft_strlen(first));
+		i++;
+	}
+}
 
 void	check_map(t_arg *data)
 {
@@ -21,10 +47,20 @@ void	check_map(t_arg *data)
 	i = 0;
 	j = 0;
 	len = size_tab_char(data->map_final) - 1;
+	data->tmp = 0;
 	if (ft_int_strchr(data->map_final[0], '0'))
 	{
 		ft_printf("Error\nSomething's wrong on the first line of the map.\n");
 		exit (0);
+	}
+	while (data->map_final[j])
+	{
+		if (ft_is_either(data->map_final[j]))
+		{
+			ft_printf("Error\nNo info at the end of the file.\n");
+			exit (0);
+		}
+		j++;
 	}
 	while (data->map_final[i])
 	{
@@ -42,6 +78,11 @@ void	check_map(t_arg *data)
 			ft_print_line(data);
 			exit (0);
 		}
+		if (ft_int_strchr(data->map_final[i], 'N')
+		|| ft_int_strchr(data->map_final[i], 'S')
+		|| ft_int_strchr(data->map_final[i], 'W')
+		|| ft_int_strchr(data->map_final[i], 'E'))
+			data->tmp++;
 		i++;
 	}
 	if (!get_position(data->map_final, 'N')
@@ -52,12 +93,17 @@ void	check_map(t_arg *data)
 		ft_printf("Error\nWhere is your player ? :(\n");
 		exit (0);
 	}
-	// else (get position)
 	if (ft_int_strchr(data->map_final[len], '0'))
 	{
 		ft_printf("Error\nSomething's wrong on the last line of the map.\n");
 		exit (0);
 	}
+	if (data->tmp > 1)
+	{
+		ft_printf("Error\nThere can be only one....\n");
+		exit (0);
+	}
+	check_structure_map(data, data->map_final);
 }
 
 void	recup_map(t_arg *data)
@@ -95,7 +141,8 @@ void	check_wrong_data(t_arg *data)
 	i = 0;
 	j = 0;
 	i = 0;
-	while (data->fd[i] != NULL)
+	while (data->fd[i] != NULL
+	&& (ft_is_either(data->fd[i]) || data->fd[i][0] == '\0'))
 	{
 		recup_data(data, data->fd[i]);
 		i++;
@@ -108,9 +155,22 @@ void	check_wrong_data(t_arg *data)
 		ft_printf("Error\nCheck floor or sky's color.\n");
 		exit (0);
 	}
+	if (data->north == NULL || data->south == NULL || data->east == NULL
+	|| data->west == NULL || data->sprite == NULL)
+	{
+		ft_printf("Error\nIt's missing some info.\n");
+		exit (0);
+	}
+	if (!ft_int_strstr(data->north, ".xpm") || !ft_int_strstr(data->south, ".xpm")
+	|| !ft_int_strstr(data->west, ".xpm") || !ft_int_strstr(data->east, ".xpm")
+	|| !ft_int_strstr(data->sprite, ".xpm"))
+	{
+		ft_printf("Error\nCheck name of texture.\n");
+		exit (0);
+	}
 }
 
-void	save_mapcub_in_char(t_arg *data, char *arg) //, int skip)
+void	save_mapcub_in_char(t_arg *data, char *arg)
 {
 	int		i;
 	int		ret;

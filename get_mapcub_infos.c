@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:15:51 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/17 13:55:34 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/18 15:03:58 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,5 @@ void		recup_data(t_arg *data, char *str)
 			data->east = get_texture(str, data->east);
 		else if (ft_int_strstr(str, "S "))
 			data->sprite = get_texture(str, data->sprite);
-		data->tmp += 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:25:08 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/16 11:47:25 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/18 15:58:44 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,22 @@ int		ft_int_strchr(const char *str, int c)
 	return (0);
 }
 
+int		pos_last(char *str, char c)
+{
+	int i;
+
+	i = ft_strlen(str);
+	if (str == NULL)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (ft_strlen(str));
+}
+
 int		space_or_element(int c)
 {
 	return (c == ' ' || c == 'R' || c == 'F' || c == 'C');
@@ -67,7 +83,7 @@ int		element(int c)
 
 int		player(int c)
 {
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
 }
 
 int		full_of(char *str, char c)
