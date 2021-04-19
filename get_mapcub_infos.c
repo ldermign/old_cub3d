@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:15:51 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/18 15:03:58 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/19 17:10:46 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	get_resolution(t_arg *data, char *str)
 	while (str[i] && space_or_comma(str[i]))
 		i++;
 	data->res_y = ft_atoi((const char *)&str[i]);
-	if (data->res_x == 0 || data->res_y == 0)
+	if (data->res_x <= 0 || data->res_y <= 0)
 	{
 		ft_printf("Error\nCheck resolution.\n");
 		exit (0);

@@ -6,41 +6,81 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 09:46:18 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/19 14:10:45 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:57:17 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_structure_map(t_arg *data, char **map)
+void	check_sprite_map(t_arg *data, char **map)
 {
 	int		i;
 	int		j;
 
 	i = 1;
 	j = 0;
-	while (map[i] && map[i + 1])
+	while (map[i][j] && map[i + 1] && map[i][j + 1])
+	{
+		j++;
+		if (ft_int_strchr(map[i], '2'))
+		{
+			j += last_zero(&map[i][j], '2');
+			// printf("map[i][j] = %c\n", map [i][j]);
+			// printf("map[i - 1][j] = {%c} avec i = %d et j = %d\n", map[i - 1][j], i - 1, j);
+			// printf("map[i + 1][j] = {%c} avec i = %d et j = %d\n", map[i + 1][j], i + 1, j);
+			// printf("map[i][j - 1] = {%c} avec i = %d et j = %d\n", map[i][j - 1], i, j - 1);
+			// printf("map[i][j + 1] = {%c} avec i = %d et j = %d\n", map[i][j + 1], i, j + 1);
+			if (!map[i][j] || !ft_int_strchr(map[i], '2'))
+			{
+				i++;
+				j = 0;
+			}
+			if (map[i][j] == '2' && ((!map[i + 1][j])
+			|| (map[i - 1][j] == ' ' || map[i][j - 1] == ' '
+			|| map[i][j + 1] == ' ' || map[i + 1][j] == ' ')))
+			{
+				ft_printf("Error\nCheck line [%d].\n", i + 1);
+				// printf("srt = {%s} avec j = %d\n", map[i], j);
+				ft_print_line(data);
+				exit (0);
+			}
+		}
+	}
+}
+
+void	check_space_map(t_arg *data, char **map)
+{
+	int		i;
+	int		j;
+
+	i = 1;
+	j = 0;
+	while (map[i][j] && map[i + 1] && map[i][j + 1])
 	{
 		j++;
 		if (ft_int_strchr(map[i], '0'))
 		{
 			j += last_zero(&map[i][j], '0');
-			if (map[i][j] == '\0' || !ft_int_strchr(map[i], '0'))
+			// printf("map[i][j] = %c\n", map [i][j]);
+			// printf("map[i - 1][j] = {%c} avec i = %d et j = %d\n", map[i - 1][j], i - 1, j);
+			// printf("map[i + 1][j] = {%c} avec i = %d et j = %d\n", map[i + 1][j], i + 1, j);
+			// printf("map[i][j - 1] = {%c} avec i = %d et j = %d\n", map[i][j - 1], i, j - 1);
+			// printf("map[i][j + 1] = {%c} avec i = %d et j = %d\n", map[i][j + 1], i, j + 1);
+			if (!map[i][j] || !ft_int_strchr(map[i], '0'))
 			{
 				i++;
 				j = 0;
 			}
-			if ((map[i][j] == '0' && !map[i + 1][j])
-			|| (map[i][j] == '0'
-			&& (map[i][j - 1] == ' ' || map[i][j + 1] == ' '
-			|| map[i - 1][j] == ' ' || map[i + 1][j] == ' ')))
+			if (map[i][j] == '0' && ((!map[i + 1][j])
+			|| (map[i - 1][j] == ' ' || map[i][j - 1] == ' '
+			|| map[i][j + 1] == ' ' || map[i + 1][j] == ' ')))
 			{
-				ft_printf("Error\nCheck line[%d].\n", i + 1);
+				ft_printf("Error\nCheck line [%d].\n", i + 1);
+				// printf("srt = {%s} avec j = %d\n", map[i], j);
 				ft_print_line(data);
 				exit (0);
 			}
 		}
-		
 	}
 }
 
@@ -49,12 +89,13 @@ void	check_map(t_arg *data)
 	int i;
 	int j;
 	int len = 0;
+	int size_str;
 
 	i = 0;
 	j = 0;
 	len = size_tab_char(data->map_final) - 1;
 	data->tmp = 0;
-	if (ft_int_strchr(data->map_final[0], '0'))
+	if (ft_int_strchr(data->map_final[0], '0') || ft_int_strchr(data->map_final[0], '2'))
 	{
 		ft_printf("Error\nSomething's wrong on the first line of the map.\n");
 		exit (0);
@@ -70,15 +111,21 @@ void	check_map(t_arg *data)
 	}
 	while (data->map_final[i])
 	{
+		size_str = ft_strlen(data->map_final[i]) - 1;
 		if (data->map_final[i][0] == '\0')
 		{
 			ft_printf("Error\nNo empty line, check line [ %d ]...\n", i + 1);
 			ft_print_line(data);
 			exit (0);
 		}
+		// printf("test %c size = %d\n", data->map_final[i][size_str], size_str);
 		if (!ft_int_strchr(data->map_final[i], '1')
 		|| ft_int_strstr(data->map_final[i], "0 ")
-		|| ft_int_strstr(data->map_final[i], " 0"))
+		|| ft_int_strstr(data->map_final[i], " 0")
+		|| ft_int_strstr(data->map_final[i], "2 ")
+		|| ft_int_strstr(data->map_final[i], " 2")
+		|| data->map_final[i][size_str] == '0'
+		|| data->map_final[i][size_str] == '2')
 		{
 			ft_printf("Error\nIt's missing some wall, check line [ %d ]...\n", i + 1);
 			ft_print_line(data);
@@ -99,7 +146,7 @@ void	check_map(t_arg *data)
 		ft_printf("Error\nWhere is your player ? :(\n");
 		exit (0);
 	}
-	if (ft_int_strchr(data->map_final[len], '0'))
+	if (ft_int_strchr(data->map_final[len], '0') || ft_int_strchr(data->map_final[len], '2'))
 	{
 		ft_printf("Error\nSomething's wrong on the last line of the map.\n");
 		exit (0);
@@ -109,7 +156,8 @@ void	check_map(t_arg *data)
 		ft_printf("Error\nThere can be only one....\n");
 		exit (0);
 	}
-	check_structure_map(data, data->map_final);
+	check_space_map(data, data->map_final);
+	check_sprite_map(data, data->map_final);
 }
 
 void	recup_map(t_arg *data)
@@ -128,6 +176,11 @@ void	recup_map(t_arg *data)
 	while (data->fd[end][0] == '\0')
 		end--;
 	len = end - start + 1;
+;	if (len <= 2)
+	{
+		ft_printf("Error\nThis is not a map...\n");
+		exit (0);
+	}
 	if ((data->map_final = (char**)malloc(sizeof(char*) * (len + 1))) == NULL)
 		return ;
 	while (i < len)
