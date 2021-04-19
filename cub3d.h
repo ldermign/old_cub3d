@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/18 15:59:17 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/19 10:54:22 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,7 @@ int		cara_in_map(int c);
 int		ft_is_noting(char *str);
 int		ft_is_either(char *str);
 int		get_position(char **tab, int c);
-
-
+int		last_zero(const char *str, int c);
 
 
 

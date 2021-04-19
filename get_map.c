@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 09:46:18 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/18 16:04:04 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/19 14:10:45 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,33 @@
 
 void	check_structure_map(t_arg *data, char **map)
 {
-	(void)data;
 	int		i;
 	int		j;
-	char	*first;
-	char	*second;
 
-	i = 0;
+	i = 1;
 	j = 0;
-	first = NULL;
-	second = NULL;
 	while (map[i] && map[i + 1])
 	{
-		first = map[i];
-		second = map[i + 1];
-		printf ("fisrt = \t[%s]\n", first);
-		printf ("second = \t[%s]\n", second);
-		if (!ft_int_strchr(first, ' '))
-			data->tmp = pos_last(first, '1');
-		printf("last position 1 \t= %d\n", data->tmp);
-		printf("size ligne first \t= %zu\n", ft_strlen(first));
-		i++;
+		j++;
+		if (ft_int_strchr(map[i], '0'))
+		{
+			j += last_zero(&map[i][j], '0');
+			if (map[i][j] == '\0' || !ft_int_strchr(map[i], '0'))
+			{
+				i++;
+				j = 0;
+			}
+			if ((map[i][j] == '0' && !map[i + 1][j])
+			|| (map[i][j] == '0'
+			&& (map[i][j - 1] == ' ' || map[i][j + 1] == ' '
+			|| map[i - 1][j] == ' ' || map[i + 1][j] == ' ')))
+			{
+				ft_printf("Error\nCheck line[%d].\n", i + 1);
+				ft_print_line(data);
+				exit (0);
+			}
+		}
+		
 	}
 }
 

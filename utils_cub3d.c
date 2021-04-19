@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:25:08 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/18 15:58:44 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/19 11:08:14 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,20 @@ int		ft_int_strchr(const char *str, int c)
 	}
 	if (str[i] || (char)c == '\0')
 		return (0);
+	return (0);
+}
+
+int		last_zero(const char *str, int c)
+{
+	int last_seen;
+
+	last_seen = 0;
+	while (str[last_seen])
+	{
+		if (str[last_seen] == (char)c)
+			return (last_seen);
+		last_seen++;
+	}
 	return (0);
 }
 
@@ -165,11 +179,36 @@ int		ft_is_either(char *str)
 void	ft_print_line(t_arg *data)
 {
 	int i;
+	int j;
 	
 	i = 0;
-	while (data->map_final[i])
+	j = 0;
+	// ft_printf("======================>\n");
+	// while (data->map_final[i])
+	// {
+	// 	ft_printf("%d", i + 1);
+	// 	i++;
+	// }
+	// write(1, "\n", 1);
+	while (data->map_final[j])
 	{
-		ft_printf("\x1b[0mLine [ %d ]\t==>\t\x1B[1;30m%s\n", i + 1, data->map_final[i]);
+		ft_printf("\x1b[0mLine [ %d ]\t==>\t\x1B[1;30m%s\n", j + 1, data->map_final[j]);
+		j++;
+	}
+}
+
+
+//revoir
+void	free_tab(char **tab)
+{
+	int i;
+
+	i = 0;
+	if (tab == NULL)
+		return ;
+	while (tab[i])
+	{
+		free(tab[i]);
 		i++;
 	}
 }
