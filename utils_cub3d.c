@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:25:08 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/19 11:08:14 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/20 14:55:09 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int		ft_is_map(char c)
 int		cara_in_map(int c)
 {
 	return (c == '0' || c == '1' || c == '2' || c == 'N' || c == 'S'
-	|| c == 'E' || c == 'W');
+	|| c == 'W' || c == 'E' || c == ' ');
 }
 
 int		get_position(char **tab, int c)
@@ -211,4 +211,66 @@ void	free_tab(char **tab)
 		free(tab[i]);
 		i++;
 	}
+}
+
+int		ft_strchr_tab(char **tab)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (tab[i])
+	{
+		j = 0;
+		while (tab[i][j])
+		{
+			if (!cara_in_map(tab[i][j]))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_strdup_map_line(char *str, int length)
+{
+	int		i;
+	int		size;
+	char	*dst;
+
+	i = 0;
+	size = ft_strlen(str);
+	if (!(dst = (char*)malloc(sizeof(*dst) * (length + 1))))
+		return (NULL);
+	while (i < size)
+	{
+		dst[i] = str[i];
+		i++;
+	}
+	while (i < length)
+	{
+		dst[i] = ' ';
+		i++;
+	}
+	dst[i] = (char)NULL;
+	return (dst);
+}
+
+int		which_is_larger(char **tab)
+{
+	int i;
+	int len;
+
+	i = 0;
+	len = 0;
+	while (tab[i])
+	{
+		if (len < (int)ft_strlen(tab[i])
+		&& !ft_is_either(tab[i]) && tab[i] != '\0')
+			len = ft_strlen(tab[i]);
+		i++;
+	}
+	return (len);
 }

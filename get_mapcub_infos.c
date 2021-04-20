@@ -6,17 +6,76 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:15:51 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/19 17:10:46 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/20 09:53:00 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void		check_resolution(t_arg *data, char *str)
+{
+	int i;
+
+	i = 0;
+	data->tmp = 0;
+	while (str[i] && (str[i] == 'R' || str[i] == ' '))
+		i++;
+	while (str[i] && ft_isdigit(str[i]))
+	{
+		if (data->tmp == 0)
+			data->tmp = 1;
+		i++;
+	}
+	while (str[i] && str[i] == ' ')
+		i++;
+	while (str[i] && ft_isdigit(str[i]))
+	{
+		if (data->tmp == 1)
+			data->tmp = 2;
+		i++;
+	}
+	if (str[i] != '\0' || data->tmp != 2)
+	{
+		ft_printf("Error\nWrong info in resolution.\n");
+		exit (0);
+	}
+}
+
+void		check_floor_sky(t_arg *data, char *str)
+{
+	data->tmp = 0;
+	while (*str
+	&& (*str == ' ' || *str == 'F' || *str == 'C' || ft_isdigit(*str)))
+		str++;
+	while (*str && space_or_comma(*str))
+	{
+		if (*str == ',')
+			data->tmp++;
+		str++;
+	}
+	while (*str && ft_isdigit(*str))
+		str++;
+	while (*str && space_or_comma(*str))
+	{
+		if (*str == ',')
+			data->tmp++;
+		str++;
+	}
+	while (*str && ft_isdigit(*str))
+		str++;
+	if (!ft_is_digit(*(str - 1)) || data->tmp != 2)
+	{
+		ft_printf("Error\nWrong info in sky or floor.\n");
+		exit (0);
+	}
+}
 
 static void	get_resolution(t_arg *data, char *str)
 {
 	int i;
 
 	i = 0;
+	check_resolution(data, str);
 	if (data->res_x != 0 && data->res_y != 0)
 	{
 		ft_printf("Error\nToo much info for resolution.\n");
@@ -42,6 +101,7 @@ static void	get_floor(t_arg *data, char *str)
 	int i;
 
 	i = 0;
+	check_floor_sky(data, str);
 	if (data->flr_r != 0 || data->flr_g != 0 || data->flr_b != 0)
 	{
 		ft_printf("Error\nYou've duplicated info about the floor.\n");
@@ -67,6 +127,7 @@ static void	get_sky(t_arg *data, char *str)
 	int i;
 
 	i = 0;
+	check_floor_sky(data, str);
 	if (data->ciel_r != 0 || data->ciel_g != 0 || data->ciel_b != 0)
 	{
 		ft_printf("Error\nYou've duplicated info about the sky.\n");

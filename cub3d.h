@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/19 17:00:57 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/20 14:43:10 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ typedef struct  s_data {
 
 typedef struct  s_map
 {
-    int         player;
-    
+    int         pla_x;
+    int         pla_y;
 }               t_spacemap;
 
 
@@ -129,6 +129,8 @@ int		element(int c);
 int		full_of(char *str, char c);
 int		size_tab_char(char **tab);
 int		pos_last(char *str, char c);
+int		ft_strchr_tab(char **tab);
+char	*ft_strdup_map_line(char *s1, int length);
 
 /*
 **  UTILS MAP
@@ -142,6 +144,7 @@ int		ft_is_noting(char *str);
 int		ft_is_either(char *str);
 int		get_position(char **tab, int c);
 int		last_zero(const char *str, int c);
+int		which_is_larger(char **tab);
 
 
 
@@ -153,22 +156,6 @@ void	printf_struct_arg(t_arg data);
 // void	ft_free(t_arg *data);
 
 
-
-
-//             1111111111111111111111111
-//             10000000001100000000000001
-//             1011000001110000000000001
-//             1001000000000000000000001
-//     111111111011000001110000000000001
-//     10000000011000001110111111111111            N
-//     1110111111111011100000010001
-//     11110111111111011101010010001
-//  111110000001101010111000000100001
-// 10000002000000000001100000010000001
-// 10000000000000000001101010010000001
-// 111000001110101011111011110000000111
-//   1111110111 1110101 1011110100000001
-//     1111111 1111111 11111111111111111
 
 /*
 **  A TEJ
