@@ -6,88 +6,76 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 09:46:18 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/20 15:46:58 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/21 12:16:15 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_sprite_map(t_arg *data, char **map)
+// void	check_space_and_sprite_map(t_arg *data, char **map, char c)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 1;
+// 	j = 0;
+// 	printf("caractere = %c\n", c);
+// 	while (map[i][j])
+// 	{
+// 		printf("pouet\n");
+// 		// j++;
+// 					// j += last_cara(&map[i][j], c);
+// 		if (ft_int_strchr(map[i], c) && map[i][j] != '\0' )
+// 		{
+// 			j += next_cara(&map[i][j], c);
+// 			if (map[i][j + 1] == '\0')//map[i][j] == '\0' // || !ft_int_strchr(map[i], c)
+// 			{
+// 				i++;
+// 				j = 0;
+// 			}
+// 			if (i == size_tab_char(map) - 1)
+// 				break ;
+// 			printf("i%dj%d= c = [%c] et ci+1 =[%c]\n", i, j, map[i][j], map[i + 1][j]);
+// 			if (map[i][j] == c && ((i != 0 && map[i - 1][j] == ' ')
+// 			|| (j != 0 && map[i][j - 1] == ' ')
+// 			|| map[i][j + 1] == ' ' || map[i + 1][j] == ' '))
+// 			{
+// 				ft_printf("Error\nCheck line [%d].\n", i + 1);
+// 				ft_print_line(data);
+// 				exit (0);
+// 			}
+// 		}
+// 	}
+// }
+
+void	check_space_and_sprite_map(t_arg *data, char **map, char c)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 1;
 	j = 0;
-	while (map[i][j] && map[i + 1] && map[i][j + 1])
+	while (map[i][j])
 	{
-		j++;
-		if (ft_int_strchr(map[i], '2'))
+		j = 0;
+		if (ft_int_strchr(map[i], c))
 		{
-			j += last_zero(&map[i][j], '2');
-			// printf("map[i][j] = %c\n", map [i][j]);
-			// printf("map[i - 1][j] = {%c} avec i = %d et j = %d\n", map[i - 1][j], i - 1, j);
-			// printf("map[i + 1][j] = {%c} avec i = %d et j = %d\n", map[i + 1][j], i + 1, j);
-			// printf("map[i][j - 1] = {%c} avec i = %d et j = %d\n", map[i][j - 1], i, j - 1);
-			// printf("map[i][j + 1] = {%c} avec i = %d et j = %d\n", map[i][j + 1], i, j + 1);
-			if (!map[i][j] || !ft_int_strchr(map[i], '2'))
+			while (j < which_is_larger(map) - 1)
 			{
-				i++;
-				j = 0;
-			}
-			if (map[i][j] == '2' && ((!map[i + 1][j])
-			|| (map[i - 1][j] == ' ' || map[i][j - 1] == ' '
-			|| map[i][j + 1] == ' ' || map[i + 1][j] == ' ')))
-			{
-				ft_printf("Error\nCheck line [%d].\n", i + 1);
-				// printf("srt = {%s} avec j = %d\n", map[i], j);
-				ft_print_line(data);
-				exit (0);
+				if (map[i][j] == c && ((i != 0 && map[i - 1][j] == ' ')
+				|| (j != 0 && map[i][j - 1] == ' ')
+				|| map[i][j + 1] == ' ' || map[i + 1][j] == ' '))
+				{
+					ft_printf("Error\nCheck line [%d].\n", i + 1);
+					ft_print_line(data);
+					exit (0);
+				}
+				j++;
 			}
 		}
-	}
-}
-
-void	check_space_map(t_arg *data, char **map)
-{
-	int		i;
-	int		j;
-
-	i = 1;
-	j = 0;
-	while (map[i][j] && map[i + 1][j])
-	{
-		j++;
-		if (ft_int_strchr(map[i], '0'))
-		{
-			j += last_zero(&map[i][j], '0');
-			// printf("map[i][j] = %c\n", map [i][j]);
-			if (map[i][j] == '\0' || !ft_int_strchr(map[i], '0')
-			|| !map[i][j + 1])
-			{
-				i++;
-				j = 0;
-			}
-			if (map[i - 1][j] && i != 0)
-				printf("%d map[i - 1][j] = {%c} avec i = %d et j = %d\n", i, map[i - 1][j], i - 1, j);
-			if (map[i + 1][j])
-				printf("%d map[i + 1][j] = {%c} avec i = %d et j = %d\n", i, map[i + 1][j], i + 1, j);
-			// if (map[i][j - 1] && j != 0)
-			// 	printf("%d map[i][j - 1] = {%c} avec i = %d et j = %d\n", i, map[i][j - 1], i, j - 1);
-			if (map[i][j + 1])
-				printf("%d map[i][j + 1] = {%c} avec i = %d et j = %d\n", i, map[i][j + 1], i, j + 1);
-			// printf("j = %d, strlen map[i]i = %d\n", i, (int)ft_strlen(map[i]));
-			if (map[i][j] == '0'
-			&& (map[i - 1][j] == ' ' || (j != 0 && map[i][j - 1] == ' ')
-			|| map[i][j + 1] == ' ' || map[i + 1][j] == ' '))
-			{
-				ft_printf("Error\nCheck line [%d].\n", i + 1);
-				// printf("srt = {%s} avec j = %d\n", map[i], j);
-				ft_print_line(data);
-				exit (0);
-			}
-			printf("test\n");
-		}
+		i++;
+		if (i == size_tab_char(map) - 1)
+			break ;
 	}
 }
 
@@ -131,7 +119,8 @@ void	check_map(t_arg *data)
 		|| ft_int_strstr(data->map_final[i], "2 ")
 		|| ft_int_strstr(data->map_final[i], " 2")
 		|| data->map_final[i][size_str] == '0'
-		|| data->map_final[i][size_str] == '2')
+		|| data->map_final[i][size_str] == '2'
+		|| data->map_final[i][0] == '0' || data->map_final[i][0] == '2')
 		{
 			ft_printf("Error\nIt's missing some wall, check line [ %d ]...\n", i + 1);
 			ft_print_line(data);
@@ -167,8 +156,8 @@ void	check_map(t_arg *data)
 		ft_printf("Error\nThere can be only one....\n");
 		exit (0);
 	}
-	check_space_map(data, data->map_final);
-	check_sprite_map(data, data->map_final);
+	check_space_and_sprite_map(data, data->map_final, '0');
+	check_space_and_sprite_map(data, data->map_final, '2');
 }
 
 void	ft_fill_map(t_arg *data, int len, int start, int larger)
@@ -176,7 +165,7 @@ void	ft_fill_map(t_arg *data, int len, int start, int larger)
 	int i;
 
 	i = 0;
-	if (!(data->map_final = (char**)malloc(sizeof(char*) * (larger + 1))))
+	if (!(data->map_final = (char**)malloc(sizeof(char*) * (len + 1))))
 		return ;
 	while (i < len)
 	{
@@ -211,7 +200,7 @@ void	recup_map(t_arg *data)
 	ft_fill_map(data, len, start, larger);
 }
 
-void	check_wrong_data(t_arg *data)
+void	check_wrong_data_and_recup(t_arg *data)
 {
 	int i;
 	int j;
@@ -237,13 +226,6 @@ void	check_wrong_data(t_arg *data)
 	|| data->west == NULL || data->sprite == NULL)
 	{
 		ft_printf("Error\nIt's missing some info.\n");
-		exit (0);
-	}
-	if (!ft_int_strstr(data->north, ".xpm") || !ft_int_strstr(data->south, ".xpm")
-	|| !ft_int_strstr(data->west, ".xpm") || !ft_int_strstr(data->east, ".xpm")
-	|| !ft_int_strstr(data->sprite, ".xpm"))
-	{
-		ft_printf("Error\nCheck name of texture.\n");
 		exit (0);
 	}
 }

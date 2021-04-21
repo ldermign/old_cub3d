@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:25:08 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/20 14:55:09 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/21 12:08:14 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		ft_int_strchr(const char *str, int c)
 	return (0);
 }
 
-int		last_zero(const char *str, int c)
+int		next_cara(const char *str, int c)
 {
 	int last_seen;
 
@@ -248,7 +248,7 @@ char	*ft_strdup_map_line(char *str, int length)
 	{
 		dst[i] = str[i];
 		i++;
-	}
+		}
 	while (i < length)
 	{
 		dst[i] = ' ';

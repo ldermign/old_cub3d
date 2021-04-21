@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/20 14:43:10 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/21 12:16:36 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		ft__save(char *arg);
 int		ft_check_name_map(char *arg);
 void	ft_check_arg(int ac, char **ag);
 void	check_map(t_arg *data);
-void	check_wrong_data(t_arg *data);
+void	check_wrong_data_and_recup(t_arg *data);
 
 
 /*
@@ -143,7 +143,7 @@ int		cara_in_map(int c);
 int		ft_is_noting(char *str);
 int		ft_is_either(char *str);
 int		get_position(char **tab, int c);
-int		last_zero(const char *str, int c);
+int		next_cara(const char *str, int c);
 int		which_is_larger(char **tab);
 
 

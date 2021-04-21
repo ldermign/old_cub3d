@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/18 15:46:29 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/21 12:16:22 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void 	check(int ac, char **ag)
 	ft_check_arg(ac, ag);
 	ft_init_arg(&data);
 	gnl_mapcub(&data, ag[1]);
-	check_wrong_data(&data);
+	check_wrong_data_and_recup(&data);
 	recup_map(&data);
 	check_map(&data);
 	// check_final_map();

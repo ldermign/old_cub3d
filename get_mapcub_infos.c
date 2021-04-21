@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:15:51 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/20 09:53:00 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/21 12:18:10 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,9 @@ static void	get_sky(t_arg *data, char *str)
 
 char		*get_texture(char *str, char *data)
 {
-	int i;
-	char *texture;
+	int		i;
+	int		len;
+	char	*texture;
 
 	i = 0;
 	texture = NULL;
@@ -163,6 +164,13 @@ char		*get_texture(char *str, char *data)
 	while (ft_is_alpha((int)str[i]) || str[i] == ' ')
 		i++;
 	texture = ft_strdup(&str[i]);
+	len = ft_strlen(texture);
+	if (texture[len - 1] != 'm' || texture[len - 2] != 'p' /////////
+	|| texture[len - 3] != 'x' || texture[len - 4] != '.')
+	{
+		ft_printf("Error\nCheck name of texture.\n");
+		exit (0);
+	}
 	return (texture);
 }
 
