@@ -6,47 +6,11 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 09:46:18 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/21 12:16:15 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/22 14:07:17 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// void	check_space_and_sprite_map(t_arg *data, char **map, char c)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 1;
-// 	j = 0;
-// 	printf("caractere = %c\n", c);
-// 	while (map[i][j])
-// 	{
-// 		printf("pouet\n");
-// 		// j++;
-// 					// j += last_cara(&map[i][j], c);
-// 		if (ft_int_strchr(map[i], c) && map[i][j] != '\0' )
-// 		{
-// 			j += next_cara(&map[i][j], c);
-// 			if (map[i][j + 1] == '\0')//map[i][j] == '\0' // || !ft_int_strchr(map[i], c)
-// 			{
-// 				i++;
-// 				j = 0;
-// 			}
-// 			if (i == size_tab_char(map) - 1)
-// 				break ;
-// 			printf("i%dj%d= c = [%c] et ci+1 =[%c]\n", i, j, map[i][j], map[i + 1][j]);
-// 			if (map[i][j] == c && ((i != 0 && map[i - 1][j] == ' ')
-// 			|| (j != 0 && map[i][j - 1] == ' ')
-// 			|| map[i][j + 1] == ' ' || map[i + 1][j] == ' '))
-// 			{
-// 				ft_printf("Error\nCheck line [%d].\n", i + 1);
-// 				ft_print_line(data);
-// 				exit (0);
-// 			}
-// 		}
-// 	}
-// }
 
 void	check_space_and_sprite_map(t_arg *data, char **map, char c)
 {
@@ -79,85 +43,143 @@ void	check_space_and_sprite_map(t_arg *data, char **map, char c)
 	}
 }
 
-void	check_map(t_arg *data)
+void	check_start_end_map(char **map, int len, int plr)
 {
 	int i;
-	int j;
-	int len = 0;
-	int size_str;
 
 	i = 0;
-	j = 0;
-	len = size_tab_char(data->map_final) - 1;
-	data->tmp = 0;
-	if (ft_int_strchr(data->map_final[0], '0') || ft_int_strchr(data->map_final[0], '2'))
+	if (ft_int_strchr(map[0], plr)
+	|| ft_int_strchr(map[0], '0') || ft_int_strchr(map[0], '2'))
 	{
-		ft_printf("Error\nSomething's wrong on the first line of the map.\n");
+		ft_printf("Error\nSomething's wrong in the first line of the map.\n");
 		exit (0);
 	}
-	while (data->map_final[j])
+	while (map[i])
 	{
-		if (ft_is_either(data->map_final[j]))
+		if (ft_is_either(map[i]))
 		{
 			ft_printf("Error\nNo info at the end of the file.\n");
 			exit (0);
 		}
-		j++;
+		i++;
 	}
-	while (data->map_final[i])
+	if (ft_int_strchr(map[0], plr)
+	|| ft_int_strchr(map[len], '0') || ft_int_strchr(map[len], '2'))
 	{
-		size_str = ft_strlen(data->map_final[i]) - 1;
-		if (data->map_final[i][0] == '\0')
+		ft_printf("Error\nSomething's wrong in the last line of the map.\n");
+		exit (0);
+	}
+}
+
+void	check_interior_map(t_arg *data, char **map, int plr)
+{
+	int i;
+	int size_str;
+
+	i = 0;
+	while (map[i])
+	{
+		size_str = ft_strlen(map[i]) - 1;
+		if (map[i][0] == '\0')
 		{
 			ft_printf("Error\nNo empty line, check line [ %d ]...\n", i + 1);
 			ft_print_line(data);
 			exit (0);
 		}
-		if (!ft_int_strchr(data->map_final[i], '1')
-		|| ft_int_strstr(data->map_final[i], "0 ")
-		|| ft_int_strstr(data->map_final[i], " 0")
-		|| ft_int_strstr(data->map_final[i], "2 ")
-		|| ft_int_strstr(data->map_final[i], " 2")
-		|| data->map_final[i][size_str] == '0'
-		|| data->map_final[i][size_str] == '2'
-		|| data->map_final[i][0] == '0' || data->map_final[i][0] == '2')
+		if (!ft_int_strchr(map[i], '1')
+		|| map[i][0] == plr || map[i][size_str] == plr
+		|| map[i][0] == '0' || map[i][size_str] == '0'
+		|| map[i][0] == '2' || map[i][size_str] == '2')
 		{
-			ft_printf("Error\nIt's missing some wall, check line [ %d ]...\n", i + 1);
+			ft_printf("Error\nCheck line [%d].\n", i + 1);
 			ft_print_line(data);
 			exit (0);
 		}
-		if (ft_int_strchr(data->map_final[i], 'N')
-		|| ft_int_strchr(data->map_final[i], 'S')
-		|| ft_int_strchr(data->map_final[i], 'W')
-		|| ft_int_strchr(data->map_final[i], 'E'))
-			data->tmp++;
 		i++;
 	}
-	if (ft_strchr_tab(data->map_final))
+}
+
+int		return_player(char **map)
+{
+	int i;
+	int j;
+	int plr;
+
+	i = 0;
+	j = 0;
+	plr = 0;
+	while (map[i] != NULL)
 	{
-		ft_printf("Error\nSomething's wrong in the map.\n");
-		exit (0);
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_is_player(map[i][j]) == 1)
+			{
+				plr = map[i][j];
+				break ;
+			}
+			j++;
+		}
+		i++;
 	}
-	if (!get_position(data->map_final, 'N')
-	&& !get_position(data->map_final, 'S')
-	&& !get_position(data->map_final, 'E')
-	&& !get_position(data->map_final, 'W'))
+	return (plr);
+}
+
+int		how_many_player(t_arg *data, char **map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	data->tmp = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_is_player((int)map[i][j]))
+				data->tmp++;
+			j++;
+		}
+		i++;
+	}
+	return (data->tmp);
+}
+
+void	find_player(t_arg *data, t_spacemap *space, char **map)
+{
+	if (!get_position(map, 'N') && !get_position(map, 'S')
+	&& !get_position(map, 'E') && !get_position(map, 'W'))
 	{
 		ft_printf("Error\nWhere is your player ? :(\n");
 		exit (0);
 	}
-	if (ft_int_strchr(data->map_final[len], '0') || ft_int_strchr(data->map_final[len], '2'))
-	{
-		ft_printf("Error\nSomething's wrong on the last line of the map.\n");
-		exit (0);
-	}
+	data->tmp = how_many_player(data, map);
 	if (data->tmp > 1)
 	{
 		ft_printf("Error\nThere can be only one....\n");
 		exit (0);
 	}
+	space->player = return_player(map);
+}
+
+void	check_map(t_arg *data, t_spacemap *space)
+{
+	int len = 0;
+
+	len = size_tab_char(data->map_final) - 1;
+	if (ft_strchr_tab_wrong_cara(data->map_final))
+	{
+		ft_printf("Error\nSomething's wrong in the map.\n");
+		exit (0);
+	}
+	find_player(data, space, data->map_final);
+	check_start_end_map(data->map_final, len, space->player);
+	check_interior_map(data, data->map_final, space->player);
 	check_space_and_sprite_map(data, data->map_final, '0');
 	check_space_and_sprite_map(data, data->map_final, '2');
+	check_space_and_sprite_map(data, data->map_final, space->player);
 }
 
 void	ft_fill_map(t_arg *data, int len, int start, int larger)

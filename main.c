@@ -6,22 +6,30 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/21 12:16:22 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/22 11:38:25 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	init_struct(t_arg *arg, t_spacemap *space)
+{
+	ft_memset(arg, 0, sizeof(t_arg));
+	ft_memset(space, 0, sizeof(t_spacemap));
+
+}
+
 void 	check(int ac, char **ag)
 {
-	t_arg	data;
+	t_arg		data;
+	t_spacemap	space;
 
+	init_struct(&data, &space);
 	ft_check_arg(ac, ag);
-	ft_init_arg(&data);
 	gnl_mapcub(&data, ag[1]);
 	check_wrong_data_and_recup(&data);
 	recup_map(&data);
-	check_map(&data);
+	check_map(&data, &space);
 	// check_final_map();
 	// if (check_info_for_window(&data) == 1)
 	// {

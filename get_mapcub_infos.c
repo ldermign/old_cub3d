@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:15:51 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/21 12:18:10 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/22 15:20:52 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		check_floor_sky(t_arg *data, char *str)
 	}
 	while (*str && ft_isdigit(*str))
 		str++;
-	if (!ft_is_digit(*(str - 1)) || data->tmp != 2)
+	if (data->tmp != 2 || *str != '\0')
 	{
 		ft_printf("Error\nWrong info in sky or floor.\n");
 		exit (0);
@@ -148,7 +148,7 @@ static void	get_sky(t_arg *data, char *str)
 	data->ciel_b = ft_atoi((const char *)str + i);
 }
 
-char		*get_texture(char *str, char *data)
+char		*get_texture(char *str, char *data, char a, char b)
 {
 	int		i;
 	int		len;
@@ -156,16 +156,23 @@ char		*get_texture(char *str, char *data)
 
 	i = 0;
 	texture = NULL;
+	data->tmp = 0;
 	if (data != NULL)
 	{
 		ft_printf("Error\nSome info are duplicated.\n");
 		exit (0);
 	}
-	while (ft_is_alpha((int)str[i]) || str[i] == ' ')
+	while (str[i] == 'A' || str[i] == 'E' || str[i] == 'N' || str[i] == 'O'
+	|| str[i] == 'S' || str[i] == 'W' || str[i] == ' ')
 		i++;
+	while (str)
+	{
+		
+		str++;
+	}
 	texture = ft_strdup(&str[i]);
 	len = ft_strlen(texture);
-	if (texture[len - 1] != 'm' || texture[len - 2] != 'p' /////////
+	if (len <= 4 || texture[len - 1] != 'm' || texture[len - 2] != 'p'
 	|| texture[len - 3] != 'x' || texture[len - 4] != '.')
 	{
 		ft_printf("Error\nCheck name of texture.\n");
@@ -176,10 +183,7 @@ char		*get_texture(char *str, char *data)
 
 void		recup_data(t_arg *data, char *str)
 {
-	if (ft_int_strstr(str, "R ") || ft_int_strstr(str, "F ")
-	|| ft_int_strstr(str, "C ") || ft_int_strstr(str, "NO ")
-	|| ft_int_strstr(str, "SO ") || ft_int_strstr(str, "WE ")
-	|| ft_int_strstr(str, "EA ") || ft_int_strstr(str, "S "))
+	if (ft_is_either(str))
 	{
 		if (ft_int_strstr(str, "R "))
 			get_resolution(data, str);
@@ -188,14 +192,14 @@ void		recup_data(t_arg *data, char *str)
 		else if (ft_int_strstr(str, "C "))
 			get_sky(data, str);
 		else if (ft_int_strstr(str, "NO "))
-			data->north = get_texture(str, data->north);
+			data->north = get_texture(str, data->north, 'N', 'O');
 		else if (ft_int_strstr(str, "SO "))
-			data->south = get_texture(str, data->south);
+			data->south = get_texture(str, data->south, 'S', 'O');
 		else if (ft_int_strstr(str, "WE "))
-			data->west = get_texture(str, data->west);
+			data->west = get_texture(str, data->west, 'W', 'E');
 		else if (ft_int_strstr(str, "EA "))
-			data->east = get_texture(str, data->east);
+			data->east = get_texture(str, data->east, 'E', 'A');
 		else if (ft_int_strstr(str, "S "))
-			data->sprite = get_texture(str, data->sprite);
+			data->sprite = get_texture(str, data->sprite, 'S', ' ');
 	}
 }

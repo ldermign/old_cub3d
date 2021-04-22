@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:25:08 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/21 12:08:14 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/22 14:48:13 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int		element(int c)
 	return (c == 'R' || c == 'F' || c == 'C');	
 }
 
-int		player(int c)
+int		ft_is_player(int c)
 {
 	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
 }
@@ -160,6 +160,13 @@ int		get_position(char **tab, int c)
 	return (0);
 }
 
+int		ft_is_texture(char *str)
+{
+	return (ft_int_strstr(str, "NO ")
+	|| ft_int_strstr(str, "SO ") || ft_int_strstr(str, "WE ")
+	|| ft_int_strstr(str, "EA ") || ft_int_strstr(str, "S "));
+}
+
 int		ft_is_noting(char *str)
 {
 	return (!ft_int_strstr(str, "R ") && !ft_int_strstr(str, "F ")
@@ -213,7 +220,7 @@ void	free_tab(char **tab)
 	}
 }
 
-int		ft_strchr_tab(char **tab)
+int		ft_strchr_tab_wrong_cara(char **tab)
 {
 	int i;
 	int j;
@@ -274,3 +281,4 @@ int		which_is_larger(char **tab)
 	}
 	return (len);
 }
+
