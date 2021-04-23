@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/22 11:38:25 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/23 08:44:05 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	init_struct(t_arg *arg, t_spacemap *space)
 {
 	ft_memset(arg, 0, sizeof(t_arg));
 	ft_memset(space, 0, sizeof(t_spacemap));
-
 }
 
 void 	check(int ac, char **ag)
@@ -24,19 +23,13 @@ void 	check(int ac, char **ag)
 	t_arg		data;
 	t_spacemap	space;
 
-	init_struct(&data, &space);
 	ft_check_arg(ac, ag);
+	init_struct(&data, &space);
 	gnl_mapcub(&data, ag[1]);
 	check_wrong_data_and_recup(&data);
 	recup_map(&data);
 	check_map(&data, &space);
-	// check_final_map();
-	// if (check_info_for_window(&data) == 1)
-	// {
-	// 	ft_printf("Error\nCheck informations in map's file.\n");
-	// 	exit (0);
-	// }
-	printf_struct_arg(data);
+	printf_struct_arg(data, space);
 	// ft_free(&data);
 }
 
@@ -46,7 +39,6 @@ int		main(int ac, char **ag)
 	// t_mlx a;
 	// void *myStruct = NULL;
 	(void)ag;
-	ft_printf(KRED"\n\n\t///\\\\\\BEGINNING///\\\\\\\n\n\n"CLR_COLOR);
 	check(ac, ag);
 
 

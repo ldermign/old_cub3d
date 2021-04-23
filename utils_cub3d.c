@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:25:08 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/22 14:48:13 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/23 16:50:28 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,27 +183,6 @@ int		ft_is_either(char *str)
 	|| ft_int_strstr(str, "EA ") || ft_int_strstr(str, "S "));
 }
 
-void	ft_print_line(t_arg *data)
-{
-	int i;
-	int j;
-	
-	i = 0;
-	j = 0;
-	// ft_printf("======================>\n");
-	// while (data->map_final[i])
-	// {
-	// 	ft_printf("%d", i + 1);
-	// 	i++;
-	// }
-	// write(1, "\n", 1);
-	while (data->map_final[j])
-	{
-		ft_printf("\x1b[0mLine [ %d ]\t==>\t\x1B[1;30m%s\n", j + 1, data->map_final[j]);
-		j++;
-	}
-}
-
 
 //revoir
 void	free_tab(char **tab)
@@ -255,7 +234,7 @@ char	*ft_strdup_map_line(char *str, int length)
 	{
 		dst[i] = str[i];
 		i++;
-		}
+	}
 	while (i < length)
 	{
 		dst[i] = ' ';
@@ -281,4 +260,3 @@ int		which_is_larger(char **tab)
 	}
 	return (len);
 }
-

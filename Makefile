@@ -6,7 +6,7 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/28 17:09:11 by ldermign          #+#    #+#              #
-#    Updated: 2021/04/22 11:37:44 by ldermign         ###   ########.fr        #
+#    Updated: 2021/04/23 16:47:33 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,9 @@ NAME	=	cub3d
 
 IDIR	=	./includes
 
-SRCS	=	./main.c ./print_utils.c ./utils_cub3d.c \
-			./get_mapcub_infos.c ./check_arg.c ./get_map.c
+SRCS	=	./main.c ./print_utils.c ./utils_cub3d.c ./clean_exit.c \
+			./get_mapcub_infos.c ./check_arg.c ./get_map.c \
+			./utils_check_get_player.c
 
 LIBFT	=	./libft
 

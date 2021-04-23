@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 10:33:26 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/08 10:34:00 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/23 08:13:41 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		ft_close(int keycode, t_mlx *temp)
 	(void)keycode;
 	if (keycode == 53)
 	{
-		ft_printf("Goodbye !\n");
+		printf("Goodbye !\n");
 		exit(0);
 	}
 	return (0);

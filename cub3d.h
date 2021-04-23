@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/22 11:56:43 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/23 17:01:36 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,6 @@ void	gnl_mapcub(t_arg *data, char *arg);
 void	recup_data(t_arg *data, char *str);
 void	recup_map(t_arg *data);
 
-
-
 /*
 **	UTILS
 */
@@ -128,7 +126,9 @@ int		full_of(char *str, char c);
 int		size_tab_char(char **tab);
 int		pos_last(char *str, char c);
 int		ft_strchr_tab_wrong_cara(char **tab);
-char	*ft_strdup_map_line(char *s1, int length);
+int		return_player(char **map);
+int		how_many_player(t_arg *data, char **map);
+void	get_position_player(t_arg *data, t_spacemap *space);
 
 /*
 **  UTILS MAP
@@ -143,15 +143,49 @@ int		ft_is_either(char *str);
 int		get_position(char **tab, int c);
 int		next_cara(const char *str, int c);
 int		which_is_larger(char **tab);
+char	*ft_strdup_map_line(char *s1, int length);
+
+
+/*
+**  CLEAN EXIT
+*/
+
+void	quit(t_arg *data, char *str_err, int i, int place);
 
 
 
-void	ft_print_line(t_arg *data);
 
-//autres
 
-void	printf_struct_arg(t_arg data);
-// void	ft_free(t_arg *data);
+
+
+
+
+
+
+
+
+
+
+
+/*
+**  OTHERS
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -169,7 +203,7 @@ void	printf_struct_arg(t_arg data);
 #define KWHT  "\x1B[0;37m" // BLANC
 #define KGRE  "\x1b[1;30m" // GRIS
 #define CLR_COLOR "\x1b[0m" // CLEAR COLOR
-
+void	printf_struct_arg(t_arg data, t_spacemap space);
 
 # include <libc.h>
 
