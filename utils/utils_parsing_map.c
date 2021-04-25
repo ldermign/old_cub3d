@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 14:54:13 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/25 14:58:13 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 17:49:22 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	which_is_larger(char **tab)
 	while (tab[i])
 	{
 		if (len < (int)ft_strlen(tab[i])
-			&& !ft_is_either(tab[i]) && tab[i] != '\0')
+			&& !ft_is_either(tab[i]) && tab[i] != NULL)
 			len = ft_strlen(tab[i]);
 		i++;
 	}

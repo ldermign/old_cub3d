@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 09:46:18 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/25 13:57:35 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 17:56:32 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	check_space_sprite_and_plr_map(t_arg *data, char **map, char c)
 			while (j < which_is_larger(map) - 1)
 			{
 				if (map[i][j] == c && ((i != 0 && map[i - 1][j] == ' ')
-				|| (j != 0 && map[i][j - 1] == ' ')
-				|| map[i][j + 1] == ' ' || map[i + 1][j] == ' '))
+						|| (j != 0 && map[i][j - 1] == ' ')
+						|| map[i][j + 1] == ' ' || map[i + 1][j] == ' '))
 					quit(data, "It's missing some wall line ", 2, i + 1);
 				j++;
 			}
