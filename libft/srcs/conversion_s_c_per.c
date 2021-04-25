@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 14:37:39 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/10 14:08:15 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:46:04 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ void	conv_s(va_list ap, t_flag_len *flag)
 	if (flag->nbr_width == 0 && flag->nbr_precision == 0 && flag->dot == 1)
 		return ;
 	else if (ft_no_flag(flag) || flag->padded_zero == 1
-	|| (flag->nbr_precision < 0 && flag->width == -1)
-	|| (flag->nbr_precision < 0 && temp != 0 && size_arg > flag->nbr_width))
+		|| (flag->nbr_precision < 0 && flag->width == -1)
+		|| (flag->nbr_precision < 0
+			&& temp != 0 && size_arg > flag->nbr_width))
 		ft_putstr_ptf(arg_char, flag);
 	else
 	{
@@ -39,7 +40,7 @@ void	conv_s(va_list ap, t_flag_len *flag)
 
 void	conv_c(va_list ap, t_flag_len *flag)
 {
-	int cara;
+	int	cara;
 
 	cara = va_arg(ap, int);
 	if (flag->nbr_width <= 1)

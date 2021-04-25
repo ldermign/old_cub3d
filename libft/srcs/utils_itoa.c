@@ -6,13 +6,13 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:57:56 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/06 16:48:18 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:46:34 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t		ft_len_nbr(size_t nbr, size_t size_base)
+size_t	ft_len_nbr(size_t nbr, size_t size_base)
 {
 	size_t	size_nbr;
 
@@ -32,16 +32,15 @@ size_t		ft_len_nbr(size_t nbr, size_t size_base)
 	return (size_nbr);
 }
 
-char		*ft_itoa_base(size_t nbr, char *base)
+char	*ft_itoa_base(size_t nbr, char *base)
 {
-	size_t	size_base;
 	size_t	size_nbr;
 	size_t	temp;
 	char	*dst;
 
-	size_base = ft_strlen(base);
-	size_nbr = ft_len_nbr(nbr, size_base);
-	if ((dst = malloc(sizeof(char) * (size_nbr + 1))) == NULL)
+	size_nbr = ft_len_nbr(nbr, ft_strlen(base));
+	dst = malloc(sizeof(char) * (size_nbr + 1));
+	if (dst == NULL)
 		return (NULL);
 	dst[size_nbr--] = '\0';
 	if (nbr == 0)
@@ -53,9 +52,9 @@ char		*ft_itoa_base(size_t nbr, char *base)
 	}
 	while (nbr > 0)
 	{
-		temp = nbr % size_base;
+		temp = nbr % ft_strlen(base);
 		dst[size_nbr] = base[temp];
-		nbr /= size_base;
+		nbr /= ft_strlen(base);
 		size_nbr--;
 	}
 	return (dst);
@@ -63,7 +62,7 @@ char		*ft_itoa_base(size_t nbr, char *base)
 
 static int	ft_len_int(long n)
 {
-	int len_int;
+	int	len_int;
 
 	len_int = 0;
 	if (n < 0)
@@ -76,7 +75,7 @@ static int	ft_len_int(long n)
 	return (len_int + 1);
 }
 
-char		*ft_itoa_unsd(unsigned int n)
+char	*ft_itoa_unsd(unsigned int n)
 {
 	char			*dst;
 	int				len;
@@ -84,10 +83,14 @@ char		*ft_itoa_unsd(unsigned int n)
 
 	nb = n;
 	len = ft_len_int(nb) + (nb < 0);
-	if ((dst = (char*)malloc(sizeof(char) * len + 1 + (n < 0))) == NULL)
+	dst = (char *)malloc(sizeof(char) * len + 1 + (n < 0));
+	if (dst == NULL)
 		return (NULL);
-	if (nb < 0 && (nb = -nb))
+	if (nb < 0)
+	{
 		*dst = '-';
+		nb = -nb;
+	}
 	dst[len--] = '\0';
 	while (len >= (n < 0))
 	{

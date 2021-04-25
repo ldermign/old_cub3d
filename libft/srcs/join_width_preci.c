@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 09:36:41 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 14:56:34 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:34:17 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	flip_zero_and_space_init(t_flag_len *flag)
 
 void	width_sup(t_flag_len *flag)
 {
-	int length;
-	int max;
-	int ret;
+	int	length;
+	int	max;
+	int	ret;
 
 	length = flag->nbr_width;
 	max = flag->nbr_precision;
@@ -77,7 +77,7 @@ void	width_sup(t_flag_len *flag)
 	flag->final_str_flag[ret] = '\0';
 }
 
-int		size_final_str(t_flag_len *flag)
+int	size_final_str(t_flag_len *flag)
 {
 	if (flag->nbr_precision >= flag->nbr_width)
 		return (flag->nbr_precision);
@@ -87,28 +87,27 @@ int		size_final_str(t_flag_len *flag)
 
 void	join_width_and_precision(t_flag_len *flag)
 {
-	int size;
-
-	size = 0;
+	flag->tmp_size = 0;
 	if (flag->width == 1 || flag->precision == 1)
 	{
-		size = size_final_str(flag);
-		if ((flag->final_str_flag = malloc(sizeof(char) * (size + 1))) == NULL)
+		flag->tmp_size = size_final_str(flag);
+		flag->final_str_flag = malloc(sizeof(char) * (flag->tmp_size + 1));
+		if (flag->final_str_flag == NULL)
 			return ;
 	}
 	if (flag->width == 1 && flag->precision == 1)
 	{
 		if (flag->nbr_precision >= flag->nbr_width)
-			ft_fill_with_c(flag->final_str_flag, '0', size + 1);
+			ft_fill_with_c(flag->final_str_flag, '0', flag->tmp_size + 1);
 		else
 			width_sup(flag);
 	}
 	if ((flag->width == 1 && flag->precision == -1 && flag->padded_zero == 0))
-		ft_fill_with_c(flag->final_str_flag, ' ', size + 1);
+		ft_fill_with_c(flag->final_str_flag, ' ', flag->tmp_size + 1);
 	else if ((flag->precision == 1 && flag->width == -1)
-	|| (flag->padded_zero == 1 && flag->precision == -1)
-	|| (flag->padded_zero == 1 && flag->nbr_precision < 0))
-		ft_fill_with_c(flag->final_str_flag, '0', size + 1);
+		|| (flag->padded_zero == 1 && flag->precision == -1)
+		|| (flag->padded_zero == 1 && flag->nbr_precision < 0))
+		ft_fill_with_c(flag->final_str_flag, '0', flag->tmp_size + 1);
 	flag->size_final_str_flag = ft_strlen(flag->final_str_flag);
 	if (flag->minus == 1)
 		flip_zero_and_space_init(flag);

@@ -6,13 +6,13 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:53:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/10 14:09:52 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:20:35 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_nbr_inf_zero(int space, int zero, int size, t_flag_len *flag)
+int	ft_nbr_inf_zero(int space, int zero, int size, t_flag_len *flag)
 {
 	if (flag->nbr_width <= flag->nbr_precision)
 	{
@@ -50,20 +50,21 @@ size_t	check_where_zero_or_space(t_flag_len *flag, char c)
 	last_seen = 0;
 	size = flag->size_final_str_flag;
 	if ((flag->final_str_flag[size - 1] == c
-	&& (flag->final_str_flag[0] == c || flag->final_str_flag[0] != c))
-	|| (flag->final_str_flag[size - 1] != c && flag->final_str_flag[0] != c))
+			&& (flag->final_str_flag[0] == c || flag->final_str_flag[0] != c))
+		|| (flag->final_str_flag[size - 1] != c
+			&& flag->final_str_flag[0] != c))
 		return (size);
 	while (flag->final_str_flag[last_seen] == c)
 		last_seen++;
 	return (last_seen);
 }
 
-int		fill_conv_d_str(char *str, int size_nbr, int zero, t_flag_len *flag)
+int	fill_conv_d_str(char *str, int size_nbr, int zero, t_flag_len *flag)
 {
 	while (size_nbr >= 0 && zero >= 0)
 	{
 		if ((str[size_nbr] != '\0' && ft_is_digit(str[size_nbr]))
-		|| ft_is_alpha(str[size_nbr]))
+			|| ft_is_alpha(str[size_nbr]))
 			flag->final_str_flag[zero] = str[size_nbr];
 		if (str[size_nbr] == '-' && flag->final_str_flag[zero] == ' ')
 			flag->final_str_flag[zero] = str[size_nbr];
@@ -79,7 +80,7 @@ void	fusion_d_i_u_x(char *str, int nbr, t_flag_len *flag)
 	int	i;
 	int	size_nbr;
 	int	place_zero;
-	int place_space;
+	int	place_space;
 
 	i = 0;
 	ret = 0;
@@ -94,31 +95,31 @@ void	fusion_d_i_u_x(char *str, int nbr, t_flag_len *flag)
 	if (nbr < 0 && flag->minus == 1 && flag->nbr_precision < flag->nbr_width)
 		place_zero++;
 	if (flag->minus == 1 && ((size_nbr && flag->precision == -1)
-	|| (flag->nbr_precision < size_nbr && flag->precision == 1)))
+			|| (flag->nbr_precision < size_nbr && flag->precision == 1)))
 		place_zero = size_nbr;
 	ret = fill_conv_d_str(str, size_nbr, place_zero, flag);
 	if (ret == 0 && flag->nbr_width > flag->nbr_precision
-	&& flag->padded_zero == 1 && size_nbr == 3)
+		&& flag->padded_zero == 1 && size_nbr == 3)
 		flag->final_str_flag[0] = '-';
 }
 
 void	prep_fus(char *str, int width, int prec, t_flag_len *flag)
 {
-	int len_str;
-	int start;
-	int last;
-	int ret;
+	int	len_str;
+	int	start;
+	int	last;
+	int	ret;
 
 	len_str = ft_strlen(str);
 	ret = prec;
 	if (ret < 0)
 		prec *= -1;
-	if (alloc_size(width, prec, len_str, flag) == 0)
+	if (alloc_size1(width, prec, len_str, flag) == 0)
 		return ;
 	ft_final_size(width, prec, len_str, flag);
 	ft_fill_with_c(flag->final_str_flag, ' ', flag->size_final_str_flag + 1);
 	if ((flag->precision == 1 && flag->nbr_precision == 0)
-	|| (flag->dot == 1 && prec == 0 && width > 0))
+		|| (flag->dot == 1 && prec == 0 && width > 0))
 		return ;
 	start = where_to_begin(prec, ret, len_str, flag);
 	last = where_last(str, prec, ret, flag);

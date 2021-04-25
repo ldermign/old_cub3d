@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 13:50:27 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:34:43 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ void	ft_init_struct_flag(t_flag_len *flag)
 	flag->conv_x = 0;
 	flag->conv_per = 0;
 	flag->dot = 0;
+	flag->tmp_size = 0;
 }
 
-int		ft_nblen(long n)
+int	ft_nblen(long n)
 {
-	int len_int;
+	int	len_int;
 
 	len_int = 1;
 	if (n < 0)
@@ -87,17 +88,17 @@ void	check_flag_padded_minus(char *str, t_flag_len *flag)
 		flag->minus = 1;
 }
 
-int		check_flags(const char *str, va_list ap, t_flag_len *flag)
+int	check_flags(const char *str, va_list ap, t_flag_len *flag)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	ft_init_struct_flag(flag);
-	check_flag_padded_minus((char*)str, flag);
+	check_flag_padded_minus((char *)str, flag);
 	if (str[i] == '0' || str[i] == '-')
 		while (str[i] == '0' || str[i] == '-')
 			i++;
-	string_of_flag_to_int((char*)&str[i], ap, flag);
+	string_of_flag_to_int((char *)&str[i], ap, flag);
 	if (str[i] && str[i + 1] && (str[i] == '*' || ft_is_digit(str[i])) && ++i)
 	{
 		flag->width = 1;

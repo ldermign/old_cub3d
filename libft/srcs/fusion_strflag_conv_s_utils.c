@@ -6,72 +6,19 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:00:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 15:13:02 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:24:16 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		alloc_if_w_and_p(int width, int prec, int len_str, t_flag_len *flag)
-{
-	if (width >= prec || prec == 0)
-	{
-		if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
-			return (0);
-	}
-	else if (prec > width)
-	{
-		if (width >= len_str)
-		{
-			if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
-				return (0);
-		}
-		else if (prec >= len_str)
-		{
-			if (!(flag->final_str_flag = ft_calloc(len_str + 1, sizeof(char))))
-				return (0);
-		}
-		else if (prec < len_str)
-		{
-			if (!(flag->final_str_flag = ft_calloc(prec + 1, sizeof(char))))
-				return (0);
-		}
-	}
-	return (1);
-}
-
-int		alloc_size(int width, int prec, int len_str, t_flag_len *flag)
-{
-	if (flag->precision == 1 && flag->width == 1)
-	{
-		if (alloc_if_w_and_p(width, prec, len_str, flag) == 0)
-			return (0);
-	}
-	else if ((len_str <= width && flag->precision == -1)
-	|| (flag->dot == 1 && prec == 0 && width > 0))
-	{
-		if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
-			return (0);
-	}
-	else if ((len_str >= width && flag->precision == -1)
-	|| (len_str <= prec && flag->width == -1))
-	{
-		if (!(flag->final_str_flag = ft_calloc(len_str + 1, sizeof(char))))
-			return (0);
-	}
-	else if ((len_str >= prec && flag->width == -1))
-		if (!(flag->final_str_flag = ft_calloc(prec + 1, sizeof(char))))
-			return (0);
-	return (1);
-}
-
 void	ft_final_size(int width, int prec, int len_str, t_flag_len *flag)
 {
 	if ((len_str <= width && flag->precision == -1)
-	|| (flag->dot == 1 && prec == 0 && width > 0))
+		|| (flag->dot == 1 && prec == 0 && width > 0))
 		flag->size_final_str_flag = width;
 	else if ((len_str >= width && flag->precision == -1)
-	|| (len_str <= prec && flag->width == -1))
+		|| (len_str <= prec && flag->width == -1))
 		flag->size_final_str_flag = len_str;
 	else if (len_str > prec && flag->width == -1)
 		flag->size_final_str_flag = prec;
@@ -91,22 +38,22 @@ void	ft_final_size(int width, int prec, int len_str, t_flag_len *flag)
 	}
 }
 
-int		where_to_begin(int prec, int ret, int len, t_flag_len *flag)
+int	where_to_begin(int prec, int ret, int len, t_flag_len *flag)
 {
-	int w_minus_len;
-	int width;
-	int start;
-	int min;
+	int	w_minus_len;
+	int	width;
+	int	start;
+	int	min;
 
 	width = flag->nbr_width;
 	w_minus_len = width - len;
 	start = 0;
 	min = which_is_smaller(width, prec, len);
 	if ((flag->width == 1 && flag->precision == -1)
-	|| (width > len && flag->precision == -1))
+		|| (width > len && flag->precision == -1))
 		start = flag->size_final_str_flag - min;
 	else if (flag->minus == 0 && len == (int)flag->size_final_str_flag
-	&& ret < 0)
+		&& ret < 0)
 		start = 0;
 	else if (flag->width == 1 && flag->precision == 1)
 	{
@@ -120,16 +67,16 @@ int		where_to_begin(int prec, int ret, int len, t_flag_len *flag)
 	return (start);
 }
 
-int		where_last(char *str, int prec, int ret, t_flag_len *flag)
+int	where_last(char *str, int prec, int ret, t_flag_len *flag)
 {
-	int len_str;
-	int width;
-	int last;
+	int	len_str;
+	int	width;
+	int	last;
 
 	len_str = ft_strlen(str);
 	width = flag->nbr_width;
 	if ((len_str >= prec && prec >= width) || flag->precision == -1
-	|| (prec >= len_str && len_str >= width))
+		|| (prec >= len_str && len_str >= width))
 		last = flag->size_final_str_flag;
 	else if (len_str >= prec && width >= prec)
 		last = prec;

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/10 14:08:56 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:38:28 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_struct_conv(char c, t_flag_len *flag)
 		flag->conv_per = 1;
 }
 
-int		which_conv(const char *str, va_list ap, t_flag_len *flag)
+int	which_conv(const char *str, va_list ap, t_flag_len *flag)
 {
 	ft_struct_conv(*str, flag);
 	make_flags_right(flag);
@@ -64,7 +64,7 @@ int		which_conv(const char *str, va_list ap, t_flag_len *flag)
 	return (1);
 }
 
-int		ft_printf_inside_job(const char *str, va_list ap)
+int	ft_printf_inside_job(const char *str, va_list ap)
 {
 	t_flag_len	flag;
 	int			i;
@@ -88,10 +88,10 @@ int		ft_printf_inside_job(const char *str, va_list ap)
 	return (flag.final_len);
 }
 
-int		ft_printf(const char *str, ...)
+int	ft_printf(const char *str, ...)
 {
 	int		final_length;
-	va_list ap;
+	va_list	ap;
 
 	va_start(ap, str);
 	final_length = ft_printf_inside_job(str, ap);

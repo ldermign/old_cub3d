@@ -6,15 +6,15 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 12:23:12 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/19 12:14:58 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:17:01 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		ft_return_in_str(char *str)
+int	ft_return_in_str(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str)
@@ -46,7 +46,8 @@ char	*ft_last_call(char *str)
 		free(str);
 		return (NULL);
 	}
-	if ((new = malloc(sizeof(char) * ((ft_strlen(str) - i) + 1))) == NULL)
+	new = malloc(sizeof(char) * ((ft_strlen(str) - i) + 1));
+	if (new == NULL)
 		return (NULL);
 	i++;
 	while (str[i])
@@ -56,14 +57,15 @@ char	*ft_last_call(char *str)
 	return (new);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	int			place_in_fd;
 	char		*reader;
 	static char	*dst;
 
 	place_in_fd = 1;
-	if ((reader = malloc(sizeof(char) * (BUFFER_SIZE + 1))) == NULL)
+	reader = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (reader == NULL)
 		return (-1);
 	if ((fd < 0 || line == NULL || BUFFER_SIZE <= 0)
 		&& (ft_free_reader(reader) == 1))

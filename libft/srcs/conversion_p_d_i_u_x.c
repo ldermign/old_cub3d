@@ -6,23 +6,24 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/10 14:07:27 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:47:23 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		particular_case(int arg_unsdint, int size, char *tmp, t_flag_len *flag)
+int	particular_case(int arg_unsdint, int size, char *tmp, t_flag_len *flag)
 {
 	if ((arg_unsdint == 0 && flag->dot == 1 && flag->nbr_precision == 0
-	&& flag->width == -1) || (flag->width == 1 && flag->precision == 1
-	&& flag->nbr_width == 0 && flag->nbr_precision == 0 && arg_unsdint == 0))
+			&& flag->width == -1) || (flag->width == 1 && flag->precision == 1
+			&& flag->nbr_width == 0 && flag->nbr_precision == 0
+			&& arg_unsdint == 0))
 	{
 		free(tmp);
 		return (1);
 	}
-	if (flag->width == 1 && flag->precision == 1
-	&& (arg_unsdint == 0 && flag->nbr_width <= 1 && flag->nbr_precision == 0))
+	if (flag->width == 1 && flag->precision == 1 && (arg_unsdint == 0
+			&& flag->nbr_width <= 1 && flag->nbr_precision == 0))
 	{
 		ft_putchar_ptf(' ', flag);
 		free(tmp);
@@ -44,7 +45,7 @@ void	conv_p(va_list ap, t_flag_len *flag)
 	char			*temp;
 	char			*str_adresse;
 
-	adresse_ptr = va_arg(ap, void*);
+	adresse_ptr = va_arg(ap, void *);
 	arg_unsdint = (unsigned long)(adresse_ptr);
 	str_adresse = ft_itoa_base(arg_unsdint, "0123456789abcdef");
 	if (adresse_ptr == NULL && flag->precision == -1 && flag->dot == 1)
@@ -72,11 +73,11 @@ void	conv_d_i(va_list ap, t_flag_len *flag)
 	temp = ft_itoa(arg_int);
 	size_temp = ft_strlen(temp);
 	if (flag->dot == 1 && arg_int == 0
-	&& ((flag->precision == 1 && flag->nbr_width == 0
-	&& flag->nbr_precision == 0)
-	|| ((flag->nbr_width == 0 && flag->precision == -1)
-	|| (flag->width == -1 && flag->nbr_precision == 0)
-	|| (flag->nbr_width == 0 && flag->nbr_precision == 0))))
+		&& ((flag->precision == 1 && flag->nbr_width == 0
+				&& flag->nbr_precision == 0)
+			|| ((flag->nbr_width == 0 && flag->precision == -1)
+				|| (flag->width == -1 && flag->nbr_precision == 0)
+				|| (flag->nbr_width == 0 && flag->nbr_precision == 0))))
 	{
 		free(temp);
 		return ;
@@ -93,7 +94,7 @@ void	conv_d_i(va_list ap, t_flag_len *flag)
 
 void	conv_u(va_list ap, t_flag_len *flag)
 {
-	unsigned	int arg_unsdint;
+	unsigned int	arg_unsdint;
 	int				size_temp;
 	char			*temp;
 

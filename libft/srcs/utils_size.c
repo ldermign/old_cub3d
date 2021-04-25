@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:59:15 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/06 16:45:45 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:08:04 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_fill_with_c(char *str, char c, int size)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < (size - 1))
@@ -27,7 +27,7 @@ void	ft_fill_with_c(char *str, char c, int size)
 
 void	*fill_from_end(char *dst, char *src, size_t n)
 {
-	size_t from_last;
+	size_t	from_last;
 
 	from_last = n;
 	if (!dst && !src)

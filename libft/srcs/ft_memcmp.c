@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldermign <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 23:10:05 by ldermign          #+#    #+#             */
-/*   Updated: 2020/12/06 23:00:49 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:50:17 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	ft_memcmp(const void *pointer1, const void *pointer2, size_t size)
 	const unsigned char	*p2;
 
 	i = 0;
-	p1 = (const unsigned char*)pointer1;
-	p2 = (const unsigned char*)pointer2;
+	p1 = (const unsigned char *)pointer1;
+	p2 = (const unsigned char *)pointer2;
 	if (size <= 0)
 		return (0);
 	while (i < size)

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:39:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/23 16:50:05 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 10:21:41 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	printf_struct_arg(t_arg data, t_spacemap space)
 	printf("sprite = \t[%s]\n", data.sprite);
 	int i = 0;
 	printf(KGRN"\n\t///\\\\\\FINAL MAP TO USE///\\\\\\\n\n");
-	while (data.map_final[i])
+	while (data.map[i])
 	{
-		printf("\x1b[0mFinal map ligne [ %d ]\t\t==>\t\t\x1B[1;30m%s\n", i + 1, data.map_final[i]);
+		printf("\x1b[0mFinal map ligne [ %d ]\t\t==>\t\t\x1B[1;30m%s\n", i + 1, data.map[i]);
 		i++;
 	}
 	printf(KGRN"\n\t///\\\\\\DATA SPACEMAP///\\\\\\\n\n"CLR_COLOR);

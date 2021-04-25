@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/15 08:28:06 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:53:36 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include "get_next_line.h"
 
 typedef	struct	s_argmts {
+	int			tmp;
+    int         last;
+    int         len_fd;
 	int			res_x;
 	int			res_y;
 	int 		flr_r;
@@ -31,6 +34,13 @@ typedef	struct	s_argmts {
 	int 		ciel_r;
 	int			ciel_g;
 	int 		ciel_b;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	char		*sprite;
+	char		**fd;
+    char        **map;
 }				t_arg;
 
 typedef struct  s_data {
@@ -42,6 +52,14 @@ typedef struct  s_data {
 	int			width;
 	int			height;
 }               t_data;
+
+typedef struct  s_map
+{
+    int         player;
+    int         ply_x;
+    int         ply_y;
+}               t_spacemap;
+
 
 typedef struct  s_mlx {
     void        *mlx;
@@ -71,6 +89,117 @@ typedef struct  s_xy {
     int x;
     int y;
 }               t_xy;
+
+/*
+**	CHECK PARSING
+*/
+
+int		ft__save(char *arg);
+int		ft_check_name_map(char *arg);
+void	ft_check_arg(int ac, char **ag);
+void	check_map(t_arg *data, t_spacemap *space);
+void	check_wrong_data_and_recup(t_arg *data);
+void	check_resolution(t_arg *data, char *str);
+void	check_floor_sky(t_arg *data, char *str);
+
+/*
+**	GET INFOS MAP.CUB
+*/
+
+void	gnl_mapcub(t_arg *data, char *arg);
+void	recup_data(t_arg *data, char *str);
+void	recup_map(t_arg *data);
+void	check_space_sprite_and_plr_map(t_arg *data, char **map, char c);
+void	check_start_end_map(t_arg *data, char **map, int plr);
+void	check_interior_map(t_arg *data, char **map, int plr);
+void	ft_fill_map(t_arg *data, int len, int start, int larger);
+void	save_mapcub_in_char(t_arg *data, char *arg);
+
+
+/*
+**	UTILS
+*/
+
+int		space_or_element(int c);
+int		ft_int_strstr(char *str, char *needle);
+int		ft_int_strchr(const char *str, int c);
+
+/*
+**  UTILS MAP
+*/
+
+int		ft_is_player(int c);
+void	map_valid(char **tab);
+int		cara_in_map(int c);
+int		ft_is_noting(char *str);
+int		ft_is_either(char *str);
+int		get_position(char **tab, int c);
+int		which_is_larger(char **tab);
+char	*ft_strdup_map_line(char *s1, int length);
+int		size_tab_char(char **tab);
+int		ft_strchr_tab_wrong_cara(char **tab);
+int		return_player(char **map);
+int		how_many_player(t_arg *data, char **map);
+void	get_position_player(t_arg *data, t_spacemap *space);
+
+/*
+**  EXIT
+*/
+
+void	quit(t_arg *data, char *str_err, int i, int place);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+**  OTHERS
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+**  A TEJ
+*/
+
+
+#define KRED  "\x1B[0;31m" // ROUGE
+#define KGRN  "\x1B[0;32m" // VERT
+#define KYEL  "\x1B[0;33m" // JAUNE
+#define KBLU  "\x1B[0;34m" // BLEU
+#define KMAG  "\x1B[0;35m" // MAGENTA
+#define KCYN  "\x1B[0;36m" // CYAN
+#define KWHT  "\x1B[0;37m" // BLANC
+#define KGRE  "\x1b[1;30m" // GRIS
+#define CLR_COLOR "\x1b[0m" // CLEAR COLOR
+void	printf_struct_arg(t_arg data, t_spacemap space);
 
 # include <libc.h>
 
@@ -103,3 +232,19 @@ molette haut = 5
 molette bas = 4
 esc = 53
 */
+
+
+//              1111111111111111111111111
+//              1000000001100000000000001
+//              1011000001110000000000001
+//              1001000000000000000000001
+//      111111111011000001110000000000001
+//      100000000110000011101111111111111
+//      1110111111111011100000010001
+//      11110111111111011101010010001
+//   111110000001101010111000000100001111111
+//  100000020000000000011000000100000011011
+//  1000000000000000000110101001N00000011
+//  111000001110001011111011110000000111
+//    111111011111110101 1011110100000001
+//      1111111 1111111 11111111111111111

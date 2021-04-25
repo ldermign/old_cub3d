@@ -6,13 +6,13 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 11:22:50 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/10 17:51:33 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:15:57 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		ft_free_reader(char *reader)
+int	ft_free_reader(char *reader)
 {
 	free(reader);
 	return (1);
@@ -32,7 +32,8 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	i = -1;
 	j = -1;
 	size_tot = ft_strlen((const char *)s1) + ft_strlen((const char *)s2) + 1;
-	if ((dst = (char*)malloc(sizeof(char) * size_tot)) == NULL)
+	dst = (char *)malloc(sizeof(char) * size_tot);
+	if (dst == NULL)
 		return (NULL);
 	while (s1[++i])
 		dst[i] = s1[i];
@@ -58,7 +59,8 @@ char	*ft_strdup_gnl(char *str)
 		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
-	if ((dst = malloc(sizeof(char) * (i + 1))) == NULL)
+	dst = malloc(sizeof(char) * (i + 1));
+	if (dst == NULL)
 	{
 		free(str);
 		return (NULL);

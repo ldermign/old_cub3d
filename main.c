@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/23 08:44:05 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 10:14:35 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void 	check(int ac, char **ag)
 	recup_map(&data);
 	check_map(&data, &space);
 	printf_struct_arg(data, space);
-	// ft_free(&data);
 }
 
 int		main(int ac, char **ag)

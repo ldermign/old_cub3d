@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/10 14:09:28 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:03:57 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ void	ft_cara_non_imp(int nbr, t_flag_len *flag)
 void	fusion_c(int nbr, t_flag_len *flag)
 {
 	if (flag->nbr_width > 1)
-		if (!(flag->final_str_flag = ft_calloc(flag->nbr_width + 1,
-		sizeof(char))))
+	{
+		flag->final_str_flag = ft_calloc(flag->nbr_width + 1, sizeof(char));
+		if (flag->final_str_flag == NULL)
 			return ;
+	}
 	if (flag->conv_per == 1 && flag->padded_zero == 1)
 		ft_fill_with_c(flag->final_str_flag, '0', flag->nbr_width + 1);
 	else
@@ -51,8 +53,8 @@ void	fusion_c(int nbr, t_flag_len *flag)
 
 void	fill_str_conv_p(char *str, int start, int len, t_flag_len *flag)
 {
-	int i;
-	int max;
+	int	i;
+	int	max;
 
 	i = 0;
 	max = flag->nbr_width;
@@ -77,7 +79,7 @@ void	fill_str_conv_p(char *str, int start, int len, t_flag_len *flag)
 
 void	fusion_p(char *str, int max, int len, t_flag_len *flag)
 {
-	int start;
+	int	start;
 
 	start = max - len;
 	if (flag->nbr_width <= flag->nbr_precision)
@@ -85,7 +87,8 @@ void	fusion_p(char *str, int max, int len, t_flag_len *flag)
 		start = 0;
 		len = flag->nbr_precision;
 	}
-	if (!(flag->final_str_flag = ft_calloc(max + 1, sizeof(char))))
+	flag->final_str_flag = ft_calloc(max + 1, sizeof(char));
+	if (flag->final_str_flag == NULL)
 		return ;
 	ft_fill_with_c(flag->final_str_flag, ' ', max + 1);
 	fill_str_conv_p(str, start, len, flag);
@@ -93,7 +96,7 @@ void	fusion_p(char *str, int max, int len, t_flag_len *flag)
 
 void	fusion_s(char *str, int start, int last, t_flag_len *flag)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (flag->minus == 1)

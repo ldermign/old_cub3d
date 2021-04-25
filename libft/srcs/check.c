@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:01:04 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 12:36:51 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:29:40 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	ft_is_digit(char c)
 int	ft_is_conv(char c)
 {
 	return (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i'
-	|| c == 'u' || c == 'x' || c == 'X' || c == '%');
+		|| c == 'u' || c == 'x' || c == 'X' || c == '%');
 }
 
 int	ft_no_flag(t_flag_len *flag)
 {
 	if (flag->minus == 0 && flag->padded_zero == 0 && flag->precision == -1
-	&& flag->width == -1)
+		&& flag->width == -1)
 		return (1);
 	return (0);
 }

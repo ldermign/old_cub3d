@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/10 14:04:38 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:44:13 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef	struct	s_struct
 	int		conv_x;
 	int		conv_per;
 	int		dot;
+	int		tmp_size;
 }				t_flag_len;
 
 /*
@@ -98,9 +99,7 @@ int				ft_printf(const char *str, ...);
 **	Utils fusion
 */
 
-int				alloc_size(int width, int prec, int len_str, t_flag_len *flag);
-int				alloc_if_w_and_p(int width, int prec, int len_str,
-															t_flag_len *flag);
+int				alloc_size1(int width, int prec, int len_str, t_flag_len *flag);
 void			ft_final_size(int width, int prec, int len_str,
 															t_flag_len *flag);
 int				where_to_begin(int prec, int ret, int len, t_flag_len *flag);

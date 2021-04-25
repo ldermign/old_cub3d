@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 08:39:23 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/23 17:01:46 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 10:21:41 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void	quit(t_arg *data, char *str_err, int i, int place)
 	if ((i == 1 || i == 2) && str_err != NULL)
 		printf("[ %d ].\n", place);
 	if (i == 2)
-		ft_print_map(data->map_final);
+		ft_print_map(data->map);
 	free(data->north);
 	free(data->south);
 	free(data->west);
 	free(data->east);
 	free(data->sprite);
 	free_str(data->fd);
-	free_str(data->map_final);
+	free_str(data->map);
 	exit (0);
 }

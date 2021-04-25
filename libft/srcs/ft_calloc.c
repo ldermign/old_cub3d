@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 23:04:24 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/06 16:45:38 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:32:59 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 	i = 0;
 	len = nmemb * size;
-	if ((str = malloc(len)) == NULL)
+	str = malloc(len);
+	if (str == NULL)
 		return (NULL);
 	while (i < len)
 	{

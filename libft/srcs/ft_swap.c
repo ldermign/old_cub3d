@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 17:22:46 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/09 17:23:39 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:01:36 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_swap(int *a, int *b)
 {
-	int nbr;
+	int	nbr;
 
 	nbr = *a;
 	*a = *b;

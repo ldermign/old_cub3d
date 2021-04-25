@@ -6,7 +6,7 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 19:45:34 by ldermign          #+#    #+#              #
-#    Updated: 2021/04/09 17:37:44 by ldermign         ###   ########.fr        #
+#    Updated: 2021/04/25 14:45:53 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ SRCS	=	./srcs/ft_strrchr.c \
 			./srcs/fusion_strflag_conv_s_utils.c \
 			./srcs/init_flags.c \
 			./srcs/join_width_preci.c \
+			./srcs/alloc_right_size.c \
 			./srcs/utils.c \
 			./srcs/utils_itoa.c
 
