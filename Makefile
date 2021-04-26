@@ -6,7 +6,7 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/28 17:09:11 by ldermign          #+#    #+#              #
-#    Updated: 2021/04/25 17:53:56 by ldermign         ###   ########.fr        #
+#    Updated: 2021/04/26 11:47:50 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS	=	./main.c \
 			./parsing/get_mapcub_infos.c ./parsing/get_map.c \
 			./parsing/check_reso_floor_sky.c ./parsing/first_step_parsing.c \
 			./parsing/check_arg.c \
+			./raycasting/raycasting_start.c \
 			./utils/utils_check_get_player.c ./utils/utils_parsing_1.c \
 			./utils/utils_parsing_2.c ./utils/utils_parsing_map.c \
 			./others/clean_exit.c \

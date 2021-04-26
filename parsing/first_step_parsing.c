@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 10:12:31 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/25 11:57:21 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/26 15:17:19 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,39 @@ void	gnl_mapcub(t_arg *data, char *arg)
 	while (1)
 	{
 		ret = get_next_line(fd_map, &line);
+		if (ret == -1)
+			quit(data, "Petit malin...\n", 0, 0);
 		if (ret <= 0)
 			break ;
 		if (ft_is_noting(line) && !ft_int_strchr(line, '1') && line[0] != '\0')
 			quit(data, "Something's wrong line ", 1, data->len_fd + 1);
 		data->len_fd++;
+		free(line);
 	}
 	data->len_fd++;
 	free(line);
 	close(fd_map);
 	save_mapcub_in_char(data, arg);
+}
+
+void	recup_data(t_arg *data, char *str)
+{
+	if (ft_is_either(str))
+	{
+		if (ft_int_strstr(str, "R "))
+			get_resolution(data, str);
+		if (ft_int_strstr(str, "F "))
+			get_floor(data, str);
+		if (ft_int_strstr(str, "C "))
+			get_sky(data, str);
+		if (ft_int_strstr(str, "NO ") || ft_int_strstr(str, "SO ")
+		|| ft_int_strstr(str, "WE ") || ft_int_strstr(str, "EA "))
+			if_texture(data, str);
+		if (ft_int_strstr(str, "S "))
+		{
+			if (data->sprite != NULL)
+				quit(data, "Some info are duplicated.\n", 0, 0);
+			data->sprite = get_texture(data, str, 'S', ' ');
+		}
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 09:46:18 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/25 17:56:32 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/26 09:47:52 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,10 @@ void	save_mapcub_in_char(t_arg *data, char *arg)
 			break ;
 		data->fd[i] = ft_strdup(line);
 		i++;
+		free(line);
 	}
 	data->fd[i] = ft_strdup(line);
-	data->fd[++i] = NULL;
 	free(line);
+	data->fd[++i] = NULL;
 	close(fd_map);
 }

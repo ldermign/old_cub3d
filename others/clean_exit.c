@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 08:39:23 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/25 10:21:41 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/26 10:05:47 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	ft_print_map(char **map)
 
 void	quit(t_arg *data, char *str_err, int i, int place)
 {
-	printf("Error\n");
+	if (i != 3)
+		printf("Error\n");
 	if (str_err != NULL)
 		printf("%s", str_err);
 	if ((i == 1 || i == 2) && str_err != NULL)

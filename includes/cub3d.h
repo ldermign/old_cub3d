@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/25 14:53:36 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/26 15:18:40 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,19 @@ void	check_start_end_map(t_arg *data, char **map, int plr);
 void	check_interior_map(t_arg *data, char **map, int plr);
 void	ft_fill_map(t_arg *data, int len, int start, int larger);
 void	save_mapcub_in_char(t_arg *data, char *arg);
+void	if_texture(t_arg *data, char *str);
+char	*get_texture(t_arg *data, char *str, char a, char b);
+void	get_sky(t_arg *data, char *str);
+void	get_floor(t_arg *data, char *str);
+void	get_resolution(t_arg *data, char *str);
 
+/*
+**  RAYCASTING
+*/
+
+int		mouse_hook(int keycode, t_mlx *temp);
+int		key_hook(int keycode, void *param);
+int		ft_close(int keycode, t_mlx *temp);
 
 /*
 **	UTILS
