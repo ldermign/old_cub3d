@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 10:12:31 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/26 15:17:19 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/27 08:24:00 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	recup_data(t_arg *data, char *str)
 		if (ft_int_strstr(str, "C "))
 			get_sky(data, str);
 		if (ft_int_strstr(str, "NO ") || ft_int_strstr(str, "SO ")
-		|| ft_int_strstr(str, "WE ") || ft_int_strstr(str, "EA "))
+			|| ft_int_strstr(str, "WE ") || ft_int_strstr(str, "EA "))
 			if_texture(data, str);
 		if (ft_int_strstr(str, "S "))
 		{

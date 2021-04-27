@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/26 11:59:35 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:03:43 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,24 @@ void	parsing(int ac, char **ag, t_arg *data)
 int		main(int ac, char **ag)
 {
 	t_arg data;
-	// t_data img;
-	// t_mlx a;
-	// void *myStruct = NULL;
-	(void)ag;
+	t_mlx img;
+	
+	ft_memset(&img, 0, sizeof(t_mlx));
 	parsing(ac, ag, &data);
-
-	// // img.width = 500;
-	// // img.height = 500;
-	// a.mlx = mlx_init();
-	// a.win = mlx_new_window(a.mlx, data.res_x, data.res_y, "Cub3D");
-	// mlx_hook(a.win, 2, 1L<<0, ft_close, &a);
-	// mlx_key_hook(a.win, key_hook, (void *)0);
-	// mlx_mouse_hook(a.win, mouse_hook, &a);
-	// img.img = mlx_new_image(a.mlx, data.res_x, data.res_y);
+	// img.mlx = mlx_init();
+	// img.win = mlx_new_window(img.mlx, data.res_x, data.res_y, "Cub3D");
+	// mlx_hook(img.win, 2, 1L<<0, ft_close, &img);
+	// mlx_key_hook(img.win, key_hook, (void *)0);
+	// mlx_mouse_hook(img.win, mouse_hook, &img);
+	// img.img = mlx_new_image(img.mlx, data.res_x, data.res_y);
 	// img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
-	// // // ft_circle_pixel(img);
-	// mlx_put_image_to_window(a.mlx, a.win, img.img, 0, 0);
+	// ft_circle_pixel(img, -400, -400, 400);
+	// mlx_put_image_to_window(img.mlx, img.win, img.img, 0, 0);
 	// // mlx_loop_hook(a.mlx, render_next_frame, myStruct);
-	// mlx_loop(a.mlx);
+	// mlx_loop(img.mlx);
 
 	// return (0);
 }
+
+
+// img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);

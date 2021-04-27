@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/26 15:18:40 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/27 13:38:00 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
+
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 typedef	struct	s_argmts {
 	int			tmp;
@@ -44,6 +47,8 @@ typedef	struct	s_argmts {
 }				t_arg;
 
 typedef struct  s_data {
+    void        *mlx;
+    void        *win;
     void        *img;
     char        *addr;
     int         bpp;
@@ -51,7 +56,7 @@ typedef struct  s_data {
     int         endian;
 	int			width;
 	int			height;
-}               t_data;
+}               t_mlx;
 
 typedef struct  s_map
 {
@@ -59,12 +64,6 @@ typedef struct  s_map
     int         ply_x;
     int         ply_y;
 }               t_spacemap;
-
-
-typedef struct  s_mlx {
-    void        *mlx;
-    void        *win;
-}               t_mlx;
 
 typedef struct  s_input {
     int sp;
@@ -181,6 +180,7 @@ void	quit(t_arg *data, char *str_err, int i, int place);
 
 
 
+void ft_circle_pixel(t_mlx img, int x, int y, int place);
 
 
 

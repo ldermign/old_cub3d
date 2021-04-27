@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:15:51 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/26 15:24:15 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/27 13:39:38 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,14 @@ char	*get_texture(t_arg *data, char *str, char a, char b)
 			data->tmp++;
 		i++;
 	}
-	if ((i < 2 && b != ' ') || (data->tmp > 2 && b != ' ') || (data->tmp > 1 && b == ' '))
+	if ((b != ' ' && (i < 2 || data->tmp > 2))
+		|| (b == ' ' && data->tmp > 1))
 		quit(data, "Something's wrong in one of the texture.\n", 0, 0);
 	text = ft_strdup(&str[i]);
 	len = ft_strlen(text);
 	if (len <= 4 || ft_strchr(text, ' ') || text[len - 1] != 'm'
-	|| text[len - 2] != 'p' || text[len - 3] != 'x' || text[len - 4] != '.' )
+		|| text[len - 2] != 'p' || text[len - 3] != 'x'
+		|| text[len - 4] != '.' )
 		quit(data, "Check name of texture.\n", 0, 0);
 	return (text);
 }
