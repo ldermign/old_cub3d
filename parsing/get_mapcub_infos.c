@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:15:51 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/27 13:39:38 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/29 15:00:08 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,28 +107,31 @@ char	*get_texture(t_arg *data, char *str, char a, char b)
 
 void	if_texture(t_arg *data, char *str)
 {
-	if (ft_int_strstr(str, "NO "))
+	// t_text	which[6];
+	t_text which [] = {
+		{"NO ", get_texture, &data->north}, {"SO ", get_texture, &data->south},
+		{"EA ", get_texture, &data->east}, {"WE ", get_texture, &data->west},
+		{"S ", get_texture, &data->sprite}, {"", NULL, NULL}
+	};
+	int		i;
+
+	i = 0;
+	// which[0] = {"NO ", get_texture, &data->north};
+	// which[1] = {"SO ", get_texture, &data->south};
+	// which[2] = {"EA ", get_texture, &data->east};
+	// which[3] = {"WE ", get_texture, &data->west};
+	// which[4] = {"S ", get_texture, &data->sprite};
+	// which[5] = {"", NULL, NULL};
+	while (which[i].f)
 	{
-		if (data->north != NULL)
-			quit(data, "Some info are duplicated.\n", 0, 0);
-		data->north = get_texture(data, str, 'N', 'O');
-	}
-	if (ft_int_strstr(str, "SO "))
-	{
-		if (data->south != NULL)
-			quit(data, "Some info are duplicated.\n", 0, 0);
-		data->south = get_texture(data, str, 'S', 'O');
-	}
-	if (ft_int_strstr(str, "WE "))
-	{
-		if (data->west != NULL)
-			quit(data, "Some info are duplicated.\n", 0, 0);
-		data->west = get_texture(data, str, 'W', 'E');
-	}
-	if (ft_int_strstr(str, "EA "))
-	{
-		if (data->east != NULL)
-			quit(data, "Some info are duplicated.\n", 0, 0);
-		data->east = get_texture(data, str, 'E', 'A');
+		if (ft_int_strstr(str, which[i].conv))
+		{
+			if (*which[i].ptr != NULL)
+				quit(data, "Some info are duplicated.\n", 0, 0);
+			*which[i].ptr = which[i].f(data, str,
+					which[i].conv[0], which[i].conv[1]);
+			break ;
+		}
+		++i;
 	}
 }

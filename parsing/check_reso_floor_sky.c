@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 10:03:46 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/29 09:12:02 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/29 09:27:41 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,5 @@ void	check_floor_sky(t_arg *data, char *str)
 	if (data->tmp > 1)
 		quit(data, "There is some wrong info in sky of floor.\n", 0, 0);
 	check_inside_split(data, tmp);
+	free_str(tmp);
 }

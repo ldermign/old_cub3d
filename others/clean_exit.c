@@ -6,27 +6,11 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 08:39:23 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/26 10:05:47 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/29 10:48:22 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	free_str(char **tab)
-{
-	int i;
-
-	i = 0;
-	if (tab != NULL)
-	{
-		while (tab[i] != NULL)
-		{
-			free(tab[i]);
-			i++;
-		}
-	}
-	free(tab);
-}
 
 void	ft_print_map(char **map)
 {

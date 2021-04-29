@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/27 13:38:00 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/29 14:52:37 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,43 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 
-# define INT_MAX 2147483647
-# define INT_MIN -2147483648
+# define KM_W 13
+# define KM_A 0
+# define KM_S 1
+# define KM_D 2
+# define KM_F 3
+# define KM_M 46
+# define KM_SPACE 49
+# define KM_UP 126
+# define KM_DOWN 125
+# define KM_LEFT 123
+# define KM_RIGht 124
+# define KM_ENTER 36
+# define KM_DELETE 51
+# define KM_LM 1
+# define KM_RM 2
+# define KM_MUP 5
+# define KM_MDOWN 4
+# define KM_ESC 53
+
+// # define KL_W
+// # define KL_A
+// # define KL_S
+// # define KL_D
+// # define KL_F
+// # define KL_M
+// # define KL_SPACE
+// # define KL_UP
+// # define KL_DOWN
+// # define KL_LEFT
+// # define KL_RIGht
+// # define KL_ENTER
+// # define KL_DELETE
+// # define KL_LM
+// # define KL_RM
+// # define KL_MUP
+// # define KL_MDOWN
+// # define KL_ESC
 
 typedef	struct	s_argmts {
 	int			tmp;
@@ -52,10 +87,13 @@ typedef struct  s_data {
     void        *img;
     char        *addr;
     int         bpp;
-    int         line_len;
+    int         size_line;
     int         endian;
 	int			width;
 	int			height;
+
+    int x;
+    int y;
 }               t_mlx;
 
 typedef struct  s_map
@@ -88,6 +126,13 @@ typedef struct  s_xy {
     int x;
     int y;
 }               t_xy;
+
+typedef struct s_texture
+{
+	char	conv[3 + 1];
+	char	*(*f)(t_arg *data, char *str, char a, char b);
+	char	**ptr;
+}	t_text;
 
 /*
 **	CHECK PARSING
@@ -131,14 +176,15 @@ int		ft_close(int keycode, t_mlx *temp);
 **	UTILS
 */
 
-int		space_or_element(int c);
 int		ft_int_strstr(char *str, char *needle);
 int		ft_int_strchr(const char *str, int c);
+void	free_str(char **tab);
 
 /*
 **  UTILS MAP
 */
 
+int		space_or_element(int c);
 int		ft_is_player(int c);
 void	map_valid(char **tab);
 int		cara_in_map(int c);
