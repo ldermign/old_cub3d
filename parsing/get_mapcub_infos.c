@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:15:51 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/29 15:00:08 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/30 08:32:53 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,31 +100,24 @@ char	*get_texture(t_arg *data, char *str, char a, char b)
 	len = ft_strlen(text);
 	if (len <= 4 || ft_strchr(text, ' ') || text[len - 1] != 'm'
 		|| text[len - 2] != 'p' || text[len - 3] != 'x'
-		|| text[len - 4] != '.' )
+		|| text[len - 4] != '.')
 		quit(data, "Check name of texture.\n", 0, 0);
 	return (text);
 }
 
 void	if_texture(t_arg *data, char *str)
 {
-	// t_text	which[6];
-	t_text which [] = {
+	const t_text	which[] = {
 		{"NO ", get_texture, &data->north}, {"SO ", get_texture, &data->south},
 		{"EA ", get_texture, &data->east}, {"WE ", get_texture, &data->west},
 		{"S ", get_texture, &data->sprite}, {"", NULL, NULL}
 	};
-	int		i;
+	int				i;
 
 	i = 0;
-	// which[0] = {"NO ", get_texture, &data->north};
-	// which[1] = {"SO ", get_texture, &data->south};
-	// which[2] = {"EA ", get_texture, &data->east};
-	// which[3] = {"WE ", get_texture, &data->west};
-	// which[4] = {"S ", get_texture, &data->sprite};
-	// which[5] = {"", NULL, NULL};
 	while (which[i].f)
 	{
-		if (ft_int_strstr(str, which[i].conv))
+		if (ft_int_strstr(str, (char *)which[i].conv))
 		{
 			if (*which[i].ptr != NULL)
 				quit(data, "Some info are duplicated.\n", 0, 0);

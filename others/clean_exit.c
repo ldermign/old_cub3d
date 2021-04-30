@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 08:39:23 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/29 10:48:22 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/30 08:34:10 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_print_map(char **map)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (map[i])
 	{

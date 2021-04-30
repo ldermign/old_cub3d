@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 10:12:31 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/29 14:53:19 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/30 08:32:18 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,7 @@ void	check_wrong_data_and_recup(t_arg *data)
 		quit(data, "Check floor or sky's color.\n", 0, 0);
 	if (data->north == NULL || data->south == NULL || data->east == NULL
 		|| data->west == NULL || data->sprite == NULL)
-		{
-			printf("sprite = %s.\n", data->sprite);
-			printf("north = %s.\n", data->north);
-			quit(data, "It's missing some info.\n", 0, 0);
-		}
+		quit(data, "It's missing some info.\n", 0, 0);
 }
 
 void	gnl_mapcub(t_arg *data, char *arg)
@@ -112,42 +108,23 @@ void	gnl_mapcub(t_arg *data, char *arg)
 	save_mapcub_in_char(data, arg);
 }
 
-typedef struct s_test
-{
-	char	conv[3 + 1];
-	void	(*f)(t_arg *data, char *str);
-}	t_test;
-
 void	recup_data(t_arg *data, char *str)
 {
-	// __attribute__((unused)) 
-	const t_test	tst[] = {
+	const t_recup	reso_sky_floor[] = {
 		{"R ", get_resolution}, {"F ", get_floor}, {"C ", get_sky},
 		{"WE ", if_texture}, {"EA ", if_texture}, {"NO ", if_texture},
 		{"SO ", if_texture}, {"S ", if_texture}, {"", NULL}
 	};
-	// __attribute__((unused)) 
-	int	i;
-	
+	int				i;
 
 	if (ft_is_either(str))
 	{
 		i = 0;
-		while (tst[i].f)
+		while (reso_sky_floor[i].f)
 		{
-			if (ft_int_strstr(str, (char *)tst[i].conv))
-				tst[i].f(data, str);
+			if (ft_int_strstr(str, (char *)reso_sky_floor[i].conv))
+				reso_sky_floor[i].f(data, str);
 			++i;
 		}
-		// if (ft_int_strstr(str, "R "))
-		// 	get_resolution(data, str);
-		// if (ft_int_strstr(str, "F "))
-		// 	get_floor(data, str);
-		// if (ft_int_strstr(str, "C "))
-		// 	get_sky(data, str);
-		// if (ft_int_strstr(str, "NO ") || ft_int_strstr(str, "SO ")
-		// 	|| ft_int_strstr(str, "WE ") || ft_int_strstr(str, "EA ")
-		// 	|| ft_int_strstr(str, "S "))
-		// 	if_texture(data, str);
 	}
 }

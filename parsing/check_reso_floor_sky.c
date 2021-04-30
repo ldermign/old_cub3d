@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 10:03:46 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/29 09:27:41 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/04/30 09:33:34 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,28 @@ void	check_resolution(t_arg *data, char *str)
 		quit(data, "Wrong info in resolution.\n", 0, 0);
 }
 
-void	check_inside_split(t_arg *data, char **tmp)
+void	check_space_in_split(t_arg *data, char *tmp)
+{
+	int	i;
+
+	i = 0;
+	if (tmp == NULL)
+		quit(data, "It's missing some numbers in sky or floor.\n", 0, 0);
+	while (tmp[i])
+	{
+		while (tmp[i] == ' ')
+			i++;
+		while (ft_isdigit(tmp[i]))
+			i++;
+		while (tmp[i] == ' ')
+			i++;
+		if (tmp[i] != '\0')
+			quit(data, "Something's wrong in sky or floor.\n",
+				0, 0);
+	}
+}
+
+void	check_infos_inside_split(t_arg *data, char **tmp)
 {
 	int	i;
 	int	j;
@@ -71,23 +92,14 @@ void	check_floor_sky(t_arg *data, char *str)
 
 	j = 0;
 	tmp = ft_split(str, ',');
-	data->tmp = 0;
 	while (tmp[0][j] == ' ')
 		j++;
 	if ((ft_strncmp(&tmp[0][j], "C ", 2) != 0)
 		&& (ft_strncmp(&tmp[0][j], "F ", 2) != 0))
 		quit(data, "Wrong info in sky or floor.\n", 0, 0);
-	while (tmp[0][j])
-	{
-		if ((tmp[0][j] == 'C' || tmp[0][j] == 'F')
-			|| (!ft_isdigit(tmp[0][j]) && tmp[0][j] != 'C' && tmp[0][j] != 'F'
-				&& tmp[0][j] != ' ' && tmp[0][j] != '\0'
-				&& tmp[0][j] != 'C' && tmp[0][j] != 'F'))
-			data->tmp++;
-		j++;
-	}
-	if (data->tmp > 1)
-		quit(data, "There is some wrong info in sky of floor.\n", 0, 0);
-	check_inside_split(data, tmp);
+	check_space_in_split(data, &tmp[0][j + 1]);
+	check_space_in_split(data, tmp[1]);
+	check_space_in_split(data, tmp[2]);
+	check_infos_inside_split(data, tmp);
 	free_str(tmp);
 }
