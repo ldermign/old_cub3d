@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/30 08:19:40 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/03 15:29:08 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,11 @@ void	get_resolution(t_arg *data, char *str);
 **  RAYCASTING
 */
 
-int		mouse_hook(int keycode, t_mlx *temp);
-int		key_hook(int keycode, void *param);
-int		ft_close(int keycode, t_mlx *temp);
+int	create_trgb(int t, int r, int g, int b);
+int	get_t(int trgb);
+int	get_r(int trgb);
+int	get_g(int trgb);
+int	get_b(int trgb);
 
 /*
 **	UTILS

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 08:19:05 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/30 08:52:09 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/03 15:07:59 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,14 @@ typedef struct  s_data {
     int         endian;
 	int			width;
 	int			height;
+	int			sky;
+	int			floor;
 
     int x;
     int y;
+
+	// int x_m;
+	// int y_m;
 }               t_mlx;
 
 typedef struct  s_map

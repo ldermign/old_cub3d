@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/02 20:28:09 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/03 15:32:14 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 int 	afficher_coor_souris(t_mlx *img)
 {
 	(void)img;
-	printf("x = %d, y = %d.\n", );
+	// printf("x = %d, y = %d.\n", );
 	return (0);
 }
 
@@ -105,6 +105,106 @@ int		move_pixel(int keycode, t_mlx *img)
 	return (0);
 }
 
+// int 	key_hook(int keycode, t_mlx *img)
+// {
+// 	printf("Keycode is = %d.\n", keycode);
+// 	if (keycode == 53)
+// 		mlx_hook(img->win, 2, 1L<<0, ft_close_escape, img);
+// 	mlx_hook(img->win, 17, 1L<<0, ft_close_cross, img);
+// 	mlx_hook(img->win, 3, 1L<<1, move_pixel, img);
+// 	return (0);
+// }
+
+void	ft_fill_img(t_mlx *img, int color)
+{
+	int x;
+	int y;
+	int pixel;
+
+	x = 0;
+	while (x < img->width)
+	{
+		y = 0;
+		while (y < img->height)
+		{
+			pixel = (y * img->size_line) + (x * 4);
+			if (img->endian == 1)
+			{
+				img->addr[pixel + 0] = (color >> 24);
+				img->addr[pixel + 1] = (color >> 16) & 0xFF;
+				img->addr[pixel + 2] = (color >> 8) & 0xFF;
+				img->addr[pixel + 3] = (color) & 0xFF;
+			}
+			else if (img->endian == 0)
+			{
+				img->addr[pixel + 0] = (color) & 0xFF;
+				img->addr[pixel + 1] = (color >> 8) & 0xFF;
+				img->addr[pixel + 2] = (color >> 16) & 0xFF;
+				img->addr[pixel + 3] = (color >> 24);
+			}
+			++y;
+		}
+		++x;
+	}
+}
+
+void	fill_sky_and_floor(t_mlx *img)
+{
+	int x;
+	int y;
+	int pixel;
+
+	x = 0;
+	while (x < img->width)
+	{
+		y = 0;
+		while (y < img->height / 2)
+		{
+			pixel = (y * img->size_line) + (x * 4);
+			if (img->endian == 1)
+			{
+				img->addr[pixel + 0] = (img->sky >> 24);
+				img->addr[pixel + 1] = (img->sky >> 16) & 0xFF;
+				img->addr[pixel + 2] = (img->sky >> 8) & 0xFF;
+				img->addr[pixel + 3] = (img->sky) & 0xFF;
+			}
+			else if (img->endian == 0)
+			{
+				img->addr[pixel + 0] = (img->sky) & 0xFF;
+				img->addr[pixel + 1] = (img->sky >> 8) & 0xFF;
+				img->addr[pixel + 2] = (img->sky >> 16) & 0xFF;
+				img->addr[pixel + 3] = (img->sky >> 24);
+			}
+			++y;
+		}
+		++x;
+	}
+	while (x < img->width)
+	{
+		y = 0;
+		while (y < img->height / 2)
+		{
+			pixel = (y * img->size_line) + (x * 4);
+			if (img->endian == 1)
+			{
+				img->addr[pixel + 0] = (img->floor >> 24);
+				img->addr[pixel + 1] = (img->floor >> 16) & 0xFF;
+				img->addr[pixel + 2] = (img->floor >> 8) & 0xFF;
+				img->addr[pixel + 3] = (img->floor) & 0xFF;
+			}
+			else if (img->endian == 0)
+			{
+				img->addr[pixel + 0] = (img->floor) & 0xFF;
+				img->addr[pixel + 1] = (img->floor >> 8) & 0xFF;
+				img->addr[pixel + 2] = (img->floor >> 16) & 0xFF;
+				img->addr[pixel + 3] = (img->floor >> 24);
+			}
+			++y;
+		}
+		++x;
+	}
+}
+
 int		main(int ac, char **ag)
 {
 	t_arg data;
@@ -112,38 +212,37 @@ int		main(int ac, char **ag)
 	
 	ft_memset(&img, 0, sizeof(t_mlx));
 	parsing(ac, ag, &data);
-	
-	img.mlx = mlx_init();
-	img.win = mlx_new_window(img.mlx, data.res_x, data.res_y, "Cub3D");
+	img.width = data.res_x;
+	img.height = data.res_y;
+	img.sky = create_trgb(get_t(1), data.ciel_r, data.ciel_g, data.ciel_b);
+	img.floor = create_trgb(get_t(1), data.flr_r, data.flr_g, data.flr_b);
 
-	// mlx_mouse_hook(img.win, mouse_hook, &img);
-	
-	// img.img = mlx_xpm_file_to_image(img.mlx, data.east, &data.res_x, &data.res_y);
-	img.img = mlx_new_image(img.mlx, data.res_x, data.res_y);
+	img.mlx = mlx_init();
+	img.win = mlx_new_window(img.mlx, img.width, img.height, "Cub3D");
+	img.img = mlx_new_image(img.mlx, img.width, img.height);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.size_line, &img.endian);
 
+	// ft_fill_img(&img, img.sky); // fonctionne ! pas toucher, s'inspirer
+	fill_sky_and_floor(&img);
+
 	// PAS TOUCHER
-	mlx_key_hook(img.win, print_keycode, &img);
+	// mlx_key_hook(img.win, print_keycode, &img);
 	mlx_hook(img.win, 2, 1L<<0, ft_close_escape, &img);
 	mlx_hook(img.win, 17, 1L<<0, ft_close_cross, &img);
 
 
-
-	mlx_mouse_show();
+	// TEST
 	// mlx_mouse_hook(img.win, afficher_coor_souris, &img);
-	// mlx_hook(img.win, 2, 1L<<0, move_pixel, &img);
-	mlx_hook(img.win, 7, 1L<<4, souris_entree, (void *)0);
-	mlx_hook(img.win, 8, 1L<<5, souris_sortie, (void *)0);
+	// mlx_hook(img.win, 2, 1L<<0, move_pixel, &img); // fonctionne avec 2 et 1L<<0 mais pas escape
+	// mlx_hook(img.win, 7, 1L<<4, souris_entree, (void *)0);
+	// mlx_hook(img.win, 8, 1L<<5, souris_sortie, (void *)0);
 	// mlx_hook(img.win, 6, 1L<<6, afficher_coor_souris, &img);
 	// mlx_key_hook(img.win, move_pixel, &img);
-
-	// my_mlx_pixel_put(&img, img.x, img.y, 0x0000FF00);
-	// mlx_put_image_to_window(img.mlx, img.win, img.img, 0, 0);
-
 	// mlx_loop_hook(a.mlx, render_next_frame, myStruct);
 
-	mlx_loop(img.mlx);
+	mlx_put_image_to_window(img.mlx, img.win, img.img, 0, 0);
 
-	// return (0);
+	mlx_loop(img.mlx);
+	return (0);
 }
 
