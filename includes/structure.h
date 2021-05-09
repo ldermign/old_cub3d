@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 08:19:05 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/03 15:07:59 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:19:40 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ typedef	struct	s_argmts {
 	char		*sprite;
 	char		**fd;
     char        **map;
+	int         player;
+    double		plrX;
+    double		plrY;
 }				t_arg;
 
 typedef struct  s_data {
@@ -49,16 +52,32 @@ typedef struct  s_data {
     int x;
     int y;
 
-	// int x_m;
-	// int y_m;
-}               t_mlx;
+	double plrX; // vecteur positionnel du joueur
+	double plrY;
 
-typedef struct  s_map
-{
-    int         player;
-    int         ply_x;
-    int         ply_y;
-}               t_spacemap;
+	double dirX; // direction du joueur
+	double dirY;
+
+	double planeX; // plan camera du joueur
+	double planeY;
+
+	double time; // temps de la trame actuelle
+	double oldTime; // temps de la trame d'avant
+
+	double cameraX;
+
+	double rayDirX;
+	double rayDirY;
+
+	int mapX; // carre dans lequel le rayon est
+	int mapY;
+
+	double sideDistX; // distance que le rayon a a parcourir jusqu'au mur
+	double sideDistY;
+
+	double deltaDistX; // 
+	double deltaDistY;
+}               t_mlx;
 
 typedef struct  s_input {
     int sp;

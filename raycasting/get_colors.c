@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 14:59:33 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/03 15:29:10 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/04 10:09:12 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,46 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int	get_t(int trgb)
+void	fill(t_mlx *img, int color, int x, int y)
 {
-	return (trgb & (0xFF << 24));
+	int pixel;
+
+	pixel = (y * img->size_line) + (x * 4);
+	if (img->endian == 1)
+	{
+		img->addr[pixel + 0] = (color >> 24);
+		img->addr[pixel + 1] = (color >> 16) & 0xFF;
+		img->addr[pixel + 2] = (color >> 8) & 0xFF;
+		img->addr[pixel + 3] = (color) & 0xFF;
+	}
+	else if (img->endian == 0)
+	{
+		img->addr[pixel + 0] = (color) & 0xFF;
+		img->addr[pixel + 1] = (color >> 8) & 0xFF;
+		img->addr[pixel + 2] = (color >> 16) & 0xFF;
+		img->addr[pixel + 3] = (color >> 24);
+	}
 }
 
-int	get_r(int trgb)
+void	fill_sky_and_floor(t_mlx *img)
 {
-	return (trgb & (0xFF << 16));
-}
+	int x;
+	int y;
 
-int	get_g(int trgb)
-{
-	return (trgb & (0xFF << 8));
-}
-
-int	get_b(int trgb)
-{
-	return (trgb & 0xFF);
+	x = 0;
+	while (x < img->width)
+	{
+		y = 0;
+		while (y < img->height / 2)
+		{
+			fill(img, img->sky, x, y);
+			++y;
+		}
+		while (y < img->height)
+		{
+			fill(img, img->floor, x, y);
+			++y;
+		}
+		++x;
+	}
 }

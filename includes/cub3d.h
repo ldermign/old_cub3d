@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/03 15:29:08 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:52:18 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@
 int		ft__save(char *arg);
 int		ft_check_name_map(char *arg);
 void	ft_check_arg(int ac, char **ag);
-void	check_map(t_arg *data, t_spacemap *space);
+void	check_map(t_arg *data);
 void	check_wrong_data_and_recup(t_arg *data);
 void	check_resolution(t_arg *data, char *str);
 void	check_floor_sky(t_arg *data, char *str);
@@ -97,10 +97,7 @@ void	get_resolution(t_arg *data, char *str);
 */
 
 int	create_trgb(int t, int r, int g, int b);
-int	get_t(int trgb);
-int	get_r(int trgb);
-int	get_g(int trgb);
-int	get_b(int trgb);
+void	fill_sky_and_floor(t_mlx *img);
 
 /*
 **	UTILS
@@ -127,7 +124,7 @@ int		size_tab_char(char **tab);
 int		ft_strchr_tab_wrong_cara(char **tab);
 int		return_player(char **map);
 int		how_many_player(t_arg *data, char **map);
-void	get_position_player(t_arg *data, t_spacemap *space);
+void	get_position_player(t_arg *data);
 
 /*
 **  EXIT
@@ -187,7 +184,7 @@ void ft_circle_pixel(t_mlx img, int x, int y, int place);
 #define KWHT  "\x1B[0;37m" // BLANC
 #define KGRE  "\x1b[1;30m" // GRIS
 #define CLR_COLOR "\x1b[0m" // CLEAR COLOR
-void	printf_struct_arg(t_arg data, t_spacemap space);
+void	printf_struct_arg(t_arg data);
 
 # include <libc.h>
 

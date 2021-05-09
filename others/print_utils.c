@@ -6,13 +6,13 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:39:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/25 10:21:41 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:53:05 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	printf_struct_arg(t_arg data, t_spacemap space)
+void	printf_struct_arg(t_arg data)
 {
 	printf(KGRN"\n\t///\\\\\\DATA MAP.CUB///\\\\\\\n\n"CLR_COLOR);
 	printf("res_x = \t%d\n", data.res_x);
@@ -28,6 +28,10 @@ void	printf_struct_arg(t_arg data, t_spacemap space)
 	printf("west = \t\t[%s]\n", data.west);
 	printf("east = \t\t[%s]\n", data.east);
 	printf("sprite = \t[%s]\n", data.sprite);
+	printf("\nPLAYER = \n");
+	printf("player = \t%c\n", data.player);
+	printf("plrX = \t%f\n", data.plrX);
+	printf("plrY = \t%f\n", data.plrY);
 	int i = 0;
 	printf(KGRN"\n\t///\\\\\\FINAL MAP TO USE///\\\\\\\n\n");
 	while (data.map[i])
@@ -35,9 +39,5 @@ void	printf_struct_arg(t_arg data, t_spacemap space)
 		printf("\x1b[0mFinal map ligne [ %d ]\t\t==>\t\t\x1B[1;30m%s\n", i + 1, data.map[i]);
 		i++;
 	}
-	printf(KGRN"\n\t///\\\\\\DATA SPACEMAP///\\\\\\\n\n"CLR_COLOR);
-	printf("player = \t%c\n", space.player);
-	printf("ply_x = \t%d\n", space.ply_x);
-	printf("ply_y = \t%d\n", space.ply_y);
 	printf("\n");
 }

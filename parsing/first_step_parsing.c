@@ -6,13 +6,13 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 10:12:31 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/30 08:32:18 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:52:02 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_map(t_arg *data, t_spacemap *space)
+void	check_map(t_arg *data)
 {
 	if (ft_strchr_tab_wrong_cara(data->map))
 		quit(data, "Something's wrong in the map.\n", 0, 0);
@@ -24,13 +24,13 @@ void	check_map(t_arg *data, t_spacemap *space)
 	data->tmp = how_many_player(data, data->map);
 	if (data->tmp > 1)
 		quit(data, "There can be only one....\n", 0, 0);
-	space->player = return_player(data->map);
-	check_start_end_map(data, data->map, space->player);
-	check_interior_map(data, data->map, space->player);
+	data->player = return_player(data->map);
+	check_start_end_map(data, data->map, data->player);
+	check_interior_map(data, data->map, data->player);
 	check_space_sprite_and_plr_map(data, data->map, '0');
 	check_space_sprite_and_plr_map(data, data->map, '2');
-	check_space_sprite_and_plr_map(data, data->map, space->player);
-	get_position_player(data, space);
+	check_space_sprite_and_plr_map(data, data->map, data->player);
+	get_position_player(data);
 }
 
 void	recup_map(t_arg *data)

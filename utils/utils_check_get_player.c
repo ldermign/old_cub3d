@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 16:46:12 by ldermign          #+#    #+#             */
-/*   Updated: 2021/04/25 14:49:00 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:52:09 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	how_many_player(t_arg *data, char **map)
 	return (data->tmp);
 }
 
-void	get_position_player(t_arg *data, t_spacemap *space)
+void	get_position_player(t_arg *data)
 {
 	int	i;
 	int	j;
@@ -72,10 +72,10 @@ void	get_position_player(t_arg *data, t_spacemap *space)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (data->map[i][j] == space->player)
+			if (data->map[i][j] == data->player)
 			{
-				space->ply_x = i;
-				space->ply_y = j;
+				data->plrX = i;
+				data->plrY = j;
 				break ;
 			}
 			j++;
