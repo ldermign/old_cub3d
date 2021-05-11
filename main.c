@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/06 14:21:55 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/11 14:15:17 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,7 @@ void	get_pars(t_arg *data, t_mlx *img)
 	img->floor = create_trgb(1, data->flr_r, data->flr_g, data->flr_b);
 	img->plrX = data->plrX;
 	img->plrY = data->plrY;
-	img->dirX = -1;
-	// img->dirY = 0;
-	// img->planeX = 0;
-	img->planeY = 0.66;
-	// img->time = 0;
-	// img->oldTime = 0;
+	img->map_size = size_tab_char(data->map) * ft_strlen(data->map[0]);
 }
 
 int		close_escape(int keycode, t_arg *data)
@@ -162,6 +157,16 @@ void	set_key_code(t_mlx *img)
 	// mlx_hook(img->win, 17, 0, exit_hook, img);
 }
 
+void	draw_plr(int posx, int posy, t_mlx *img)
+{
+	int color_plr;
+	// int size_plr;
+
+	color_plr = create_trgb(1, 1, 1, 0);
+	// size_plr = taille du pint
+	my_mlx_pixel_put(img, posx, posy, color_plr);
+}
+
 int		main(int ac, char **ag)
 {
 	t_arg data;
@@ -177,45 +182,16 @@ int		main(int ac, char **ag)
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.size_line, &img.endian);
 
 	fill_sky_and_floor(&img);
+	
+	printf("map_size = %d\n", img.map_size);
 
 
-
-	while (!done())
-	{
-		for (int x = 0; x < w; x++)
-		{
-			// calcul position et direction du rayon
-			img.cameraX = 2 * x / (double(w)) - 1;
-			img.rayDirX = img.dirX + img.planeX * img.cameraX;
-			img.rayDirY = img.dirY + img.planeX * img.cameraX;
-			//which box of the map we're in
-    		img.mapX = int(img.posX);
-    		img.mapY = int(img.posY);
-
-    		//length of ray from current position to next x or y-side
-    		img.sideDistX;
-    		img.sideDistY;
-
-    		 //length of ray from one x or y-side to next x or y-side
-    		img.deltaDistX = std::abs(1 / rayDirX);
-    		img.deltaDistY = std::abs(1 / rayDirY);
-    		double perpWallDist;
-
-    		//what direction to step in x or y-direction (either +1 or -1)
-    		int stepX;
-    		int stepY;
-
-    		int hit = 0; //was there a wall hit?
-    		int side; //was a NS or a EW wall hit?
-		}
-
-	}
-
+	draw_plr(img.plrX, img.plrY, &img);
 
 
 	// PAS TOUCHER
 	// mlx_key_hook(img.win, &print_keycode, &img); // ne fonctionne pas avec move pixel
-	// mlx_key_hook(img.win, &close_escape, &data);
+	mlx_key_hook(img.win, &close_escape, &data);
 	mlx_hook(img.win, 2, 1L<<0, move_pixel, &img);
 	mlx_hook(img.win, 17, 1L<<0, &close_cross, &data);
 

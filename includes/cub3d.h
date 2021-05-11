@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/06 13:52:18 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/11 10:32:08 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <math.h>
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
