@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 08:19:05 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/13 16:20:59 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/14 14:48:41 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef struct  s_data {
     int x;
     int y;
 
-	double plrX; // vecteur positionnel du joueur // position
-	double plrY;
+	double posX; // vecteur positionnel du joueur // position
+	double posY;
 
     int         map_size;
 
@@ -65,16 +65,16 @@ typedef struct  s_data {
 	double planeX; // plan camera du joueur
 	double planeY;
 
-	double time; // temps de la trame actuelle
-	double oldTime; // temps de la trame d'avant
+	// double time; // temps de la trame actuelle
+	// double oldTime; // temps de la trame d'avant
 
 	double cameraX;
 
 	double rayDirX;
 	double rayDirY;
 
-	int mapX; // carre dans lequel le rayon est
-	int mapY;
+	// int mapX; // carre dans lequel le rayon est
+	// int mapY;
 
 	double sideDistX; // distance que le rayon a a parcourir jusqu'au mur
 	double sideDistY; //length of ray from current position to next x or y-side

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/13 16:34:20 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/14 17:39:15 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ void	get_pars(t_arg *data, t_mlx *img)
 	img->height = data->res_y;
 	img->sky = create_trgb(1, data->ciel_r, data->ciel_g, data->ciel_b);
 	img->floor = create_trgb(1, data->flr_r, data->flr_g, data->flr_b);
-	// img->plrX = data->plrX;
-	// img->plrY = data->plrY;
 	img->map_size = size_tab_char(data->map) * ft_strlen(data->map[0]);
-	img->dirX = -1;
+
+	img->posX = data->plrX;
+	img->posY = data->plrY;
+
+	
+	// img->dirX = 0;
 	// img->dirY = 0;
 	// img->planeX = 0;
-	img->planeY = 0.66;
-	// img->time = 0;
-	// img->oldTime = 0;%
+	// img->planeY = 0.66;
+
 }
 
 int		close_escape(int keycode, t_arg *data)
@@ -177,17 +179,52 @@ void 	draw_line_wall(t_mlx *img, int x, int start, int end, int side)
 {
 	int color;
 
-	color = create_trgb(1, 255, 0, 0);
+	color = create_trgb(1, 255, 255, 255);
 	if (side == 1)
 		color /= 2;
+	printf("start = %d, end = %d\n", start, end);
 	while (start < end)
 	{
+		// printf("start = %d, end = %d\n", start, end);
 		my_mlx_pixel_put(img, x, start, color);
 		start++;
 	}
 	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 	// printf("x = %d, start = %d, end = %d\n", x, start, end);
 }
+
+void	get_side_player(t_mlx *img, t_arg *data)
+{
+	if ((char)data->player == 'N')
+	{
+		img->dirX = 0, img->dirY = 1; // direction du joueur
+		img->planeX = 0.66, img->planeY = 0; // plan camera du joueur
+	}
+	else if ((char)data->player == 'S')
+	{
+		img->dirX = 0, img->dirY = -1; // direction du joueur
+		img->planeX = -0.66, img->planeY = 0; // plan camera du joueur
+	}
+	else if ((char)data->player == 'W')
+	{
+		img->dirX = -1, img->dirY = 0; // direction du joueur
+		img->planeX = 0, img->planeY = -0.66; // plan camera du joueur
+	}
+	else if ((char)data->player == 'E')
+	{
+		img->dirX = 1, img->dirY = 0; // direction du joueur
+		img->planeX = 0, img->planeY = 0.66; // plan camera du joueur
+	}
+}
+
+// void	player_moving(int keycode, t_mlx *img)
+// {
+// 	if (keycode == 13)
+		
+// 	if (keycode == 0)
+// 	if (keycode == 1)
+// 	if (keycode == 2)
+// }
 
 int		main(int ac, char **ag)
 {
@@ -206,14 +243,19 @@ int		main(int ac, char **ag)
 	fill_sky_and_floor(&img);
 	mlx_put_image_to_window(img.mlx, img.win, img.img, 0, 0);
 	
+
+	// mlx_hook(img.win, 2, 1L<<0, player_moving, &img);
+
+		
 	// printf("map_size = %d\n", img.map_size);
-	// draw_plr(img.plrX, img.plrY, &img);
+	// draw_plr(img.posX, img.posY, &img);
 
-	img.plrX = data.plrX, img.plrY = data.plrY;
-	printf("plrX = %f, plrY = %f\n", img.plrX, img.plrY);
-	img.dirX = -1, img.dirY = 0; // direction du joueur
-	img.planeX = 0, img.planeY = 0.66; // plan camera du joueur
+	img.posX = (int)data.plrX + 0.5, img.posY = (int)data.plrY + 0.5;
+	// printf("plrX = %f, plrY = %f\n", img.plrX, img.plrY);
 
+	get_side_player(&img, &data);
+	// img.dirX = -1, img.dirY = 0; // direction du joueur
+	// img.planeX = 0, img.planeY = 0.66; // plan camera du joueur
 	for (int x = 0; x < img.width; x++)
 	{
 		// calcul position et direction du rayon
@@ -222,8 +264,9 @@ int		main(int ac, char **ag)
 		img.rayDirY = img.dirY + img.planeY * img.cameraX;
 
 		//which box of the map we're in
-		int mapX = (int)(img.plrX);
-		int mapY = (int)(img.plrY);
+		int mapX = (int)(img.posX);
+		int mapY = (int)(img.posY);
+		// printf("mapX = %d, mapY = %d\n", mapX, mapY);
 
 		//length of ray from one x or y-side to next x or y-side
 		img.deltaDistX = fabs(1 / img.rayDirX);
@@ -237,78 +280,89 @@ int		main(int ac, char **ag)
 		int stepX;
 		int stepY;
 
-		int hit; //was there a wall hit?
+		int hit = 0; //was there a wall hit?
 		int side; //was a NS or a EW wall hit?
 
-		printf("img.sideDistX = %f < img.sideDistY = %f\n", img.sideDistX, img.sideDistY);
+		// printf("img.sideDistX = %f < img.sideDistY = %f\n", img.sideDistX, img.sideDistY);
+		// printf("stepX = %d < stepY = %d\n", stepX, stepY);
 		//calculate step and initial sideDist
 		if (img.rayDirX < 0)
 		{
 			stepX = -1;
-			img.sideDistX = (img.plrX - mapX) * img.deltaDistX;
+			img.sideDistX = (img.posX - mapX) * img.deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			img.sideDistX = (mapX + 1.0 - img.plrX) * img.deltaDistX;
+			img.sideDistX = (mapX + 1.0 - img.posX) * img.deltaDistX;
 		}
 		if (img.rayDirY < 0)
 		{
 			stepY = -1;
-			img.sideDistY = (img.plrY - mapY) * img.deltaDistY;
+			img.sideDistY = (img.posY - mapY) * img.deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			img.sideDistY = (mapY + 1.0 - img.plrY) * img.deltaDistY;
+			img.sideDistY = (mapY + 1.0 - img.posY) * img.deltaDistY;
 		}
+		// printf("img.sideDistX = %f < img.sideDistY = %f\n", img.sideDistX, img.sideDistY);
+		// printf("stepX = %d < stepY = %d\n", stepX, stepY);
 
-		printf("img.sideDistX = %f < img.sideDistY = %f\n", img.sideDistX, img.sideDistY);
 		//perform DDA
-		hit = 0;
 		while (hit == 0)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
 			if (img.sideDistX < img.sideDistY)
 			{
 				// printf("1\n");
+				// printf("%f += %f\n", img.sideDistX, img.deltaDistX);
 				img.sideDistX += img.deltaDistX;
 				mapX += stepX;
 				side = 0;
 			}
 			else
 			{
-				printf("2\n");
+				// printf("2\n");
+				// printf("%f += %f\n", img.sideDistY, img.deltaDistY);
 				img.sideDistY += img.deltaDistY;
 				mapY += stepY;
 				side = 1;
 			}
 			// Check if ray has hit a wall
-			if (data.map[mapX][mapY] > 0) hit = 1;
+			if (data.map[mapX][mapY] == '1') hit = 1;
 		}
-
+		// printf("mapX = %d, mapY = %d\n", mapX, mapY);
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
 		if (side == 0)
-			perpWallDist = (mapX - img.plrX + (1 - stepX) / 2) / img.rayDirX;
+		{
+			// printf("test\n");
+			perpWallDist = (mapX - img.posX + (1 - stepX) / 2) / img.rayDirX;
+			// printf("%f = (%d - %f + (1 - %d) / 2) / %f\n", perpWallDist, mapX, img.posX, stepX, img.rayDirX);
+		}
 		else
 		{
-			printf("ssamsaoule\n");
-			perpWallDist = (mapY - img.plrY + (1 - stepY) / 2) / img.rayDirY;
+			// printf("ssamsaoule\n");
+			perpWallDist = (mapY - img.posY + (1 - stepY) / 2) / img.rayDirY;
+			// printf("%f = (%d - %f + (1 - %d) / 2) / %f\n", perpWallDist, mapY, img.posY, stepY, img.rayDirY);
 		}
 
 		//Calculate height of line to draw on screen
 		// int h;
 		int lineHeight;
-		lineHeight = (img.height / perpWallDist);
-		printf("%d = (%d / %f)\n", lineHeight, img.height, perpWallDist);
+		lineHeight = (int)(img.height / perpWallDist);
+		// printf("%d = (%d / %f)\n", lineHeight, img.height, perpWallDist);
+		// -2147483648 = (750 / -0.000000)
+
 
 		//calculate lowest and highest pixel to fill in current stripe
 		int drawStart;
 		int drawEnd;
 
-		drawStart = -(lineHeight / 2) + (img.height / 2);
-		drawEnd = (lineHeight / 2) + (img.height / 2);
-		printf("%d = -(%d / 2) + (%d / 2)\n", drawStart, lineHeight, img.height);
+		drawStart = -lineHeight / 2 + img.height / 2;
+		drawEnd = lineHeight / 2 + img.height / 2;
+		// printf("%d = -%d / 2 + %d / 2\n", drawStart, lineHeight, img.height);
+		// -1073741449 = --2147483648 / 2 + 750 / 2
 		if (drawStart < 0)
 			drawStart = 0;
 		if (drawEnd >= img.height)
@@ -330,6 +384,7 @@ int		main(int ac, char **ag)
 		// if (side == 1) {color = color / 2;}
 
 		//draw the pixels of the stripe as a vertical line
+		// printf("start = %d, end = %d\n", drawStart, drawEnd);
 		draw_line_wall(&img, x, drawStart, drawEnd, side); // refaire
 
 		mlx_put_image_to_window(img.mlx, img.win, img.img, 0, 0);
@@ -382,10 +437,37 @@ int		main(int ac, char **ag)
 	// 	double oldPlaneX = img.planeX;
 	// 	img.planeX = img.planeX * cos(rotSpeed) - img.planeY * sin(rotSpeed);
 	// 	img.planeY = oldPlaneX * sin(rotSpeed) + img.planeY * cos(rotSpeed);
+	
+	
 
 	// mlx_put_image_to_window(img.mlx, img.win, img.img, 0, 0);
 
-		
+
+// RAYCASTING YOUTUBE VIDEO
+
+	// draw_plr(300, 350, &img);
+	// buttons();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// RAYCASTING YOUTUBE VIDEO
 
 
 	// PAS TOUCHER
