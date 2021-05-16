@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 08:19:05 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/14 14:48:41 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/16 17:13:28 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,65 +51,64 @@ typedef struct  s_data {
 
     int x;
     int y;
-
-	double posX; // vecteur positionnel du joueur // position
-	double posY;
-
-    int         map_size;
-
-
-
-	double dirX; // direction du joueur
-	double dirY;
-
-	double planeX; // plan camera du joueur
-	double planeY;
-
-	// double time; // temps de la trame actuelle
-	// double oldTime; // temps de la trame d'avant
-
-	double cameraX;
-
-	double rayDirX;
-	double rayDirY;
-
-	// int mapX; // carre dans lequel le rayon est
-	// int mapY;
-
-	double sideDistX; // distance que le rayon a a parcourir jusqu'au mur
-	double sideDistY; //length of ray from current position to next x or y-side
-
-	double deltaDistX;
-	double deltaDistY;
 }               t_mlx;
 
-typedef struct  s_input {
-    int sp;
-    int ret;
-    int w;
-    int a;
-    int s;
-    int d;
-    int f;
-    int l;
-    int m;
-    int arr_u;
-    int arr_d;
-    int arr_l;
-    int arr_r;
-    int mouse_l;
-    int mouse_r;
-    int touche;
-}               t_ipt;
+typedef struct  s_calculs {
+	int hit;
+	int side;
+	double plrX; // vecteur positionnel du joueur // position
+	double plrY;
+	double dirX; // direction du joueur
+	double dirY;
+	double planeX; // plan camera du joueur
+	double planeY;
+	// double time; // temps de la trame actuelle
+	// double oldTime; // temps de la trame d'avant
+	double cameraX;
+	double rayDirX;
+	double rayDirY;
+	int mapX; // carre dans lequel le rayon est
+	int mapY;
+	int stepX; 	//what direction to step in x or y-direction (either +1 or -1)
+	int stepY;
+	double sideDistX; // distance que le rayon a a parcourir jusqu'au mur
+	double sideDistY; //length of ray from current position to next x or y-side
+	double deltaDistX;
+	double deltaDistY;
+	int	drawStart;
+	int	drawEnd;
+	double perpWallDist;
+}				t_calc;
 
-typedef struct  s_xy {
-    int x;
-    int y;
-}               t_xy;
+typedef struct  s_structure {
+	t_arg *data;
+	t_mlx *img;
+	t_calc *cls;
+}				t_s;
 
+// typedef struct  s_input {
+//     int sp;
+//     int ret;
+//     int w;
+//     int a;
+//     int s;
+//     int d;
+//     int f;
+//     int l;
+//     int m;
+//     int arr_u;
+//     int arr_d;
+//     int arr_l;
+//     int arr_r;
+//     int mouse_l;
+//     int mouse_r;
+//     int touche;
+// }               t_ipt;
+
+t_s	*s(void);
 
 /*
-**  FUNCTION POINTER
+**  POINTEUR SUR FONCTION
 */
 
 typedef struct s_recup_data

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 14:59:33 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/04 10:09:12 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/16 14:32:54 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	create_trgb(int t, int r, int g, int b)
 
 void	fill(t_mlx *img, int color, int x, int y)
 {
-	int pixel;
+	int	pixel;
 
 	pixel = (y * img->size_line) + (x * 4);
 	if (img->endian == 1)
@@ -40,8 +40,8 @@ void	fill(t_mlx *img, int color, int x, int y)
 
 void	fill_sky_and_floor(t_mlx *img)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	while (x < img->width)

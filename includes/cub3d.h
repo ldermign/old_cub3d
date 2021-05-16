@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/11 10:32:08 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/16 17:46:11 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,28 @@ void	get_floor(t_arg *data, char *str);
 void	get_resolution(t_arg *data, char *str);
 
 /*
-**  RAYCASTING
+**	RAYCASTING
 */
 
-int	create_trgb(int t, int r, int g, int b);
+void	start_raycasting(t_mlx *img, t_calc *clcls, t_arg *data);
+
+/*
+**	R CALCULS
+*/
+
+void	step_calculs(t_calc *clc);
+void	which_square_with_wall_DDA(t_calc *clcls, t_arg *data);
+void	distance_camera_calculs(t_mlx *img, t_calc *clcls);
+int		move_player(int keycode);
+
+/*
+**  R UTILS
+*/
+
+void	get_pars(t_arg *data, t_mlx *img, t_calc *clcls);
+void	init_calculs(t_mlx *img, t_calc *clcls, int i);
 void	fill_sky_and_floor(t_mlx *img);
+void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 /*
 **	UTILS
@@ -107,6 +124,7 @@ void	fill_sky_and_floor(t_mlx *img);
 int		ft_int_strstr(char *str, char *needle);
 int		ft_int_strchr(const char *str, int c);
 void	free_str(char **tab);
+int		create_trgb(int t, int r, int g, int b);
 
 /*
 **  UTILS MAP
@@ -147,14 +165,6 @@ void	quit(t_arg *data, char *str_err, int i, int place);
 
 
 
-
-/*
-**  OTHERS
-*/
-
-
-
-void ft_circle_pixel(t_mlx img, int x, int y, int place);
 
 
 
