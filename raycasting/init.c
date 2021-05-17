@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:27:09 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/16 14:33:07 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/17 11:35:41 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	get_pars(t_arg *data, t_mlx *img, t_calc *clcls)
 
 void	init_calculs(t_mlx *img, t_calc *clcls, int i)
 {
+	clcls->hit = 0;
 	clcls->mapX = (int)(clcls->plrX);
 	clcls->mapY = (int)(clcls->plrY);
 	clcls->cameraX = 2 * i / (double)(img->width) - 1;

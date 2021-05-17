@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/16 17:42:39 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/17 14:56:15 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,21 @@ int		move_pixel(int keycode, t_mlx *img)
 
 int		key_press(int keycode)
 {
-	(void)keycode;
 	if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
-		move_player(keycode);
-	mlx_put_image_to_window(s()->img->mlx, s()->img->win, s()->img->img, 0, 0);
+	{
+		move_player(keycode, s()->img, s()->cls, s()->data);
+		mlx_put_image_to_window(s()->img->mlx, s()->img->win, s()->img->img, 0, 0);
+	}
 	return (0);
 }
 
-int		key_release(int keycode, t_mlx *img)
+int		key_release(int keycode)
 {
-	(void)img;
-	(void)keycode;
+	if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
+	{
+		move_player(keycode, s()->img, s()->cls, s()->data);
+		mlx_put_image_to_window(s()->img->mlx, s()->img->win, s()->img->img, 0, 0);
+	}
 	return (0);
 }
 
@@ -120,8 +124,10 @@ int		main(int ac, char **ag)
 	start_raycasting(s()->img, s()->cls, s()->data);
 	// set_keycode(&img, &clcls, &data);
 	
-	// mlx_hook(img.win, 2, 1L<<0, &key_press, (void *)0);
+	// mlx_hook(s()->img->win, 2, 1L<<0, &key_press, (void *)0);
 	// mlx_hook(img.win, 3, 1L<<0, &key_release, (void *)0);
+	
+	// mlx_hook(s()->img->win, 2, 1L<<0, &key_press, (void *)0);
 	
 	// PAS TOUCHER
 	// mlx_key_hook(img.win, &print_keycode, &img); // ne fonctionne pas avec move pixel

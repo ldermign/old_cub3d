@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/16 17:46:11 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/17 14:43:22 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,13 @@ void	start_raycasting(t_mlx *img, t_calc *clcls, t_arg *data);
 **	R CALCULS
 */
 
+int		key_release(int keycode);
+int		key_press(int keycode);
+
 void	step_calculs(t_calc *clc);
 void	which_square_with_wall_DDA(t_calc *clcls, t_arg *data);
 void	distance_camera_calculs(t_mlx *img, t_calc *clcls);
-int		move_player(int keycode);
+int		move_player(int keycode, t_mlx *img, t_calc *cls, t_arg *data);
 
 /*
 **  R UTILS

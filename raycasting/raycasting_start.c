@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:46:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/16 17:40:47 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/17 14:55:49 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void 	draw_line_wall(t_mlx *img, int x, int start, int end, int side)
 		my_mlx_pixel_put(img, x, start, color);
 		start++;
 	}
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 }
 
 void	get_orientation_player(t_calc *clcls, t_arg *data)
@@ -61,7 +60,6 @@ void	start_raycasting(t_mlx *img, t_calc *clcls, t_arg *data)
 	get_orientation_player(clcls, data);
 	while (i < img->width)
 	{
-		clcls->hit = 0;
 		init_calculs(img, clcls, i);
 		step_calculs(clcls);
 		which_square_with_wall_DDA(clcls, data);
@@ -69,6 +67,10 @@ void	start_raycasting(t_mlx *img, t_calc *clcls, t_arg *data)
 		draw_line_wall(img, i, clcls->drawStart, clcls->drawEnd, clcls->side);
 		i++;
 	}
+	// mlx_hook(img->win, 2, 1L<<0, &key_press, (void *)0);
+	mlx_hook(img->win, 3, 1L<<1, &key_release, (void *)0);
+	// mlx_key_hook(img->win, &key_release, (void *)0);d
+	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 
 	// mlx_key_hook(img.win, &move_player, (void*)0);
 	// mlx_hook(img.win, 2, 1L<<0, &move_player, (void*)0);
