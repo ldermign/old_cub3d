@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:46:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/17 14:55:49 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/18 13:52:43 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,71 +56,26 @@ void	start_raycasting(t_mlx *img, t_calc *clcls, t_arg *data)
 
 	i = 0;
 	fill_sky_and_floor(img);
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
+	// mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 	get_orientation_player(clcls, data);
+	// printf("test1\n");
 	while (i < img->width)
 	{
+		// printf("test\n");
 		init_calculs(img, clcls, i);
 		step_calculs(clcls);
 		which_square_with_wall_DDA(clcls, data);
 		distance_camera_calculs(img, clcls);
 		draw_line_wall(img, i, clcls->drawStart, clcls->drawEnd, clcls->side);
+		mlx_put_image_to_window(s()->img->mlx, s()->img->win, s()->img->img, 0, 0);
 		i++;
 	}
+	// printf("nique\n");
+	// mlx_put_image_to_window(s()->img->mlx, s()->img->win, s()->img->img, 0, 0);
+
 	// mlx_hook(img->win, 2, 1L<<0, &key_press, (void *)0);
-	mlx_hook(img->win, 3, 1L<<1, &key_release, (void *)0);
+	// mlx_hook(img->win, 2, 1L<<0, &key_release, (void *)0);
+	// mlx_put_image_to_window(s()->img->mlx, s()->img->win, s()->img->img, 0, 0);
 	// mlx_key_hook(img->win, &key_release, (void *)0);d
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
-
-	// mlx_key_hook(img.win, &move_player, (void*)0);
-	// mlx_hook(img.win, 2, 1L<<0, &move_player, (void*)0);
-	
-	//timing for input and FPS counter
-	// img.oldTime = img.time;
-	// img.time = getTicks(); // refaire
-	// double frameTime = (img.time - img.oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
-	// print(1.0 / frameTime); //FPS counter
-	// redraw(); // pas forcement ?
-	// cls(); //pas forcement ??
-
-	// speed modifiers
-	// double moveSpeed = 5.0; //the constant value is in squares/second
-	// double rotSpeed = 3.0; //the constant value is in radians/second
-
-
-	// readKeys(); // refaire
-	// move forward if no wall in front of you
-	// if (key_down(13))
-	// {
-	// 	if(data.map[(int)img.plrX + (int)img.dirX * (int)moveSpeed][(int)img.plrY] == 0) img.plrX += img.dirX * moveSpeed;
-	// 	if(data.map[(int)img.plrX][(int)img.plrY + (int)img.dirY * (int)moveSpeed] == 0) img.plrY += img.dirY * moveSpeed;
-	// }
-	// //move backwards if no wall behind you
-	// if (key_down(1))
-	// {
-	// 	if(data.map[(int)(img.plrX - img.dirX * moveSpeed)][(int)img.plrY] == 0) img.plrX -= img.dirX * moveSpeed;
-	// 	if(data.map[(int)img.plrX][(int)(img.plrY - img.dirY * moveSpeed)] == 0) img.plrY -= img.dirY * moveSpeed;
-	// }
-	// //rotate to the right
-	// if (key_down(2))
-	// {
-	// 	//both camera direction and camera plane must be rotated
-	// 	double oldDirX = img.dirX;
-	// 	img.dirX = img.dirX * cos(-rotSpeed) - img.dirY * sin(-rotSpeed);
-	// 	img.dirY = oldDirX * sin(-rotSpeed) + img.dirY * cos(-rotSpeed);
-	// 	double oldPlaneX = img.planeX;
-	// 	img.planeX = img.planeX * cos(-rotSpeed) - img.planeY * sin(-rotSpeed);
-	// 	img.planeY = oldPlaneX * sin(-rotSpeed) + img.planeY * cos(-rotSpeed);
-	// }
-	// //rotate to the left
-	// if (key_down(0))
-	// {
-	// 	//both camera direction and camera plane must be rotated
-	// 	double oldDirX = img.dirX;
-	// 	img.dirX = img.dirX * cos(rotSpeed) - img.dirY * sin(rotSpeed);
-	// 	img.dirY = oldDirX * sin(rotSpeed) + img.dirY * cos(rotSpeed);
-	// 	double oldPlaneX = img.planeX;
-	// 	img.planeX = img.planeX * cos(rotSpeed) - img.planeY * sin(rotSpeed);
-	// 	img.planeY = oldPlaneX * sin(rotSpeed) + img.planeY * cos(rotSpeed);
-	// }
+	// mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 }
