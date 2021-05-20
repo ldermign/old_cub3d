@@ -6,80 +6,79 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:18:23 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/18 13:45:53 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:49:00 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	move_player(int keycode, t_mlx *img, t_calc *cls, t_arg *data)
+void	ft_move(int keycode, t_mlx *img, t_calc *c, t_arg *data)
 {
-	(void)img;
-	// cls->dirX = -1, cls->dirY = 0, cls->planeX = 0, cls->planeY = 0.66;
-	// cls->dirX = -1;
-	// printf("test\n");
-	double moveSpeed = 0.1; //the constant value is in squares/second
-	double rotSpeed = 0.1; //the constant value is in radians/second
-
 	if (keycode == 13)
 	{
-		if (data->map[(int)cls->plrX + (int)cls->dirX * (int)moveSpeed][(int)cls->plrY] != '1')
-		{
-			printf("nique move !!!!\n");
-			cls->plrX += cls->dirX * moveSpeed;
-		}
-		if (data->map[(int)cls->plrX][(int)cls->plrY + (int)cls->dirY * (int)moveSpeed] != '1')
-			cls->plrY += cls->dirY * moveSpeed;
+		
+		if (data->map[(int)(c->plrX + c->dirX * c->speed)][(int)c->plrY] != '1')
+			c->plrX += c->dirX * c->speed;
+		if (data->map[(int)c->plrX]
+			[(int)(c->plrY + c->dirY * c->speed)] != '1')
+			c->plrY += c->dirY * c->speed;
+		raycasting(img, c, data);
 	}
 	if (keycode == 1)
 	{
-		if ((int)data->map[(int)cls->plrX - (int)cls->dirX * (int)moveSpeed][(int)cls->plrY] != '1')
-			cls->plrX -= cls->dirX * moveSpeed;
-		if ((int)data->map[(int)cls->plrX][(int)(cls->plrY - cls->dirY * moveSpeed)] != '1')
-			cls->plrY -= cls->dirY * moveSpeed; 
+		if (data->map[(int)(c->plrX - c->dirX * c->speed)][(int)c->plrY] != '1')
+			c->plrX -= c->dirX * c->speed;
+		if (data->map[(int)c->plrX]
+			[(int)(c->plrY - c->dirY * c->speed)] != '1')
+			c->plrY -= c->dirY * c->speed;
+		raycasting(img, c, data);
 	}
-	// if (keycode == 0) //gauche
+	// if (keycode == 0) // gauche
 	// {
-	// 	if (data->map[(int)cls->plrX + (int)cls->dirX * (int)moveSpeed][(int)cls->plrY] != '1')
-	// 		cls->plrX += cls->dirX * moveSpeed;
-	// 	if (data->map[(int)cls->plrX][(int)cls->plrY + (int)cls->dirY * (int)moveSpeed] != '1')
-	// 		cls->plrY += cls->dirY * moveSpeed;
+		
 	// }
-	// if (keycode == 2) //droite
+	// if (keycode == 2) // droite
 	// {
-	// 	if ((int)data->map[(int)cls->plrX - (int)cls->dirX * (int)moveSpeed][(int)cls->plrY] != '1')
-	// 		cls->plrX -= cls->dirX * moveSpeed;
-	// 	if ((int)data->map[(int)cls->plrX][(int)(cls->plrY - cls->dirY * moveSpeed)] != '1')
-	// 		cls->plrY -= cls->dirY * moveSpeed; 
+
 	// }
-	//rotate to the right
+}
+
+void	ft_rotation(int keycode, t_mlx *img, t_calc *c, t_arg *data)
+{
+	double	oldDirX;
+	double	oldPlaneX;
+
 	if (keycode == 124)
 	{
-		double oldDirX = cls->dirX;
-		double oldPlaneX = cls->planeX;
-		//both camera direction and camera plane must be rotated
-		printf("dirX = dirX * cos(-0.1) - dirY * sin(-0.1) ==> %f = %f * %f - %f * %f.\n", (cls->dirX * cos(-rotSpeed) - cls->dirY * sin(-rotSpeed)), cls->dirX, cos(-rotSpeed), cls->dirY, sin(-rotSpeed));
-		cls->dirX = cls->dirX * cos(-rotSpeed) - cls->dirY * sin(-rotSpeed);
-		printf("dirY = oldDirX * sin(-0.1) + dirY * cos(-0.1) ==> %f = %f * %f - %f * %f.\n", (oldDirX * sin(-rotSpeed) + cls->dirY * cos(-rotSpeed)), oldDirX, sin(-rotSpeed), cls->dirY, cos(-rotSpeed));
-		cls->dirY = oldDirX * sin(-rotSpeed) + cls->dirY * cos(-rotSpeed);
-		printf("planeX = planeX * cos(-0.1) - planeY * sin(-0.1) ==> %f = %f * %f - %f * %f.\n", (cls->planeX * cos(-rotSpeed) - cls->planeY * sin(-rotSpeed)), cls->planeX, cos(-rotSpeed), cls->planeY, sin(-rotSpeed));
-		cls->planeX = cls->planeX * cos(-rotSpeed) - cls->planeY * sin(-rotSpeed);
-		printf("planeY = oldPlaneX * sin(-0.1) + planeY * cos(-0.1) ==> %f = %f * %f - %f * %f.\n", (oldPlaneX * sin(-rotSpeed) + cls->planeY * cos(-rotSpeed)), cls->planeX, sin(-rotSpeed), cls->planeY, cos(-rotSpeed));
-		cls->planeY = oldPlaneX * sin(-rotSpeed) + cls->planeY * cos(-rotSpeed);
+		oldDirX = c->dirX;
+		oldPlaneX = c->planeX;
+		c->dirX = c->dirX * cos(-c->rota) - c->dirY * sin(-c->rota);
+		c->dirY = oldDirX * sin(-c->rota) + c->dirY * cos(-c->rota);
+		c->planeX = c->planeX * cos(-c->rota) - c->planeY * sin(-c->rota);
+		c->planeY = oldPlaneX * sin(-c->rota) + c->planeY * cos(-c->rota);
+		raycasting(img, c, data);
 	}
-	//rotate to the left
 	if (keycode == 123)
 	{
-		double oldDirX = cls->dirX;
-		double oldPlaneX = cls->planeX;
-		//both camera direction and camera plane must be rota@ted
-		cls->dirX = cls->dirX * cos(rotSpeed) - cls->dirY * sin(rotSpeed);
-		cls->dirY = oldDirX * sin(rotSpeed) + cls->dirY * cos(rotSpeed);
-		cls->planeX = cls->planeX * cos(rotSpeed) - cls->planeY * sin(rotSpeed);
-		cls->planeY = oldPlaneX * sin(rotSpeed) + cls->planeY * cos(rotSpeed);
+		oldDirX = c->dirX;
+		oldPlaneX = c->planeX;
+		c->dirX = c->dirX * cos(c->rota) - c->dirY * sin(c->rota);
+		c->dirY = oldDirX * sin(c->rota) + c->dirY * cos(c->rota);
+		c->planeX = c->planeX * cos(c->rota) - c->planeY * sin(c->rota);
+		c->planeY = oldPlaneX * sin(c->rota) + c->planeY * cos(c->rota);
+		raycasting(img, c, data);
 	}
-		mlx_put_image_to_window(s()->img->mlx, s()->img->win, s()->img->img, 0, 0);
+}
 
-	// start_raycasting(img, cls, data);
+int	move_player(int keycode, t_mlx *img, t_calc *cls, t_arg *data)
+{
+	cls->speed = 0.1;
+	cls->rota = 0.1;
+
+	// printf("plrX = %f, plrY = %f\n", cls->plrX, cls->plrY);
+	if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
+		ft_move(keycode, img, cls, data);
+	if (keycode == 123 || keycode == 124)
+		ft_rotation(keycode, img, cls, data);
 	return (1);
 }

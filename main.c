@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/18 13:54:48 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:14:39 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,49 +49,15 @@ int	print_keycode(int keycode, t_mlx *img)
 	return (0);
 }
 
-int		move_pixel(int keycode, t_mlx *img)
-{
-	if (keycode == 2) //bon, d, droite
-		img->x++;
-	if (keycode == 1) // bon, w, haut
-		img->y++;
-	if (keycode == 0) // bon, a, gauche
-		img->x--;
-	if (keycode == 13) // bon, s, bas
-		img->y--;
-	my_mlx_pixel_put(img, img->x, img->y, 0x0000FF00);
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
-	return (0);
-}
-
 int		key_press(int keycode)
 {
-	// if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13
-	// || keycode == 123 || keycode == 124)
-	// {
+	if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13
+	|| keycode == 123 || keycode == 124)
 		move_player(keycode, s()->img, s()->cls, s()->data);
-		// printf("relase ?\n");
-	// }
-	// printf("key avant\n");
-	start_raycasting(s()->img, s()->cls, s()->data);
-	printf("key apres\n");
-	// mlx_put_image_to_window(s()->img->mlx, s()->img->win, s()->img->img, 0, 0);
+	else
+		printf("Error, [ %d ] isn't a valid keycode.\n", keycode);
 	return (0);
 }
-
-// int		key_release(int keycode)
-// {
-// 	// start_raycasting(s()->img, s()->cls, s()->data);
-// 	// printf("test\n");
-// 	// if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13 || keycode == 123 || keycode == 124)
-// 	// {
-// 		move_player(keycode, s()->img, s()->cls, s()->data);
-// 	// 	mlx_put_image_to_window(s()->img->mlx, s()->img->win, s()->img->img, 0, 0);
-// 	// }
-// 	start_raycasting(s()->img, s()->cls, s()->data);
-// 	mlx_put_image_to_window(s()->img->mlx, s()->img->win, s()->img->img, 0, 0);
-// 	return (0);
-// }
 
 t_s	*s(void)
 {
@@ -130,7 +96,7 @@ int		main(int ac, char **ag)
 	s()->img->win = mlx_new_window(s()->img->mlx, s()->img->width, s()->img->height, "Cub3D");
 	s()->img->img = mlx_new_image(s()->img->mlx, s()->img->width, s()->img->height);
 	s()->img->addr = mlx_get_data_addr(s()->img->img, &s()->img->bpp, &s()->img->size_line, &s()->img->endian);
-	start_raycasting(s()->img, s()->cls, s()->data);
+	start_ray(s()->img, s()->cls, s()->data);
 	// set_keycode(&img, &clcls, &data);
 	
 	// mlx_hook(s()->img->win, 2, 1L<<0, &key_press, (void *)0);

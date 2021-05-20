@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 14:59:33 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/16 14:32:54 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/20 10:28:45 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,12 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	fill(t_mlx *img, int color, int x, int y)
+void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
-	int	pixel;
+	char	*dst;
 
-	pixel = (y * img->size_line) + (x * 4);
-	if (img->endian == 1)
-	{
-		img->addr[pixel + 0] = (color >> 24);
-		img->addr[pixel + 1] = (color >> 16) & 0xFF;
-		img->addr[pixel + 2] = (color >> 8) & 0xFF;
-		img->addr[pixel + 3] = (color) & 0xFF;
-	}
-	else if (img->endian == 0)
-	{
-		img->addr[pixel + 0] = (color) & 0xFF;
-		img->addr[pixel + 1] = (color >> 8) & 0xFF;
-		img->addr[pixel + 2] = (color >> 16) & 0xFF;
-		img->addr[pixel + 3] = (color >> 24);
-	}
+	dst = data->addr + (y * data->size_line + x * (data->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
 void	fill_sky_and_floor(t_mlx *img)
@@ -49,12 +36,12 @@ void	fill_sky_and_floor(t_mlx *img)
 		y = 0;
 		while (y < img->height / 2)
 		{
-			fill(img, img->sky, x, y);
+			my_mlx_pixel_put(img, x, y, img->sky);
 			++y;
 		}
 		while (y < img->height)
 		{
-			fill(img, img->floor, x, y);
+			my_mlx_pixel_put(img, x, y, img->floor);
 			++y;
 		}
 		++x;

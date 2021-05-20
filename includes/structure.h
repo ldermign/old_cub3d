@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 08:19:05 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/16 17:13:28 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:02:54 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ typedef struct  s_calculs {
 	double dirY;
 	double planeX; // plan camera du joueur
 	double planeY;
-	// double time; // temps de la trame actuelle
-	// double oldTime; // temps de la trame d'avant
+	double speed;
+	double rota;
 	double cameraX;
 	double rayDirX;
 	double rayDirY;
