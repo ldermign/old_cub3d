@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:40:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/27 09:51:23 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/28 14:26:56 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,7 @@ void	get_resolution(t_arg *data, char *str);
 **	RAYCASTING
 */
 
-void	start_ray(t_mlx *img, t_calc *clcls, t_arg *data);
-void	raycasting(t_mlx *img, t_calc *cls, t_arg *data);
+int	all_calculs_cub(t_mlx *img, t_calc *cls, t_arg *data);
 
 /*
 **	R CALCULS
@@ -108,7 +107,7 @@ int		key_press(int keycode);
 void	step_calculs(t_calc *clc);
 void	which_square_with_wall_DDA(t_calc *clcls, t_arg *data);
 void	distance_camera_calculs(t_mlx *img, t_calc *clcls);
-int		move_player(int keycode, t_mlx *img, t_calc *cls, t_arg *data);
+int		move_player(int keycode, t_calc *cls, t_arg *data);
 
 /*
 **  R UTILS
@@ -153,7 +152,6 @@ void	get_position_player(t_arg *data);
 */
 
 void	quit(t_arg *data, char *str_err, int i, int place);
-
 
 
 

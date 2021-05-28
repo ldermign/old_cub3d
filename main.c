@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 15:37:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/27 11:55:44 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/28 09:53:00 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,35 +23,11 @@ void	parsing(int ac, char **ag)
 	// quit(&data, "All good.\n", 3, 0);
 }
 
-// int		close_escape(int keycode)
-// {
-// 	if (keycode == 53)
-// 	{
-// 		printf("You pressed the escape button.\n");
-// 		quit(s()->data, "Goodbye !\n", 3, 0);
-// 		exit (0);
-// 	}
-// 	return (0);
-// }
-
 int		close_cross()
 {
 	printf("You clicked on the cross.\n");
 	quit(s()->data, "Goodbye !\n", 3, 0);
 	exit(0);
-	return (0);
-}
-
-int	print_keycode(int keycode, t_mlx *img)
-{
-	(void)img;
-	printf("Keycode is = %d.\n", keycode);
-	return (0);
-}
-
-int	move_player2(int keycode)
-{
-	move_player(keycode, s()->img, s()->cls, s()->data);
 	return (0);
 }
 
@@ -63,14 +39,10 @@ int		key_press(int keycode)
 		quit(s()->data, "Goodbye !\n", 3, 0);
 		exit (0);
 	}
-	// if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13
-	// || keycode == 123 || keycode == 124)
-	// {
-		// move_player(keycode, s()->img, s()->cls, s()->data);
-		move_player2(keycode);
-	// }
-	// else
-		printf("Error, [ %d ] isn't a valid keycode.\n", keycode);
+	if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13
+	|| keycode == 123 || keycode == 124)
+		move_player(keycode, s()->cls, s()->data);
+	all_calculs_cub(s()->img, s()->cls, s()->data);
 	return (0);
 }
 
@@ -111,12 +83,11 @@ int		main(int ac, char **ag)
 	s()->img->win = mlx_new_window(s()->img->mlx, s()->img->width, s()->img->height, "Cub3D");
 	s()->img->img = mlx_new_image(s()->img->mlx, s()->img->width, s()->img->height);
 	s()->img->addr = mlx_get_data_addr(s()->img->img, &s()->img->bpp, &s()->img->size_line, &s()->img->endian);
-	start_ray(s()->img, s()->cls, s()->data);
-	// set_keycode(&img, &clcls, &data);
+	get_orientation_player(s()->cls, s()->data);
+	all_calculs_cub(s()->img, s()->cls, s()->data);
 	
 	// mlx_hook(s()->img->win, 2, 1L<<0, &key_press, (void *)0);
 	// mlx_hook(img.win, 3, 1L<<0, &key_release, (void *)0);
-	
 	// mlx_hook(s()->img->win, 2, 1L<<0, &key_press, (void *)0);
 	
 	// PAS TOUCHER
@@ -128,7 +99,7 @@ int		main(int ac, char **ag)
 	// mlx_hook(s()->img->win, 3, 1L<<0, &key_release, (void *)0);
 	mlx_hook(s()->img->win, 17, 1L<<0, &close_cross, (void *)0);
 	// mlx_key_hook(s()->img->win, &close_escape, (void *)0);
-	mlx_loop_hook(s()->img->mlx, &move_player2, (void *)0); //creer fonction qui refresh
+	// mlx_loop_hook(s()->img->mlx, &all_calculs_cub, s()); //creer fonction qui refresh
 
 	mlx_loop(s()->img->mlx);
 	return (0);

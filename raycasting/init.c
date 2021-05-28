@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:27:09 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/20 13:38:23 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/28 14:08:41 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,22 @@ void	init_calculs(t_mlx *img, t_calc *clcls, int i)
 
 void	get_orientation_player(t_calc *clcls, t_arg *data)
 {
-	if ((char)data->player == 'E')
+	if (data->player == 'E') // cast (char) a data
 	{
 		clcls->dirY = 1;
 		clcls->planeX = 0.66;
 	}
-	else if ((char)data->player == 'N')
+	else if (data->player == 'N')
 	{
 		clcls->dirX = -1;
 		clcls->planeY = 0.66;
 	}
-	else if ((char)data->player == 'W')
+	else if (data->player == 'W')
 	{
 		clcls->dirY = -1;
 		clcls->planeX = -0.66;
 	}
-	else if ((char)data->player == 'S')
+	else if (data->player == 'S')
 	{
 		clcls->dirX = 1;
 		clcls->planeY = -0.66;

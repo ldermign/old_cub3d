@@ -6,13 +6,13 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:46:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/05/27 09:58:05 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/05/28 09:57:32 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void 	draw_line_wall(int x, int start, int end, int side)
+static void 	draw_line_wall(int x, int start, int end, int side)
 {
 	int	color;
 
@@ -23,10 +23,12 @@ void 	draw_line_wall(int x, int start, int end, int side)
 	{
 		my_mlx_pixel_put(s()->img, x, start, color);
 		start++;
+		// if (x == 249 || x == 250 || x == 251)
+		// 	printf("x = [%d].", x);
 	}
 }
 
-void	raycasting(t_mlx *img, t_calc *cls, t_arg *data)
+int	all_calculs_cub(t_mlx *img, t_calc *cls, t_arg *data)
 {
 	int	i;
 
@@ -42,11 +44,5 @@ void	raycasting(t_mlx *img, t_calc *cls, t_arg *data)
 		i++;
 	}
 	mlx_put_image_to_window(s()->img->mlx, s()->img->win, s()->img->img, 0, 0);
-}
-
-void	start_ray(t_mlx *img, t_calc *clcls, t_arg *data)
-{
-	get_orientation_player(s()->cls, s()->data);
-	raycasting(img, clcls, data);
-	mlx_put_image_to_window(s()->img->mlx, s()->img->win, s()->img->img, 0, 0);
+	return (0);
 }
