@@ -6,7 +6,7 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/28 17:09:11 by ldermign          #+#    #+#              #
-#    Updated: 2021/06/03 11:59:49 by ldermign         ###   ########.fr        #
+#    Updated: 2021/09/11 10:47:42 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ RM		=	rm -rf
 all:		${NAME}
 
 .c.o:
-			${MAKE} -C MLX
+			${MAKE} -C mlx
 			cp mlx/${MLX} .
 			${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
